@@ -12,16 +12,20 @@
         }
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Verdana', sans-serif;
+            background-color: #f5f5f5;
         }
         .leaflet-container {
-            background-color: #e6f7ff;
+            background-color: #d0f0f0;
+        }
+        .leaflet-marker-icon {
+            border-radius: 50%;
+            cursor: pointer;
         }
         .ping-marker {
             width: 24px;
             height: 24px;
-            background-color: rgba(255, 69, 0, 0.5);
+            background-color: rgba(255, 69, 0, 0.7);
             border-radius: 50%;
             animation: pingAnimation 1.5s infinite ease-in-out;
         }
@@ -31,13 +35,12 @@
             100% { transform: scale(1); opacity: 1; }
         }
         .leaflet-popup-content-wrapper {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 8px;
-            padding: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
         }
         .leaflet-popup-content {
-            margin: 0;
             color: #333;
             font-size: 14px;
             font-weight: bold;
@@ -92,55 +95,55 @@
             { coords: [37.5665, 126.9780], title: "SOUTH KOREA 2", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuw7Jvj-f0iKrt1PZ4SKhApr&si=sMogdXfr1_Uz_dIR" }
         ];
 
-        // Function to calculate the gradient color
+        // Function to calculate gradient color
         function getGradientColor(startColor, endColor, percent) {
-            function hexToRgb(hex) {
-                var bigint = parseInt(hex.substring(1), 16);
-                var r = (bigint >> 16) & 255;
-                var g = (bigint >> 8) & 255;
-                var b = bigint & 255;
-                return [r, g, b];
-            }
+            const startRGB = hexToRgb(startColor);
+            const endRGB = hexToRgb(endColor);
 
-            function rgbToHex(rgb) {
-                var r = rgb[0], g = rgb[1], b = rgb[2];
-                return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
-            }
-
-            var startRGB = hexToRgb(startColor);
-            var endRGB = hexToRgb(endColor);
-
-            var newColor = startRGB.map(function(start, i) {
+            const newColor = startRGB.map((start, i) => {
                 return Math.round(start + percent * (endRGB[i] - start));
             });
 
             return rgbToHex(newColor);
         }
 
-        var startColor = "#8B0000"; // Dark Red
-        var endColor = "#32CD32";   // Bright Green
+        function hexToRgb(hex) {
+            let bigint = parseInt(hex.substring(1), 16);
+            return [(bigint >> 16) & 255, (bigint >> 8) & 255, bigint & 255];
+        }
 
-        var routeCoordinates = destinations.map(function(dest) {
-            return dest.coords;
+        function rgbToHex(rgb) {
+            const [r, g, b] = rgb;
+            return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
+        }
+
+        const startColor = "#FF6347"; // Tomato
+        const endColor = "#32CD32"; // Lime Green
+
+        const routeCoordinates = destinations.map(dest => dest.coords);
+
+        // Create the gradient polyline
+        const gradientColors = destinations.map((_, index) => {
+            const percent = index / (destinations.length - 1);
+            return getGradientColor(startColor, endColor, percent);
         });
 
-        // Create the polyline
-        var route = L.polyline(routeCoordinates, {
-            weight: 3,
+        const route = L.polyline(routeCoordinates, {
+            weight: 4,
             opacity: 0.8,
-            color: '#ff4500'
+            color: gradientColors[0]
         }).addTo(map);
 
-        // Add dot markers with gradient colors
-        destinations.forEach(function(dest, index) {
-            var percent = index / (destinations.length - 1);
-            var markerColor = getGradientColor(startColor, endColor, percent);
+        // Create custom divIcons for each marker with gradient colors
+        destinations.forEach((dest, index) => {
+            const percent = index / (destinations.length - 1);
+            const markerColor = getGradientColor(startColor, endColor, percent);
 
-            var marker = L.circleMarker(dest.coords, {
-                radius: 5,
+            const marker = L.circleMarker(dest.coords, {
+                radius: 6,
                 fillColor: markerColor,
                 color: markerColor,
-                weight: 1,
+                weight: 2,
                 fillOpacity: 1
             }).addTo(map);
 
@@ -159,16 +162,18 @@
             });
         });
 
-        // Create a custom animated marker for the last destination
-        var lastDestination = destinations[destinations.length - 1];
+        // Create the ping marker for the last destination
+        const lastDestination = destinations[destinations.length - 1];
 
-        var pingIcon = L.divIcon({
+        const pingIcon = L.divIcon({
             className: 'ping-marker',
             iconSize: [24, 24],
             iconAnchor: [12, 12]
         });
 
-        L.marker(lastDestination.coords, { icon: pingIcon }).addTo(map);
+        const pingMarker = L.marker(lastDestination.coords, {
+            icon: pingIcon
+        }).addTo(map);
 
         map.fitBounds(route.getBounds());
     </script>
