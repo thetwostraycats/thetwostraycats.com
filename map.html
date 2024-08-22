@@ -29,17 +29,16 @@
         .leaflet-marker-icon:hover {
             border-color: #ff4500;
         }
-        .ping {
-            animation: pingAnimation 1.5s infinite;
-            background-color: #ff4500;
-            border-radius: 50%;
+        .ping-marker {
             width: 24px;
             height: 24px;
-            position: absolute;
+            background-color: rgba(255, 69, 0, 0.5);
+            border-radius: 50%;
+            animation: pingAnimation 1.5s infinite ease-in-out;
         }
         @keyframes pingAnimation {
             0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.5); opacity: 0.5; }
+            50% { transform: scale(1.5); opacity: 0.6; }
             100% { transform: scale(1); opacity: 1; }
         }
         .leaflet-popup-content-wrapper {
@@ -140,20 +139,16 @@
             });
         });
 
-        // Fix the ping animation to stay centered
+        // Fix the ping animation to stay centered by creating a custom animated marker
         var lastDestination = destinations[destinations.length - 1];
-        L.circleMarker(lastDestination.coords, {
-            radius: 12,
-            fillOpacity: 0,
-            color: '#ff4500',
-            className: 'ping'
-        }).addTo(map);
 
-        map.on('zoomend', function() {
-            var zoom = map.getZoom();
-            document.querySelector('.ping').style.width = (zoom * 2) + 'px';
-            document.querySelector('.ping').style.height = (zoom * 2) + 'px';
+        var pingIcon = L.divIcon({
+            className: 'ping-marker',
+            iconSize: [24, 24],
+            iconAnchor: [12, 12]
         });
+
+        L.marker(lastDestination.coords, {icon: pingIcon}).addTo(map);
 
         map.fitBounds(route.getBounds());
     </script>
