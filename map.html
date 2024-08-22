@@ -14,31 +14,6 @@
             font-family: 'Verdana', sans-serif;
             background-color: #f5f5f5;
         }
-        .mapboxgl-popup-content {
-            background: #f0f8ff;
-            color: #333;
-            font-family: 'Verdana', sans-serif;
-            font-size: 14px;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-        }
-        .mapboxgl-popup-close-button {
-            color: #333;
-        }
-        .mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
-            border-top-color: #f0f8ff;
-        }
-        .marker {
-            background-color: #ff6347; /* Tomato color */
-            border: 2px solid #32cd32; /* Lime Green border */
-            border-radius: 50%;
-            width: 12px;
-            height: 12px;
-            cursor: pointer;
-        }
-        .marker:hover {
-            background-color: #ffa07a; /* Light Salmon */
-        }
     </style>
     <!-- Mapbox GL JS -->
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
@@ -53,7 +28,7 @@
 
         var map = new mapboxgl.Map({
             container: 'map', // container ID
-            style: 'mapbox://styles/mapbox/streets-v11', // Resetting to a working style
+            style: 'mapbox://styles/mapbox/streets-v11', // style URL
             center: [20.0, 45.0], // starting position [lng, lat]
             zoom: 3 // starting zoom
         });
@@ -85,27 +60,25 @@
                         0, '#FF6347',   // Start with Tomato
                         1, '#32CD32'    // End with Lime Green
                     ],
-                    'line-width': 3
+                    'line-width': 4
                 }
             });
 
-            // Add interactive markers for each location
-            const locations = [
-                { coords: [37.5665, 126.9780], title: "SOUTH KOREA", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk&si=CxzH7jEE-2hz9azS" },
-                { coords: [35.682839, 139.759455], title: "JAPAN", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT&si=4FCXgJ5tzXKvGzoO" },
-                // ... add other locations here as objects
-                { coords: [37.5665, 126.9780], title: "SOUTH KOREA 2", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuw7Jvj-f0iKrt1PZ4SKhApr&si=sMogdXfr1_Uz_dIR" }
-            ];
-
-            locations.forEach(function(location) {
-                var el = document.createElement('div');
-                el.className = 'marker';
-
-                new mapboxgl.Marker(el)
-                    .setLngLat(location.coords)
-                    .setPopup(new mapboxgl.Popup({ offset: 25 })
-                    .setHTML(`<h4>${location.title}</h4><a href="${location.playlist}" target="_blank">Watch Playlist</a>`))
-                    .addTo(map);
+            // Add a symbol layer for markers
+            map.addLayer({
+                'id': 'points',
+                'type': 'circle',
+                'source': 'travel-route',
+                'paint': {
+                    'circle-radius': 6,
+                    'circle-color': [
+                        'interpolate',
+                        ['linear'],
+                        ['get', 'index'],
+                        0, '#FF6347',   // Start with Tomato
+                        1, '#32CD32'    // End with Lime Green
+                    ]
+                }
             });
         });
     </script>
