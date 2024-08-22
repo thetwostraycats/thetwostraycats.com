@@ -8,6 +8,7 @@
     <style>
         #map {
             height: 100vh;
+            width: 100%;
         }
         body {
             margin: 0;
@@ -28,9 +29,6 @@
         .leaflet-marker-icon:hover {
             border-color: #ff4500;
         }
-        .leaflet-popup-content-wrapper {
-            display: none;
-        }
         .ping {
             animation: pingAnimation 1s infinite;
             background-color: #ff4500;
@@ -50,14 +48,16 @@
     <div id="map"></div>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet-polylinedecorator/dist/leaflet.polylineDecorator.js"></script>
     <script>
+        // Initialize the map centered on Asia/Europe/Africa
         var map = L.map('map').setView([45.0, 20.0], 3);
 
+        // Add OpenStreetMap tiles
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 18,
         }).addTo(map);
 
+        // List of countries with their coordinates and playlist links
         var destinations = [
             { coords: [37.5665, 126.9780], title: "SOUTH KOREA", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk&si=CxzH7jEE-2hz9azS" },
             { coords: [35.682839, 139.759455], title: "JAPAN", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT&si=4FCXgJ5tzXKvGzoO" },
@@ -91,38 +91,39 @@
             { coords: [37.5665, 126.9780], title: "SOUTH KOREA 2", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuw7Jvj-f0iKrt1PZ4SKhApr&si=sMogdXfr1_Uz_dIR" }
         ];
 
-        var routeCoordinates = destinations.map(dest => dest.coords);
+        // Extract coordinates for polyline
+        var routeCoordinates = destinations.map(function(dest) {
+            return dest.coords;
+        });
 
+        // Create the polyline
         var route = L.polyline(routeCoordinates, {
+            color: '#ff4500',
             weight: 3,
             opacity: 0.8
         }).addTo(map);
 
-        var gradient = [
-            {offset: '0%', color: '#8B0000'}, // Dark Red (South Korea)
-            {offset: '100%', color: '#32CD32'} // Light Green (End)
-        ];
-
-        var gradientPolyline = L.polylineDecorator(route, {
-            patterns: [
-                {
-                    offset: '0',
-                    repeat: '10%',
-                    symbol: L.Symbol.dash({
-                        pixelSize: 10,
-                        pathOptions: {
-                            color: 'url(#line-gradient)',
-                            weight: 3,
-                            opacity: 0.8
-                        }
-                    })
-                }
-            ]
+        // Add gradient effect to the route
+        var gradient = L.polyline(routeCoordinates, {
+            weight: 5,
+            opacity: 0.7,
+            lineCap: 'round',
+            lineJoin: 'round',
+            color: 'red'
         }).addTo(map);
 
-        destinations.forEach(dest => {
+        gradient.setStyle({
+            gradient: true,
+            colors: [
+                { offset: '0%', color: '#8B0000' },
+                { offset: '100%', color: '#32CD32' }
+            ]
+        });
+
+        // Add simple dot markers for each destination
+        destinations.forEach(function(dest) {
             var marker = L.circleMarker(dest.coords, {
-                radius: 5,
+                radius: 6,
                 fillColor: '#ff4500',
                 color: '#ff4500',
                 weight: 1,
@@ -153,6 +154,7 @@
             });
         });
 
+        // Add ping animation to the last location
         var lastDestination = destinations[destinations.length - 1];
         L.circleMarker(lastDestination.coords, {
             radius: 12,
@@ -161,6 +163,7 @@
             className: 'ping'
         }).addTo(map);
 
+        // Fit the map to show the full route
         map.fitBounds(route.getBounds());
     </script>
 </body>
