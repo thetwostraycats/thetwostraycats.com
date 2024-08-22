@@ -16,7 +16,7 @@
             background-color: #f4f4f4;
         }
         .leaflet-container {
-            background-color: #f0f0f0;
+            background-color: #e6f7ff;
         }
         .leaflet-marker-icon {
             background-color: #333;
@@ -30,16 +30,16 @@
             border-color: #ff4500;
         }
         .ping {
-            animation: pingAnimation 1s infinite;
+            animation: pingAnimation 1.5s infinite;
             background-color: #ff4500;
             border-radius: 50%;
             width: 24px;
             height: 24px;
-            position: relative;
+            position: absolute;
         }
         @keyframes pingAnimation {
             0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.2); opacity: 0.6; }
+            50% { transform: scale(1.5); opacity: 0.5; }
             100% { transform: scale(1); opacity: 1; }
         }
     </style>
@@ -55,6 +55,10 @@
         // Add OpenStreetMap tiles
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 18,
+            id: 'mapbox/streets-v11',
+            tileSize: 512,
+            zoomOffset: -1,
+            opacity: 0.9
         }).addTo(map);
 
         // List of countries with their coordinates and playlist links
@@ -96,34 +100,28 @@
             return dest.coords;
         });
 
-        // Create the polyline
-        var route = L.polyline(routeCoordinates, {
-            color: '#ff4500',
-            weight: 3,
-            opacity: 0.8
-        }).addTo(map);
-
-        // Add gradient effect to the route
+        // Create the gradient polyline
         var gradient = L.polyline(routeCoordinates, {
-            weight: 5,
-            opacity: 0.7,
-            lineCap: 'round',
-            lineJoin: 'round',
-            color: 'red'
+            weight: 3,
+            opacity: 0.8,
+            color: '#ff4500'
         }).addTo(map);
 
+        // Apply gradient effect using Leaflet's built-in methods
         gradient.setStyle({
-            gradient: true,
-            colors: [
-                { offset: '0%', color: '#8B0000' },
-                { offset: '100%', color: '#32CD32' }
-            ]
+            color: 'red',
+            weight: 2,
+            opacity: 0.8
         });
+
+        // Redefine the color for the gradient from dark red to light green
+        var gradientPath = gradient.getElement();
+        gradientPath.setAttribute("stroke", "url(#gradient)");
 
         // Add simple dot markers for each destination
         destinations.forEach(function(dest) {
             var marker = L.circleMarker(dest.coords, {
-                radius: 6,
+                radius: 5,
                 fillColor: '#ff4500',
                 color: '#ff4500',
                 weight: 1,
@@ -163,8 +161,15 @@
             className: 'ping'
         }).addTo(map);
 
+        // Fix the ping animation to stay centered
+        map.on('zoom', function() {
+            var zoom = map.getZoom();
+            document.querySelector('.ping').style.width = (zoom * 2) + 'px';
+            document.querySelector('.ping').style.height = (zoom * 2) + 'px';
+        });
+
         // Fit the map to show the full route
-        map.fitBounds(route.getBounds());
+        map.fitBounds(gradient.getBounds());
     </script>
 </body>
 </html>
