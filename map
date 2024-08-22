@@ -24,7 +24,7 @@
 
     <script>
         // Initialize Mapbox with your token
-        mapboxgl.accessToken = 'pk.eyJ1IjoidHdvc3RyYXljYXRzIiwiYSI6ImNtMDVvNWg0MDBtYTUyanMyd3l0c2dkZ3MifQ.rMTSjEzGk3UJJ_44yksV9Q';
+        mapboxgl.accessToken = 'pk.eyJ1IjoidHdvc3RyYXljYXRzIiwiYSI6ImNtMDVuaHNiYzAwZWQyanE3MTA3OWtlN3IifQ.pxSzfDsCchhn2oXBKjv4JQ';
 
         var map = new mapboxgl.Map({
             container: 'map', // container ID
