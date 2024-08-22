@@ -40,7 +40,7 @@
         map.on('load', function () {
             map.addSource('travel-route', {
                 type: 'geojson',
-                data: 'https://raw.githubusercontent.com/thetwostraycats/thetwostraycats.com/403e5b48aa6a7e0ad03573b223e806468d744bae/travel-route.GeoJSON'
+                data: 'https://raw.githubusercontent.com/thetwostraycats/thetwostraycats.com/main/travel-route.GeoJSON'
             });
 
             // Add the route line layer
