@@ -18,6 +18,7 @@
             background: url('https://github.com/thetwostraycats/thetwostraycats.com/blob/main/tsc-wallpaper.png?raw=true') no-repeat center center fixed; 
             background-size: cover;
             color: #333;
+            position: relative;
         }
 
         .container {
@@ -89,14 +90,19 @@
         }
 
         .credit {
-            margin-top: 30px;
-            font-size: 0.7em;
-            color: #999;
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 0.8em;
+            color: rgba(255, 255, 255, 0.7);
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 5px 0;
         }
 
         .credit a {
             text-decoration: none;
-            color: #999;
+            color: rgba(255, 255, 255, 0.7);
         }
 
         .credit a:hover {
@@ -131,9 +137,9 @@
                 </a>
             </div>
         </div>
-        <div class="credit">
-            Site by <a href="https://instagram.com/sate.adam" target="_blank">@Adam</a>
-        </div>
+    </div>
+    <div class="credit">
+        Site made by <a href="https://instagram.com/sate.adam" target="_blank">@Adam</a>
     </div>
 </body>
 </html>
