@@ -15,7 +15,6 @@
             background-color: #f5f5f5;
         }
     </style>
-    <!-- Mapbox GL JS -->
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet" />
 </head>
@@ -24,7 +23,7 @@
 
     <script>
         // Initialize Mapbox with your token
-        mapboxgl.accessToken = 'pk.eyJ1IjoidHdvc3RyYXljYXRzIiwiYSI6ImNtMDVvNWg0MDBtYTUyanMyd3l0c2dkZ3MifQ.rMTSjEzGk3UJJ_44yksV9Q';
+        mapboxgl.accessToken = 'YOUR_NEW_MAPBOX_ACCESS_TOKEN';
 
         var map = new mapboxgl.Map({
             container: 'map', // container ID
@@ -43,7 +42,7 @@
                 data: 'https://raw.githubusercontent.com/thetwostraycats/thetwostraycats.com/main/travel-route.GeoJSON'
             });
 
-            // Add the route line layer
+            // Just add the line layer
             map.addLayer({
                 'id': 'route',
                 'type': 'line',
@@ -53,31 +52,8 @@
                     'line-cap': 'round'
                 },
                 'paint': {
-                    'line-color': [
-                        'interpolate',
-                        ['linear'],
-                        ['get', 'index'],
-                        0, '#FF6347',   // Start with Tomato
-                        1, '#32CD32'    // End with Lime Green
-                    ],
+                    'line-color': '#FF6347',
                     'line-width': 4
-                }
-            });
-
-            // Add a symbol layer for markers
-            map.addLayer({
-                'id': 'points',
-                'type': 'circle',
-                'source': 'travel-route',
-                'paint': {
-                    'circle-radius': 6,
-                    'circle-color': [
-                        'interpolate',
-                        ['linear'],
-                        ['get', 'index'],
-                        0, '#FF6347',   // Start with Tomato
-                        1, '#32CD32'    // End with Lime Green
-                    ]
                 }
             });
         });
