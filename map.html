@@ -16,7 +16,7 @@
             background-color: #f5f5f5;
         }
         .leaflet-container {
-            background-color: #d0f0f0;
+            background-color: #f0f8ff;
         }
         .leaflet-marker-icon {
             border-radius: 50%;
@@ -48,12 +48,18 @@
         .leaflet-popup-tip-container {
             display: none;
         }
+        /* Custom map styling for a cuter color scheme */
+        .leaflet-tile {
+            filter: hue-rotate(200deg) brightness(1.2);
+        }
     </style>
 </head>
 <body>
     <div id="map"></div>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.polylineoffset/1.0.1/leaflet.polylineoffset.min.js"></script> <!-- Plugin for polyline offset -->
+
     <script>
         var map = L.map('map').setView([45.0, 20.0], 3);
 
@@ -95,49 +101,51 @@
             { coords: [37.5665, 126.9780], title: "SOUTH KOREA 2", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuw7Jvj-f0iKrt1PZ4SKhApr&si=sMogdXfr1_Uz_dIR" }
         ];
 
-        // Function to calculate gradient color
-        function getGradientColor(startColor, endColor, percent) {
-            const startRGB = hexToRgb(startColor);
-            const endRGB = hexToRgb(endColor);
+        // Gradient Polyline Setup
+        var routeCoordinates = destinations.map(dest => dest.coords);
 
-            const newColor = startRGB.map((start, i) => {
-                return Math.round(start + percent * (endRGB[i] - start));
+        // Adding gradient to polyline
+        var route = L.polyline(routeCoordinates, {
+            weight: 5,
+            opacity: 1,
+            lineCap: 'round'
+        }).addTo(map);
+
+        // Apply gradient
+        var gradientColors = ['#FF6347', '#FFA500', '#32CD32'];
+        route.setStyle({ color: gradientColors[0] });
+
+        // Custom function to create a gradient on the polyline
+        function setPolylineGradient(polyline, colors) {
+            const path = polyline._path;
+            const length = path.getTotalLength();
+            path.setAttribute('stroke', 'url(#line-gradient)');
+            const gradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+            gradient.id = 'line-gradient';
+            gradient.setAttribute('gradientUnits', 'userSpaceOnUse');
+            gradient.setAttribute('x1', '0%');
+            gradient.setAttribute('x2', '100%');
+
+            colors.forEach((color, i) => {
+                const stop = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+                stop.setAttribute('offset', `${(i / (colors.length - 1)) * 100}%`);
+                stop.setAttribute('stop-color', color);
+                gradient.appendChild(stop);
             });
 
-            return rgbToHex(newColor);
+            polyline._renderer._container.querySelector('defs').appendChild(gradient);
         }
 
-        function hexToRgb(hex) {
-            let bigint = parseInt(hex.substring(1), 16);
-            return [(bigint >> 16) & 255, (bigint >> 8) & 255, bigint & 255];
-        }
-
-        function rgbToHex(rgb) {
-            const [r, g, b] = rgb;
-            return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
-        }
-
-        const startColor = "#FF6347"; // Tomato
-        const endColor = "#32CD32"; // Lime Green
-
-        const routeCoordinates = destinations.map(dest => dest.coords);
-
-        // Create the gradient polyline
-        const gradientColors = destinations.map((_, index) => {
-            const percent = index / (destinations.length - 1);
-            return getGradientColor(startColor, endColor, percent);
+        map.on('layeradd', function(e) {
+            if (e.layer === route) {
+                setPolylineGradient(route, gradientColors);
+            }
         });
-
-        const route = L.polyline(routeCoordinates, {
-            weight: 4,
-            opacity: 0.8,
-            color: gradientColors[0]
-        }).addTo(map);
 
         // Create custom divIcons for each marker with gradient colors
         destinations.forEach((dest, index) => {
             const percent = index / (destinations.length - 1);
-            const markerColor = getGradientColor(startColor, endColor, percent);
+            const markerColor = gradientColors[Math.floor(percent * (gradientColors.length - 1))];
 
             const marker = L.circleMarker(dest.coords, {
                 radius: 6,
