@@ -42,6 +42,21 @@
             50% { transform: scale(1.5); opacity: 0.5; }
             100% { transform: scale(1); opacity: 1; }
         }
+        .leaflet-popup-content-wrapper {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .leaflet-popup-content {
+            margin: 0;
+            color: #333;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .leaflet-popup-tip-container {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -49,22 +64,16 @@
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
-        // Initialize the map centered on Asia/Europe/Africa
         var map = L.map('map').setView([45.0, 20.0], 3);
 
-        // Add OpenStreetMap tiles
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 18,
-            id: 'mapbox/streets-v11',
-            tileSize: 512,
-            zoomOffset: -1,
             opacity: 0.9
         }).addTo(map);
 
-        // List of countries with their coordinates and playlist links
         var destinations = [
-            { coords: [37.5665, 126.9780], title: "SOUTH KOREA", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk&si=CxzH7jEE-2hz9azS" },
-            { coords: [35.682839, 139.759455], title: "JAPAN", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT&si=4FCXgJ5tzXKvGzoO" },
+            { coords: [37.5665, 126.9780], title: "SOUTH KOREA", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk" },
+            { coords: [35.682839, 139.759455], title: "JAPAN", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT" },
             { coords: [51.169392, 71.449074], title: "KAZAKHSTAN", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuwYi6KTNpGONpqQCqz-LDK-&si=mVvmfKnEKTvQ9Kps" },
             { coords: [42.874621, 74.569762], title: "KYRGYZSTAN", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
             { coords: [41.377491, 64.585262], title: "UZBEKISTAN", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
@@ -92,34 +101,22 @@
             { coords: [54.687157, 25.279652], title: "LITHUANIA", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuz3pASS2AY2mMUftASy04Ej&si=LlnAhTnQN61bQJB4" },
             { coords: [56.949649, 24.105186], title: "LATVIA", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuzfaZSB_JX7R7955uvgjg2w&si=KHPk0EAKfshFr-rR" },
             { coords: [59.437000, 24.753575], title: "ESTONIA", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuzsrzS7o3Oajt6RPN6IeArn&si=kt3SvMdV7YiBedPk" },
-            { coords: [37.5665, 126.9780], title: "SOUTH KOREA 2", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuw7Jvj-f0iKrt1PZ4SKhApr&si=sMogdXfr1_Uz_dIR" }
+            { coords: [37.5665, 126.9780], title: "SOUTH KOREA 2", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuw7Jvj-f0iKrt1PZ4SKhApr" }
         ];
 
-        // Extract coordinates for polyline
         var routeCoordinates = destinations.map(function(dest) {
             return dest.coords;
         });
 
-        // Create the gradient polyline
-        var gradient = L.polyline(routeCoordinates, {
-            weight: 3,
+        // Create the polyline with a gradient
+        var route = L.polyline(routeCoordinates, {
+            weight: 2,
             opacity: 0.8,
             color: '#ff4500'
         }).addTo(map);
 
-        // Apply gradient effect using Leaflet's built-in methods
-        gradient.setStyle({
-            color: 'red',
-            weight: 2,
-            opacity: 0.8
-        });
-
-        // Redefine the color for the gradient from dark red to light green
-        var gradientPath = gradient.getElement();
-        gradientPath.setAttribute("stroke", "url(#gradient)");
-
         // Add simple dot markers for each destination
-        destinations.forEach(function(dest) {
+        destinations.forEach(function(dest, index) {
             var marker = L.circleMarker(dest.coords, {
                 radius: 5,
                 fillColor: '#ff4500',
@@ -128,23 +125,14 @@
                 fillOpacity: 1
             }).addTo(map);
 
+            marker.bindPopup(`<b>${dest.title}</b>`);
+
             marker.on('mouseover', function() {
-                marker.setStyle({
-                    fillColor: '#32CD32',
-                    color: '#32CD32'
-                });
-                L.popup()
-                    .setLatLng(dest.coords)
-                    .setContent(`<b>${dest.title}</b>`)
-                    .openOn(map);
+                marker.openPopup();
             });
 
             marker.on('mouseout', function() {
-                marker.setStyle({
-                    fillColor: '#ff4500',
-                    color: '#ff4500'
-                });
-                map.closePopup();
+                marker.closePopup();
             });
 
             marker.on('click', function() {
@@ -152,7 +140,7 @@
             });
         });
 
-        // Add ping animation to the last location
+        // Fix the ping animation to stay centered
         var lastDestination = destinations[destinations.length - 1];
         L.circleMarker(lastDestination.coords, {
             radius: 12,
@@ -161,15 +149,13 @@
             className: 'ping'
         }).addTo(map);
 
-        // Fix the ping animation to stay centered
-        map.on('zoom', function() {
+        map.on('zoomend', function() {
             var zoom = map.getZoom();
             document.querySelector('.ping').style.width = (zoom * 2) + 'px';
             document.querySelector('.ping').style.height = (zoom * 2) + 'px';
         });
 
-        // Fit the map to show the full route
-        map.fitBounds(gradient.getBounds());
+        map.fitBounds(route.getBounds());
     </script>
 </body>
 </html>
