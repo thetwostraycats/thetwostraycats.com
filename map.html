@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Journey - The Two Stray Cats</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Courier Prime', monospace;
+            background-color: #f0f4f8;
+        }
+        .map-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #b3d9ff; /* Pale blue */
+        }
+        svg {
+            width: 100%;
+            height: auto;
+        }
+        .marker {
+            fill: #ff5733;
+            cursor: pointer;
+        }
+        .marker:hover {
+            fill: #c70039;
+        }
+        .country-label {
+            font-size: 0.9em;
+            text-anchor: middle;
+            pointer-events: none;
+        }
+        .gradient-line {
+            stroke: url(#gradient);
+            stroke-width: 3;
+            fill: none;
+        }
+        .current-location {
+            fill: #28a745;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { r: 5; opacity: 1; }
+            50% { r: 8; opacity: 0.7; }
+            100% { r: 5; opacity: 1; }
+        }
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 10px 15px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        .back-button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-button">Back to Links</a>
+    <div class="map-container">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1009.67 665.96">
+            <!-- Define the gradient for the journey line -->
+            <defs>
+                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:darkred;" />
+                    <stop offset="100%" style="stop-color:green;" />
+                </linearGradient>
+            </defs>
+
+            <!-- Your SVG map content here (countries as paths) -->
+
+            <!-- Gradient line representing your journey -->
+            <path class="gradient-line" d="M200,400 L250,320 L270,350 L300,370 L340,350 L380,370 L420,330 L460,310 L500,300 L540,280 L580,250 L600,230 L640,220 L680,210 L720,200" />
+
+            <!-- Markers for the countries -->
+            <circle class="marker" cx="200" cy="400" r="5" data-country="South Korea" data-link="https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk"></circle>
+            <circle class="marker" cx="250" cy="320" r="5" data-country="Japan" data-link="https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT"></circle>
+            <circle class="marker" cx="270" cy="350" r="5" data-country="Kazakhstan" data-link="https://youtube.com/playlist?list=PLbZGBFUIvyuwYi6KTNpGONpqQCqz-LDK-&si=mVvmfKnEKTvQ9Kps"></circle>
+            <circle class="marker" cx="300" cy="370" r="5" data-country="Kyrgyzstan" data-link="https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw"></circle>
+            <circle class="marker" cx="340" cy="350" r="5" data-country="Uzbekistan" data-link="https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw"></circle>
+            <circle class="marker" cx="380" cy="370" r="5" data-country="Tajikistan" data-link="https://youtube.com/playlist?list=PLbZGBFUIvyuzAq1kzcrgaySFHrHiqhu_f&si=kG7VHRuz2v_6yDST"></circle>
+            <circle class="marker" cx="420" cy="330" r="5" data-country="Azerbaijan" data-link="https://youtube.com/playlist?list=PLbZGBFUIvyuyiUbEZNqNeFo_DqDQ0Ntyc&si=g28l5jcZJN2t3KqR"></circle>
+            <circle class="marker" cx="460" cy="310" r="5" data-country="Georgia" data-link="https://youtube.com/playlist?list=PLbZGBFUIvyuzUAMFKLp2gNsi8cMkj6e7P&si=3cdcBVLcj1yckcc1"></circle>
+            <circle class="marker" cx="500" cy="300" r="5" data-country="Turkey" data-link="https://youtube.com/playlist?list=PLbZGBFUIvyuypjQEePfQNxOdnMgZwJLOa&si=IZVG_HI66nfeW1AK"></circle>
+            <circle class="marker" cx="540" cy="280" r="5" data-country="Greece" data-link="https://youtube.com/playlist?list=PLbZGBFUIvyuyle5YGdkJdl32BtVcRqhZF&si=7aDdJ69-yoLV_jlU"></circle>
+            <circle class="marker" cx="580" cy="250" r="5" data-country="Bulgaria" data-link="https://youtube.com/playlist?list=PLbZGBFUIvyuwJUs1lCsjIzRJx9sUzRms7&si=en8PVBU0vQFRCBpS"></circle>
+            <circle class="marker" cx="600" cy="230" r="5" data-country="North Macedonia" data-link="https://youtube.com/playlist?list=PLbZGBFUIvyuwCrNRlOAdMakDjSyidA_pr&si=1UuNZA6boeaz8022"></circle>
+            <circle class="marker" cx="640" cy="220" r="5" data-country="Albania" data-link="https://youtube.com/playlist?list=PLbZGBFUIvyuyUaE2ZfYwv7vxo5sEtXW1_&si=a4hZrdQ-aoS5h4Pq"></circle>
+            <circle class="marker" cx="680" cy="210" r="5" data-country="Italy" data-link="https://youtube.com/playlist?list=PLbZGBFUIvyuzUhkH3xIb9KCzQxXDvu84z&si=PD_snF6g2-_hKRrd"></circle>
+            <circle class="marker" cx="720" cy="200" r="5" data-country="Vatican City" data-link="https://youtube.com/playlist?list=PLbZGBFUIvyuwAD4AudQuG2d_DaZG8hS7i&si=4UhbpX1S9RkYWbxB"></circle>
+
+            <!-- Example current location marker -->
+            <circle class="current-location" cx="720" cy="200" r="5"></circle>
+        </svg>
+    </div>
+    <script>
+        // JavaScript to handle hover effects and clicks
+        document.querySelectorAll('.marker').forEach(marker => {
+            marker.addEventListener('mouseenter', function() {
+                const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                label.setAttribute('x', marker.getAttribute('cx'));
+                label.setAttribute('y', marker.getAttribute('cy') - 10);
+                label.setAttribute('class', 'country-label');
+                label.textContent = marker.getAttribute('data-country');
+                marker.parentNode.appendChild(label);
+            });
+            marker.addEventListener('mouseleave', function() {
+                document.querySelectorAll('.country-label').forEach(label => label.remove());
+            });
+            marker.addEventListener('click', function() {
+                window.open(marker.getAttribute('data-link'), '_blank');
+            });
+        });
+    </script>
+</body>
+</html>
