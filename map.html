@@ -3,133 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Travel Map</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <title>Our Journey - The Two Stray Cats</title>
     <style>
-        #map {
+        body {
+            margin: 0;
+            font-family: 'Courier Prime', monospace;
+            background-color: #f0f4f8;
+        }
+        .map-container {
+            position: relative;
+            width: 100%;
             height: 100vh;
+            overflow: hidden;
+            background-color: #e0e4cc; /* Softer background color */
         }
-        .leaflet-popup-content-wrapper {
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 8px;
-            padding: 10px;
+        svg {
+            width: 200%;
+            height: 150%;
+            cursor: move;
         }
-        .leaflet-popup-content a {
-            color: #ff4500;
-            font-weight: bold;
+        .marker, .country {
+            fill: #ff5733; /* Red color for markers */
+            cursor: pointer;
+            transition: fill 0.3s ease;
         }
-        .ping {
-            animation: pingAnimation 1s infinite;
+        .marker:hover, .country:hover {
+            fill: #c70039; /* Darker red on hover */
         }
-        @keyframes pingAnimation {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.2); opacity: 0.6; }
-            100% { transform: scale(1); opacity: 1; }
+        .current-location {
+            fill: #28a745;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { r: 3; opacity: 1; }
+            50% { r: 5; opacity: 0.7; }
+            100% { r: 3; opacity: 1; }
+        }
+        .gradient-line {
+            stroke: url(#gradient);
+            stroke-width: 2; /* Thinner line */
+            fill: none;
+        }
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 10px 15px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        .back-button:hover {
+            background-color: #555;
         }
     </style>
 </head>
 <body>
-    <div id="map"></div>
+    <a href="/" class="back-button">Back to Links</a>
+    <div class="map-container">
+        <!-- Embed the SVG directly from the uploaded file -->
+        <svg id="map" xmlns="http://www.w3.org/2000/svg" viewBox="-500 0 2000 1000">
+            <defs>
+                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:darkred;" />
+                    <stop offset="100%" style="stop-color:green;" />
+                </linearGradient>
+            </defs>
 
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet-polylinedecorator/dist/leaflet.polylineDecorator.js"></script>
+            <!-- Your SVG content should be placed here -->
+
+            <!-- Example gradient line for the journey -->
+            <path class="gradient-line" d="M200,400 L600,500 L700,600 L800,700" />
+
+            <!-- Markers for the countries with adjusted sizes -->
+            <circle class="marker" cx="1200" cy="300" r="3" data-link="https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk"></circle>
+            <circle class="marker current-location" cx="1200" cy="300" r="5"></circle> <!-- Ping on South Korea -->
+            <circle class="marker" cx="1300" cy="400" r="3" data-link="https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT"></circle>
+            <circle class="marker" cx="1500" cy="500" r="3" data-link="https://youtube.com/playlist?list=PLbZGBFUIvyuwYi6KTNpGONpqQCqz-LDK-&si=mVvmfKnEKTvQ9Kps"></circle>
+            <!-- Add the rest of the markers -->
+        </svg>
+    </div>
     <script>
-        // Initialize the map centered on Asia/Europe/Africa
-        var map = L.map('map').setView([45.0, 20.0], 3);
+        // Enable zoom and pan with initial viewport
+        const svg = document.querySelector('#map');
+        let viewBox = svg.viewBox.baseVal;
+        viewBox.x = -500; // Adjust this value to set initial view
+        viewBox.y = 0;   // Adjust this value to set initial view
+        viewBox.width = 2000;  // Adjust width for zoom level
+        viewBox.height = 1000; // Adjust height for zoom level
+        let isPanning = false;
+        let startPoint = {x: 0, y: 0};
+        let startViewBox = {x: 0, y: 0};
 
-        // Add OpenStreetMap tiles
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 18,
-        }).addTo(map);
-
-        // List of countries with their coordinates and playlist links
-        var destinations = [
-            { coords: [37.5665, 126.9780], title: "SOUTH KOREA", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk&si=CxzH7jEE-2hz9azS" },
-            { coords: [35.682839, 139.759455], title: "JAPAN", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT&si=4FCXgJ5tzXKvGzoO" },
-            { coords: [51.169392, 71.449074], title: "KAZAKHSTAN", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuwYi6KTNpGONpqQCqz-LDK-&si=mVvmfKnEKTvQ9Kps" },
-            { coords: [42.874621, 74.569762], title: "KYRGYZSTAN", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
-            { coords: [41.377491, 64.585262], title: "UZBEKISTAN", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
-            { coords: [38.861034, 71.276093], title: "TAJIKISTAN", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuzAq1kzcrgaySFHrHiqhu_f&si=kG7VHRuz2v_6yDST" },
-            { coords: [40.143105, 47.576927], title: "AZERBAIJAN", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuyiUbEZNqNeFo_DqDQ0Ntyc&si=g28l5jcZJN2t3KqR" },
-            { coords: [41.715137, 44.827095], title: "GEORGIA", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuzUAMFKLp2gNsi8cMkj6e7P&si=3cdcBVLcj1yckcc1" },
-            { coords: [39.933365, 32.859742], title: "TURKIYE", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuypjQEePfQNxOdnMgZwJLOa&si=IZVG_HI66nfeW1AK" },
-            { coords: [37.983810, 23.727539], title: "GREECE", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuyle5YGdkJdl32BtVcRqhZF&si=7aDdJ69-yoLV_jlU" },
-            { coords: [42.733883, 25.485830], title: "BULGARIA", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuwJUs1lCsjIzRJx9sUzRms7&si=en8PVBU0vQFRCBpS" },
-            { coords: [41.608635, 21.745275], title: "NORTH MACEDONIA", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuwCrNRlOAdMakDjSyidA_pr&si=1UuNZA6boeaz8022" },
-            { coords: [41.327546, 19.818698], title: "ALBANIA", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuyUaE2ZfYwv7vxo5sEtXW1_&si=a4hZrdQ-aoS5h4Pq" },
-            { coords: [41.902782, 12.496366], title: "ITALY", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuzUhkH3xIb9KCzQxXDvu84z&si=PD_snF6g2-_hKRrd" },
-            { coords: [41.902916, 12.453389], title: "VATICAN CITY", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuwAD4AudQuG2d_DaZG8hS7i&si=4UhbpX1S9RkYWbxB" },
-            { coords: [38.736946, -9.142685], title: "PORTUGAL", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuybUvJ6kPWKiOBRgwy-Q1Qi&si=IkIhSvkxBXrvxrxo" },
-            { coords: [40.416775, -3.703790], title: "SPAIN", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuzv1mwpyepKAdco3OOhJCNk&si=PZCls6QOkAacxQ50" },
-            { coords: [31.791702, -7.092620], title: "MOROCCO", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuw3_kHyN0JdhGHKxoqe0NBH&si=PU9Yt50w6bOIeizD" },
-            { coords: [33.886917, 9.537499], title: "TUNISIA", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuw2fC2_ShvMYJZNhsUv_Q5Q&si=RO0zMV9DTH_BoOuG" },
-            { coords: [30.044420, 31.235712], title: "EGYPT", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuwsfyLWO8iEPEbcUATOdaRc&si=AJYeQtuQ9NyxZLO-" },
-            { coords: [39.933365, 32.859742], title: "TURKIYE 2", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuwM5spZz9XLUHcZW9Po7tfG&si=Pk4nXp2SFd-Rlge5" },
-            { coords: [47.497913, 19.040236], title: "HUNGARY", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuwVfvlne79sYbREXB2tg7ZW&si=GM7HyAA0cpAf5mMG" },
-            { coords: [48.208174, 16.373819], title: "AUSTRIA", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuyR432PnpHimkXmof9eonon&si=iKnR43h_ti3UKvvt" },
-            { coords: [48.148598, 17.107748], title: "SLOVAKIA", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuxi3s2kpwRmtrW_iM50MRoZ&si=aHEBiSpQ4Va1ret1" },
-            { coords: [52.229676, 21.012229], title: "POLAND", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyux74Mk7pHpTlzjisK3e8auG&si=Ly6oUaDZYN2IKz0e" },
-            { coords: [52.520008, 13.404954], title: "GERMANY", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuzYAS_YiNWxI75qcJCatvgp&si=cbT0euj3RvbYLeiD" },
-            { coords: [54.687157, 25.279652], title: "LITHUANIA", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuz3pASS2AY2mMUftASy04Ej&si=LlnAhTnQN61bQJB4" },
-            { coords: [56.949649, 24.105186], title: "LATVIA", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuzfaZSB_JX7R7955uvgjg2w&si=KHPk0EAKfshFr-rR" },
-            { coords: [59.437000, 24.753575], title: "ESTONIA", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuzsrzS7o3Oajt6RPN6IeArn&si=kt3SvMdV7YiBedPk" },
-            { coords: [37.5665, 126.9780], title: "SOUTH KOREA 2", playlist: "https://youtube.com/playlist?list=PLbZGBFUIvyuw7Jvj-f0iKrt1PZ4SKhApr&si=sMogdXfr1_Uz_dIR" }
-        ];
-
-        // Extract coordinates for polyline
-        var routeCoordinates = destinations.map(function(dest) {
-            return dest.coords;
+        svg.addEventListener('mousedown', function(evt) {
+            isPanning = true;
+            startPoint = {x: evt.clientX, y: evt.clientY};
+            startViewBox = {x: viewBox.x, y: viewBox.y};
         });
 
-        // Create a gradient polyline to show the route
-        var route = L.polyline(routeCoordinates, {
-            color: '#ff4500',
-            weight: 5,
-            opacity: 0.8
-        }).addTo(map);
+        svg.addEventListener('mousemove', function(evt) {
+            if (isPanning) {
+                viewBox.x = startViewBox.x - (evt.clientX - startPoint.x) * (viewBox.width / svg.clientWidth);
+                viewBox.y = startViewBox.y - (evt.clientY - startPoint.y) * (viewBox.height / svg.clientHeight);
+            }
+        });
 
-        // Add gradient effect to the route
-        L.polylineDecorator(route, {
-            patterns: [
-                {
-                    offset: 0,
-                    endOffset: 0,
-                    repeat: 0,
-                    symbol: L.Symbol.arrowHead({
-                        pixelSize: 10,
-                        polygon: false,
-                        pathOptions: { stroke: true, color: '#ff4500', opacity: 0.8 }
-                    })
+        svg.addEventListener('mouseup', function() {
+            isPanning = false;
+        });
+
+        svg.addEventListener('wheel', function(evt) {
+            evt.preventDefault();
+            const zoomFactor = 1.1;
+            const mousePointTo = {
+                x: evt.clientX / svg.clientWidth * viewBox.width + viewBox.x,
+                y: evt.clientY / svg.clientHeight * viewBox.height + viewBox.y
+            };
+            if (evt.deltaY < 0) { // Zoom in
+                viewBox.width /= zoomFactor;
+                viewBox.height /= zoomFactor;
+            } else { // Zoom out
+                viewBox.width *= zoomFactor;
+                viewBox.height *= zoomFactor;
+            }
+            viewBox.x = mousePointTo.x - (mousePointTo.x - viewBox.x) * (viewBox.width / (viewBox.width * zoomFactor));
+            viewBox.y = mousePointTo.y - (mousePointTo.y - viewBox.y) * (viewBox.height / (viewBox.height * zoomFactor));
+        });
+
+        // Handle marker clicks
+        const markers = document.querySelectorAll('.marker');
+        markers.forEach(marker => {
+            marker.addEventListener('click', function() {
+                const link = this.getAttribute('data-link');
+                if (link) {
+                    window.open(link, '_blank');
                 }
-            ]
-        }).addTo(map);
-
-        // Add markers with popups for each destination
-        destinations.forEach(function(dest, index) {
-            var marker = L.marker(dest.coords).addTo(map);
-            marker.bindPopup(`<b>${index + 1}. ${dest.title}</b><br><a href="${dest.playlist}" target="_blank">Watch Playlist</a>`);
-            marker.on('mouseover', function() {
-                marker.openPopup();
-            });
-            marker.on('mouseout', function() {
-                marker.closePopup();
             });
         });
-
-        // Add ping animation to the last location
-        var lastDestination = destinations[destinations.length - 1];
-        var lastMarker = L.marker(lastDestination.coords, {
-            icon: L.divIcon({
-                className: 'ping',
-                html: '<div style="width:24px;height:24px;background-color:#ff4500;border-radius:50%;"></div>',
-                iconSize: [24, 24],
-                iconAnchor: [12, 12]
-            })
-        }).addTo(map);
-        lastMarker.bindPopup(`<b>Current Location: ${lastDestination.title}</b><br><a href="${lastDestination.playlist}" target="_blank">Watch Playlist</a>`).openPopup();
-
-        // Fit the map to show the full route
-        map.fitBounds(route.getBounds());
     </script>
 </body>
 </html>
