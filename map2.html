@@ -22,11 +22,12 @@
     <div id="map"></div>
 
     <script>
-        mapboxgl.accessToken = 'pk.eyJ1IjoidHdvc3RyYXljYXRzIiwiYSI6ImNtMDVvNWg0MDBtYTUyanMyd3l0c2dkZ3MifQ.rMTSjEzGk3UJJ_44yksV9Q';
+        // Initialize Mapbox with the correct token
+        mapboxgl.accessToken = 'pk.eyJ1IjoidHdvc3RyYXljYXRzIiwiYSI6ImNtMDVwM3JnNTBnZmIyaXF4dHRoNGFnbmYifQ.dh7P4Ojmd_dQ3ALDFPDteA';
 
         var map = new mapboxgl.Map({
             container: 'map',
-            style: 'mapbox://styles/mapbox/light-v10',
+            style: 'mapbox://styles/mapbox/streets-v11', // use a different map style to see if the issue persists
             center: [70.0, 35.0],
             zoom: 3
         });
