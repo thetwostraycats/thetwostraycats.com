@@ -23,7 +23,7 @@
 
     <script>
         // Initialize Mapbox with your token
-        mapboxgl.accessToken = 'your_mapbox_token_here';
+        mapboxgl.accessToken = 'pk.eyJ1IjoidHdvc3RyYXljYXRzIiwiYSI6ImNtMDVvNWg0MDBtYTUyanMyd3l0c2dkZ3MifQ.rMTSjEzGk3UJJ_44yksV9Q';
 
         var map = new mapboxgl.Map({
             container: 'map', // container ID
@@ -39,7 +39,7 @@
         map.on('load', function () {
             map.addSource('simplified-route', {
                 type: 'geojson',
-                data: 'path_to_your_downloaded_geojson_file' // Update this path
+                data: 'https://raw.githubusercontent.com/thetwostraycats/thetwostraycats.com/main/simplified_travel_route.geojson' // Update this path
             });
 
             // Add the line layer
