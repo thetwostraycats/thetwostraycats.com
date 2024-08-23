@@ -1,0 +1,621 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        37.5665,
+                        126.978
+                    ],
+                    [
+                        37.511399999999995,
+                        131.8416
+                    ],
+                    [
+                        37.4563,
+                        126.7052
+                    ]
+                ]
+            },
+            "properties": {
+                "title": "seoul to incheon",
+                "transport": "plane"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        37.4563,
+                        126.7052
+                    ],
+                    [
+                        36.5695695,
+                        138.2323275
+                    ],
+                    [
+                        35.682839,
+                        139.759455
+                    ]
+                ]
+            },
+            "properties": {
+                "title": "incheon to tokyo",
+                "transport": "plane"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        35.682839,
+                        139.759455
+                    ],
+                    [
+                        34.6937,
+                        135.5023
+                    ]
+                ]
+            },
+            "properties": {
+                "title": "tokyo to osaka",
+                "transport": "bus"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        34.6937,
+                        135.5023
+                    ],
+                    [
+                        35.0116,
+                        135.7681
+                    ]
+                ]
+            },
+            "properties": {
+                "title": "osaka to kyoto",
+                "transport": "bus"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        35.0116,
+                        135.7681
+                    ],
+                    [
+                        34.85265,
+                        140.6352
+                    ],
+                    [
+                        34.6937,
+                        135.5023
+                    ]
+                ]
+            },
+            "properties": {
+                "title": "kyoto to osaka",
+                "transport": "plane"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        34.6937,
+                        135.5023
+                    ],
+                    [
+                        35.188269500000004,
+                        142.6308775
+                    ],
+                    [
+                        35.682839,
+                        139.759455
+                    ]
+                ]
+            },
+            "properties": {
+                "title": "osaka to tokyo",
+                "transport": "plane"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        35.682839,
+                        139.759455
+                    ],
+                    [
+                        36.5695695,
+                        138.2323275
+                    ],
+                    [
+                        37.4563,
+                        126.7052
+                    ]
+                ]
+            },
+            "properties": {
+                "title": "tokyo to incheon",
+                "transport": "plane"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        37.4563,
+                        126.7052
+                    ],
+                    [
+                        40.339150000000004,
+                        106.7782
+                    ],
+                    [
+                        43.222,
+                        76.8512
+                    ]
+                ]
+            },
+            "properties": {
+                "title": "incheon to almaty",
+                "transport": "plane"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        43.222,
+                        76.8512
+                    ],
+                    [
+                        47.1957,
+                        79.15015
+                    ],
+                    [
+                        51.1694,
+                        71.4491
+                    ]
+                ]
+            },
+            "properties": {
+                "title": "almaty to astana",
+                "transport": "plane"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        51.1694,
+                        71.4491
+                    ],
+                    [
+                        43.222,
+                        76.8512
+                    ]
+                ]
+            },
+            "properties": {
+                "title": "astana to almaty",
+                "transport": "car"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        43.222,
+                        76.8512
+                    ],
+                    [
+                        42.8746,
+                        74.5698
+                    ]
+                ]
+            },
+            "properties": {
+                "title": "almaty to bishkek",
+                "transport": "bus"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        42.8746,
+                        74.5698
+                    ],
+                    [
+                        42.6494,
+                        77.081
+                    ]
+                ]
+            },
+            "properties": {
+                "title": "bishkek to cholpon-ata",
+                "transport": "bus"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        42.6494,
+                        77.081
+                    ],
+                    [
+                        42.762,
+                        80.8254
+                    ],
+                    [
+                        42.8746,
+                        74.5698
+                    ]
+                ]
+            },
+            "properties": {
+                "title": "cholpon-ata to bishkek",
+                "transport": "plane"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        42.8746,
+                        74.5698
+                    ],
+                    [
+                        41.2995,
+                        69.2401
+                    ]
+                ]
+            },
+            "properties": {
+                "title": "bishkek to tashkent",
+                "transport": "train"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        41.2995,
+                        69.2401
+                    ],
+                    [
+                        39.6542,
+                        66.9597
+                    ]
+                ]
+            },
+            "properties": {
+                "title": "tashkent to samarkand",
+                "transport": "car"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        39.6542,
+                        66.9597
+                    ],
+                    [
+                        39.5036,
+                        67.616
+                    ]
+                ]
+            },
+            "properties": {
+                "title": "samarkand to panjakent",
+                "transport": "car"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        39.5036,
+                        67.616
+                    ],
+                    [
+                        39.2191,
+                        67.979
+                    ]
+                ]
+            },
+            "properties": {
+                "title": "panjakent to shing",
+                "transport": "car"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        39.2191,
+                        67.979
+                    ],
+                    [
+                        38.5598,
+                        68.787
+                    ]
+                ]
+            },
+            "properties": {
+                "title": "shing to dushanbe",
+                "transport": "train"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        38.5598,
+                        68.787
+                    ],
+                    [
+                        39.6542,
+                        66.9597
+                    ]
+                ]
+            },
+            "properties": {
+                "title": "dushanbe to samarkand",
+                "transport": "train"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        39.6542,
+                        66.9597
+                    ],
+                    [
+                        39.7747,
+                        64.4289
+                    ]
+                ]
+            },
+            "properties": {
+                "title": "samarkand to bukhara",
+                "transport": "train"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        39.7747,
+                        64.4289
+                    ],
+                    [
+                        39.6542,
+                        66.9597
+                    ]
+                ]
+            },
+            "properties": {
+                "title": "bukhara to samarkand",
+                "transport": "train"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        39.6542,
+                        66.9597
+                    ],
+                    [
+                        40.47685,
+                        73.09989999999999
+                    ],
+                    [
+                        41.2995,
+                        69.2401
+                    ]
+                ]
+            },
+            "properties": {
+                "title": "samarkand to tashkent",
+                "transport": "plane"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        41.2995,
+                        69.2401
+                    ],
+                    [
+                        40.4093,
+                        49.8671
+                    ]
+                ]
+            },
+            "properties": {
+                "title": "tashkent to baku",
+                "transport": "train"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        40.4093,
+                        49.8671
+                    ],
+                    [
+                        40.6828,
+                        46.3606
+                    ]
+                ]
+            },
+            "properties": {
+                "title": "baku to ganja",
+                "transport": "car"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        40.6828,
+                        46.3606
+                    ],
+                    [
+                        41.5421,
+                        45.001
+                    ]
+                ]
+            },
+            "properties": {
+                "title": "ganja to rustavi",
+                "transport": "bus"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        41.5421,
+                        45.001
+                    ],
+                    [
+                        41.7151,
+                        44.8271
+                    ]
+                ]
+            },
+            "properties": {
+                "title": "rustavi to tblisi",
+                "transport": "bus"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        41.7151,
+                        44.8271
+                    ],
+                    [
+                        41.6206,
+                        45.9217
+                    ]
+                ]
+            },
+            "properties": {
+                "title": "tblisi to sighnaghi",
+                "transport": "bus"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        41.6206,
+                        45.9217
+                    ],
+                    [
+                        41.7151,
+                        44.8271
+                    ]
+                ]
+            },
+            "properties": {
+                "title": "sighnaghi to tblisi",
+                "transport": "train"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        41.7151,
+                        44.8271
+                    ],
+                    [
+                        41.6168,
+                        41.6367
+                    ]
+                ]
+            },
+            "properties": {
+                "title": "tblisi to batumi",
+                "transport": "car"
+            }
+        }
+    ]
+}
