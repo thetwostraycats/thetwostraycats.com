@@ -15,15 +15,14 @@
             background-color: #f5f5f5;
         }
         .city-dot {
-            background-color: #007cbf;
+            background-color: #FF6347; /* Tomato */
             border-radius: 50%;
             width: 10px;
             height: 10px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
         }
         .city-dot:hover {
-            background-color: #FF6347;
+            background-color: #FF4500; /* OrangeRed */
         }
         .mapboxgl-popup-content {
             text-align: center;
@@ -33,10 +32,6 @@
             color: #fff;
             padding: 5px;
             border-radius: 3px;
-            cursor: pointer;
-        }
-        .mapboxgl-popup-content:hover {
-            background-color: #555;
         }
     </style>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
@@ -58,70 +53,28 @@
         map.addControl(new mapboxgl.NavigationControl());
 
         var cities = [
-            { coords: [126.9780, 37.5665], name: "SEOUL, SOUTH KOREA", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk", transport: 'train' },
-            { coords: [126.4504, 37.4634], name: "INCHEON, SOUTH KOREA", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk", transport: 'plane' },
-            { coords: [139.759455, 35.682839], name: "TOKYO, JAPAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT", transport: 'plane' },
-            { coords: [135.495951, 34.702485], name: "OSAKA, JAPAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT", transport: 'bus' },
-            { coords: [135.7681, 35.0116], name: "KYOTO, JAPAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT", transport: 'bus' },
-            { coords: [76.9285, 43.2383], name: "ALMATY, KAZAKHSTAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwYi6KTNpGONpqQCqz-LDK-", transport: 'plane' },
-            { coords: [71.449074, 51.169392], name: "ASTANA, KAZAKHSTAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwYi6KTNpGONpqQCqz-LDK-", transport: 'car' },
-            { coords: [74.5893, 42.8746], name: "BISHKEK, KYRGYZSTAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw", transport: 'bus' }
+            { coords: [126.9780, 37.5665], name: "SEOUL, SOUTH KOREA", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk" },
+            { coords: [126.4504, 37.4634], name: "INCHEON, SOUTH KOREA", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk" },
+            { coords: [139.759455, 35.682839], name: "TOKYO, JAPAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT" },
+            { coords: [135.495951, 34.702485], name: "OSAKA, JAPAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT" },
+            { coords: [135.7681, 35.0116], name: "KYOTO, JAPAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT" },
+            { coords: [76.9285, 43.2383], name: "ALMATY, KAZAKHSTAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwYi6KTNpGONpqQCqz-LDK-" },
+            { coords: [71.449074, 51.169392], name: "ASTANA, KAZAKHSTAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwYi6KTNpGONpqQCqz-LDK-" },
+            { coords: [74.5893, 42.8746], name: "BISHKEK, KYRGYZSTAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw" }
         ];
 
-        // Add markers
+        // Add markers and popups
         cities.forEach(function(city) {
             var el = document.createElement('div');
             el.className = 'city-dot';
             
-            var marker = new mapboxgl.Marker(el)
+            new mapboxgl.Marker(el)
                 .setLngLat(city.coords)
-                .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<strong>' + city.name + '</strong>'))
+                .setPopup(new mapboxgl.Popup({ offset: 25 }).setText(city.name))
                 .addTo(map);
 
             el.addEventListener('click', function() {
                 window.open(city.url, '_blank');
-            });
-        });
-
-        // Add lines
-        cities.forEach(function(city, index) {
-            if (index === 0) return; // Skip the first city
-
-            var color;
-            var dashArray = [];
-
-            switch (city.transport) {
-                case 'plane':
-                    color = '#1E90FF';
-                    dashArray = [2, 2];
-                    break;
-                case 'bus':
-                    color = '#ADD8E6';
-                    break;
-                case 'train':
-                    color = '#00008B';
-                    break;
-            }
-
-            map.addLayer({
-                id: 'route-' + index,
-                type: 'line',
-                source: {
-                    type: 'geojson',
-                    data: {
-                        type: 'Feature',
-                        geometry: {
-                            type: 'LineString',
-                            coordinates: [cities[index - 1].coords, city.coords]
-                        }
-                    }
-                },
-                paint: {
-                    'line-color': color,
-                    'line-width': 4,
-                    'line-dasharray': dashArray,
-                    'line-opacity': 0.8
-                }
             });
         });
 
