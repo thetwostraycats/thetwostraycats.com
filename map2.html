@@ -75,6 +75,32 @@
             // Add more cities as needed
         ];
 
+        cities.forEach(function(city) {
+            // Create a marker for each city
+            var el = document.createElement('div');
+            el.className = 'city-dot';
+            
+            // Create a marker using the custom element
+            var marker = new mapboxgl.Marker(el)
+                .setLngLat(city.coords)
+                .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<strong>' + city.name + '</strong>')) // Show country name on hover
+                .addTo(map);
+
+            // Add click event to open YouTube playlist
+            el.addEventListener('click', function() {
+                window.open(city.url, '_blank');
+            });
+
+            // Make popup title clickable
+            marker.getElement().addEventListener('mouseenter', function() {
+                marker.togglePopup();
+            });
+
+            marker.getElement().addEventListener('mouseleave', function() {
+                marker.togglePopup();
+            });
+        });
+
         // Draw the lines based on transport method
         for (let i = 1; i < cities.length; i++) {
             let color = '#0000FF';
@@ -114,32 +140,6 @@
                 }
             });
         }
-
-        cities.forEach(function(city) {
-            // Create a marker for each city
-            var el = document.createElement('div');
-            el.className = 'city-dot';
-            
-            // Create a marker using the custom element
-            var marker = new mapboxgl.Marker(el)
-                .setLngLat(city.coords)
-                .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<strong>' + city.name + '</strong>')) // Show country name on hover
-                .addTo(map);
-
-            // Add click event to open YouTube playlist
-            el.addEventListener('click', function() {
-                window.open(city.url, '_blank');
-            });
-
-            // Make popup title clickable
-            marker.getElement().addEventListener('mouseenter', function() {
-                marker.togglePopup();
-            });
-
-            marker.getElement().addEventListener('mouseleave', function() {
-                marker.togglePopup();
-            });
-        });
     </script>
 </body>
 </html>
