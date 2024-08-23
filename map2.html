@@ -51,14 +51,14 @@
         map.addControl(new mapboxgl.NavigationControl());
 
         var cities = [
-            { coords: [126.9780, 37.5665], name: "SEOUL, SOUTH KOREA", url: "https://www.youtube.com/playlist?list=SEOUL_PLAYLIST" },
-            { coords: [126.4504, 37.4634], name: "INCHEON, SOUTH KOREA", url: "https://www.youtube.com/playlist?list=INCHEON_PLAYLIST" },
-            { coords: [139.759455, 35.682839], name: "TOKYO, JAPAN", url: "https://www.youtube.com/playlist?list=TOKYO_PLAYLIST" },
-            { coords: [135.495951, 34.702485], name: "OSAKA, JAPAN", url: "https://www.youtube.com/playlist?list=OSAKA_PLAYLIST" },
-            { coords: [135.7681, 35.0116], name: "KYOTO, JAPAN", url: "https://www.youtube.com/playlist?list=KYOTO_PLAYLIST" },
-            { coords: [76.9285, 43.2383], name: "ALMATY, KAZAKHSTAN", url: "https://www.youtube.com/playlist?list=ALMATY_PLAYLIST" },
-            { coords: [71.449074, 51.169392], name: "ASTANA, KAZAKHSTAN", url: "https://www.youtube.com/playlist?list=ASTANA_PLAYLIST" },
-            { coords: [74.5893, 42.8746], name: "BISHKEK, KYRGYZSTAN", url: "https://www.youtube.com/playlist?list=BISHKEK_PLAYLIST" }
+            { coords: [126.9780, 37.5665], name: "SEOUL, SOUTH KOREA", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk&si=CxzH7jEE-2hz9azS" },
+            { coords: [126.4504, 37.4634], name: "INCHEON, SOUTH KOREA", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk&si=CxzH7jEE-2hz9azS" },
+            { coords: [139.759455, 35.682839], name: "TOKYO, JAPAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT&si=4FCXgJ5tzXKvGzoO" },
+            { coords: [135.495951, 34.702485], name: "OSAKA, JAPAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT&si=4FCXgJ5tzXKvGzoO" },
+            { coords: [135.7681, 35.0116], name: "KYOTO, JAPAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT&si=4FCXgJ5tzXKvGzoO" },
+            { coords: [76.9285, 43.2383], name: "ALMATY, KAZAKHSTAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwYi6KTNpGONpqQCqz-LDK-&si=mVvmfKnEKTvQ9Kps" },
+            { coords: [71.449074, 51.169392], name: "ASTANA, KAZAKHSTAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwYi6KTNpGONpqQCqz-LDK-&si=mVvmfKnEKTvQ9Kps" },
+            { coords: [74.5893, 42.8746], name: "BISHKEK, KYRGYZSTAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" }
         ];
 
         cities.forEach(function(city) {
@@ -75,17 +75,17 @@
                 .addTo(map);
         });
 
-        function createCurve(start, end) {
+        function createFlightCurve(start, end) {
             var controlPoint = [
                 (start[0] + end[0]) / 2,
-                (start[1] + end[1]) / 2 + 10 // Adjusting for curvature
+                (start[1] + end[1]) / 2 + 10 // Adjusting for a better curve appearance
             ];
             return [start, controlPoint, end];
         }
 
         var routes = [
             {
-                coords: createCurve([126.9780, 37.5665], [139.759455, 35.682839]), // Seoul to Tokyo
+                coords: createFlightCurve([126.9780, 37.5665], [139.759455, 35.682839]), // Seoul to Tokyo
                 transport: 'plane'
             },
             {
