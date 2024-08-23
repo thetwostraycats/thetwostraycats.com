@@ -23,7 +23,23 @@
             transition: background-color 0.3s ease;
         }
         .city-dot:hover {
-            background-color: #FF6347; /* Change color on hover */
+            background-color: #FF6347;
+        }
+        .mapboxgl-popup {
+            max-width: 200px;
+        }
+        .mapboxgl-popup-content {
+            text-align: center;
+            font-family: 'Verdana', sans-serif;
+            font-size: 14px;
+            background-color: #333;
+            color: #fff;
+            padding: 5px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .mapboxgl-popup-content:hover {
+            background-color: #555;
         }
     </style>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
@@ -48,16 +64,56 @@
 
         // Define cities with coordinates and transport methods
         var cities = [
-            { coords: [126.9780, 37.5665], name: "South Korea", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk" },
-            { coords: [126.4504, 37.4634], name: "South Korea", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk" },
-            { coords: [139.759455, 35.682839], name: "Japan", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT" },
-            { coords: [135.495951, 34.702485], name: "Japan", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT" },
-            { coords: [135.7681, 35.0116], name: "Japan", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT" },
-            { coords: [76.9285, 43.2383], name: "Kazakhstan", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwYi6KTNpGONpqQCqz-LDK-" },
-            { coords: [71.449074, 51.169392], name: "Kazakhstan", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwYi6KTNpGONpqQCqz-LDK-" },
-            { coords: [74.5893, 42.8746], name: "Kyrgyzstan", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw" }
+            { coords: [126.9780, 37.5665], name: "SOUTH KOREA", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk", transport: 'train' },
+            { coords: [126.4504, 37.4634], name: "SOUTH KOREA", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk", transport: 'plane' },
+            { coords: [139.759455, 35.682839], name: "JAPAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT", transport: 'plane' },
+            { coords: [135.495951, 34.702485], name: "JAPAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT", transport: 'bus' },
+            { coords: [135.7681, 35.0116], name: "JAPAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT", transport: 'bus' },
+            { coords: [76.9285, 43.2383], name: "KAZAKHSTAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwYi6KTNpGONpqQCqz-LDK-", transport: 'plane' },
+            { coords: [71.449074, 51.169392], name: "KAZAKHSTAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwYi6KTNpGONpqQCqz-LDK-", transport: 'car' },
+            { coords: [74.5893, 42.8746], name: "KYRGYZSTAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw", transport: 'bus' }
             // Add more cities as needed
         ];
+
+        // Draw the lines based on transport method
+        for (let i = 1; i < cities.length; i++) {
+            let color = '#0000FF';
+            let dashArray = [];
+
+            switch (cities[i].transport) {
+                case 'plane':
+                    color = '#1E90FF';
+                    dashArray = [2, 2];
+                    break;
+                case 'bus':
+                    color = '#ADD8E6';
+                    break;
+                case 'train':
+                    color = '#00008B';
+                    break;
+            }
+
+            map.addLayer({
+                id: 'route-' + i,
+                type: 'line',
+                source: {
+                    type: 'geojson',
+                    data: {
+                        type: 'Feature',
+                        geometry: {
+                            type: 'LineString',
+                            coordinates: [cities[i - 1].coords, cities[i].coords]
+                        }
+                    }
+                },
+                paint: {
+                    'line-color': color,
+                    'line-width': 4,
+                    'line-dasharray': dashArray,
+                    'line-opacity': 0.8
+                }
+            });
+        }
 
         cities.forEach(function(city) {
             // Create a marker for each city
@@ -67,12 +123,21 @@
             // Create a marker using the custom element
             var marker = new mapboxgl.Marker(el)
                 .setLngLat(city.coords)
-                .setPopup(new mapboxgl.Popup({ offset: 25 }).setText(city.name)) // Show country name on hover
+                .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<strong>' + city.name + '</strong>')) // Show country name on hover
                 .addTo(map);
 
             // Add click event to open YouTube playlist
             el.addEventListener('click', function() {
                 window.open(city.url, '_blank');
+            });
+
+            // Make popup title clickable
+            marker.getElement().addEventListener('mouseenter', function() {
+                marker.togglePopup();
+            });
+
+            marker.getElement().addEventListener('mouseleave', function() {
+                marker.togglePopup();
             });
         });
     </script>
