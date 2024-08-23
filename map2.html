@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,42 +10,37 @@
             height: 100vh;
             width: 100%;
         }
+
         body {
             margin: 0;
             font-family: 'Verdana', sans-serif;
             background-color: #f5f5f5;
         }
+
+        .marker {
+            cursor: pointer;
+        }
     </style>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet" />
 </head>
+
 <body>
     <div id="map"></div>
 
     <script>
-        // Initialize Mapbox with your token
         mapboxgl.accessToken = 'pk.eyJ1IjoidHdvc3RyYXljYXRzIiwiYSI6ImNtMDVwM3JnNTBnZmIyaXF4dHRoNGFnbmYifQ.dh7P4Ojmd_dQ3ALDFPDteA';
 
         var map = new mapboxgl.Map({
-            container: 'map', // container ID
-            style: 'mapbox://styles/mapbox/streets-v11', // style URL
-            center: [70.0, 35.0], // starting position [lng, lat]
-            zoom: 3 // starting zoom
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [70.0, 35.0],
+            zoom: 3
         });
 
-        // Add zoom and rotation controls to the map.
         map.addControl(new mapboxgl.NavigationControl());
 
-        // Define the paths with appropriate transport modes and colors
-        const pathStyles = {
-            plane: { color: '#1E90FF', width: 3 },
-            bus: { color: '#FF6347', width: 3 },
-            train: { color: '#FFD700', width: 3 },
-            car: { color: '#228B22', width: 3 },
-            ferry: { color: '#8A2BE2', width: 3 }
-        };
-
-        // Define the cities and their coordinates
+        // Step 1: Define Cities
         const cities = {
             seoul: { coordinates: [126.9780, 37.5665], name: "SEOUL, SOUTH KOREA", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk&si=CxzH7jEE-2hz9azS" },
             incheon: { coordinates: [126.7061, 37.4602], name: "INCHEON, SOUTH KOREA", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk&si=CxzH7jEE-2hz9azS" },
@@ -57,33 +53,48 @@
             cholponata: { coordinates: [77.0679, 42.6496], name: "CHOLPON-ATA, KYRGYZSTAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
             tashkent: { coordinates: [69.2401, 41.2995], name: "TASHKENT, UZBEKISTAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
             samarkand: { coordinates: [66.9781, 39.6270], name: "SAMARKAND, UZBEKISTAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
-            panjakent: { coordinates: [67.3841, 39.5050], name: "PANJAKENT, TAJIKISTAN", link: "" },
-            shing: { coordinates: [68.7444, 39.1149], name: "SHING, TAJIKISTAN", link: "" },
-            dushanbe: { coordinates: [68.7849, 38.5598], name: "DUSHANBE, TAJIKISTAN", link: "" },
-            bukhara: { coordinates: [64.5152, 39.7754], name: "BUKHARA, UZBEKISTAN", link: "" },
-            baku: { coordinates: [49.8671, 40.4093], name: "BAKU, AZERBAIJAN", link: "" },
-            ganja: { coordinates: [46.3606, 40.6827], name: "GANJA, AZERBAIJAN", link: "" },
-            rustavi: { coordinates: [44.9505, 41.5317], name: "RUSTAVI, GEORGIA", link: "" },
-            tblisi: { coordinates: [44.7930, 41.7151], name: "TBILISI, GEORGIA", link: "" },
-            sighnaghi: { coordinates: [45.9204, 41.6209], name: "SIGHNAGHI, GEORGIA", link: "" },
-            batumi: { coordinates: [41.6413, 41.6168], name: "BATUMI, GEORGIA", link: "" }
+            bukhara: { coordinates: [64.5152, 39.7754], name: "BUKHARA, UZBEKISTAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            panjakent: { coordinates: [67.3841, 39.5050], name: "PANJAKENT, TAJIKISTAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            shing: { coordinates: [68.7444, 39.1149], name: "SHING, TAJIKISTAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            dushanbe: { coordinates: [68.7849, 38.5598], name: "DUSHANBE, TAJIKISTAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            baku: { coordinates: [49.8671, 40.4093], name: "BAKU, AZERBAIJAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            ganja: { coordinates: [46.3606, 40.6827], name: "GANJA, AZERBAIJAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            rustavi: { coordinates: [44.9505, 41.5317], name: "RUSTAVI, GEORGIA", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            tblisi: { coordinates: [44.7930, 41.7151], name: "TBILISI, GEORGIA", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            sighnaghi: { coordinates: [45.9204, 41.6209], name: "SIGHNAGHI, GEORGIA", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            batumi: { coordinates: [41.6413, 41.6168], name: "BATUMI, GEORGIA", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
         };
 
-        // Define Connections
+        // Step 2: Define Path Styles
+        const pathStyles = {
+            plane: { color: '#1E90FF', width: 3 },
+            bus: { color: '#FF6347', width: 3 },
+            train: { color: '#FFD700', width: 3 },
+            car: { color: '#228B22', width: 3 },
+            ferry: { color: '#8A2BE2', width: 3 }
+        };
+
+        // Step 3: Define Connections
         const connections = [
+            // South Korea
             { from: 'seoul', to: 'incheon', transport: 'train' },
             { from: 'incheon', to: 'tokyo', transport: 'plane' },
-            { from: 'tokyo', to: 'osaka', transport: 'bus' },
+            // Japan
+            { from: 'tokyo', to: 'osaka', transport: 'plane' },
             { from: 'osaka', to: 'kyoto', transport: 'bus' },
             { from: 'kyoto', to: 'osaka', transport: 'bus' },
             { from: 'osaka', to: 'tokyo', transport: 'plane' },
+            { from: 'tokyo', to: 'incheon', transport: 'plane' },
+            // Kazakhstan
             { from: 'incheon', to: 'almaty', transport: 'plane' },
             { from: 'almaty', to: 'astana', transport: 'plane' },
-            { from: 'astana', to: 'almaty', transport: 'plane' },
+            { from: 'astana', to: 'almaty', transport: 'car' },
+            // Kyrgyzstan
             { from: 'almaty', to: 'bishkek', transport: 'bus' },
             { from: 'bishkek', to: 'cholponata', transport: 'bus' },
             { from: 'cholponata', to: 'bishkek', transport: 'bus' },
             { from: 'bishkek', to: 'tashkent', transport: 'plane' },
+            // Uzbekistan
             { from: 'tashkent', to: 'samarkand', transport: 'train' },
             { from: 'samarkand', to: 'panjakent', transport: 'car' },
             { from: 'panjakent', to: 'shing', transport: 'car' },
@@ -93,46 +104,50 @@
             { from: 'bukhara', to: 'samarkand', transport: 'train' },
             { from: 'samarkand', to: 'tashkent', transport: 'train' },
             { from: 'tashkent', to: 'baku', transport: 'plane' },
+            // Azerbaijan & Georgia
             { from: 'baku', to: 'ganja', transport: 'train' },
             { from: 'ganja', to: 'rustavi', transport: 'car' },
             { from: 'rustavi', to: 'tblisi', transport: 'bus' },
             { from: 'tblisi', to: 'sighnaghi', transport: 'bus' },
             { from: 'sighnaghi', to: 'tblisi', transport: 'bus' },
-            { from: 'tblisi', to: 'batumi', transport: 'train' }
+            { from: 'tblisi', to: 'batumi', transport: 'train' },
         ];
 
-        // Adding the paths to the map
+        // Step 4: Add Paths to the Map
         connections.forEach(connection => {
             const fromCity = cities[connection.from];
             const toCity = cities[connection.to];
-            const pathStyle = pathStyles[connection.transport];
+            const style = pathStyles[connection.transport];
 
-            map.addLayer({
-                'id': `${connection.from}-${connection.to}`,
-                'type': 'line',
-                'source': {
-                    'type': 'geojson',
-                    'data': {
-                        'type': 'Feature',
-                        'geometry': {
-                            'type': 'LineString',
-                            'coordinates': [fromCity.coordinates, toCity.coordinates]
+            map.on('load', function () {
+                map.addLayer({
+                    'id': `${connection.from}-${connection.to}`,
+                    'type': 'line',
+                    'source': {
+                        'type': 'geojson',
+                        'data': {
+                            'type': 'Feature',
+                            'geometry': {
+                                'type': 'LineString',
+                                'coordinates': [fromCity.coordinates, toCity.coordinates]
+                            }
                         }
+                    },
+                    'layout': {
+                        'line-join': 'round',
+                        'line-cap': 'round'
+                    },
+                    'paint': {
+                        'line-color': style.color,
+                        'line-width': style.width
                     }
-                },
-                'layout': {
-                    'line-join': 'round',
-                    'line-cap': 'round'
-                },
-                'paint': {
-                    'line-color': pathStyle.color,
-                    'line-width': pathStyle.width
-                }
+                });
             });
         });
 
-        // Adding markers and interactivity
-        Object.values(cities).forEach(city => {
+        // Step 5: Add Markers to the Map
+        Object.keys(cities).forEach(cityKey => {
+            const city = cities[cityKey];
             const el = document.createElement('div');
             el.className = 'marker';
             el.style.backgroundColor = '#FF6347';
@@ -142,21 +157,22 @@
 
             const markerInstance = new mapboxgl.Marker(el)
                 .setLngLat(city.coordinates)
-                .setPopup(new mapboxgl.Popup({ offset: 25 })
-                    .setHTML(`<h3>${city.name}</h3>`))
+                .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(`<h3>${city.name}</h3>`))
                 .addTo(map);
 
+            // Hover effect: change color and make the line transparent
             el.addEventListener('mouseenter', () => {
                 markerInstance.getElement().style.backgroundColor = '#FFD700';
-                map.setPaintProperty(`${city.name}`, 'line-opacity', 0.5);
+                map.setPaintProperty('travel-routes', 'line-opacity', 0.5);
                 el.style.cursor = 'pointer';
             });
 
             el.addEventListener('mouseleave', () => {
                 markerInstance.getElement().style.backgroundColor = '#FF6347';
-                map.setPaintProperty(`${city.name}`, 'line-opacity', 1);
+                map.setPaintProperty('travel-routes', 'line-opacity', 1);
             });
 
+            // Click event: redirect to the link
             el.addEventListener('click', () => {
                 window.location.href = city.link;
             });
@@ -164,4 +180,5 @@
 
     </script>
 </body>
+
 </html>
