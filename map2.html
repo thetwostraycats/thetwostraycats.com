@@ -17,11 +17,11 @@
 <body>
     <div id="map"></div>
     <script>
-        mapboxgl.accessToken = 'pk.eyJ1IjoidHdvc3RyYXljYXRzIiwiYSI6ImNtMDVvNWg0MDBtYTUyanMyd3l0c2dkZ3MifQ.rMTSjEzGk3UJJ_44yksV9Q';
+        mapboxgl.accessToken = 'your_mapbox_token';
 
         var map = new mapboxgl.Map({
             container: 'map',
-            style: 'mapbox://styles/mapbox/streets-v11', // Base map style
+            style: 'mapbox://styles/mapbox/light-v10', // Use a different style to test
             center: [20.0, 45.0],
             zoom: 3
         });
