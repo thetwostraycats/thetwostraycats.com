@@ -14,22 +14,10 @@
             font-family: 'Verdana', sans-serif;
             background-color: #f5f5f5;
         }
-        .city-dot {
-            background-color: #FF6347; /* Tomato */
-            border-radius: 50%;
-            width: 10px;
-            height: 10px;
-            cursor: pointer;
-        }
-        .city-dot:hover {
-            background-color: #FF4500; /* OrangeRed */
-        }
         .mapboxgl-popup-content {
             text-align: center;
             font-family: 'Verdana', sans-serif;
             font-size: 14px;
-            background-color: #333;
-            color: #fff;
             padding: 5px;
             border-radius: 3px;
         }
@@ -53,29 +41,21 @@
         map.addControl(new mapboxgl.NavigationControl());
 
         var cities = [
-            { coords: [126.9780, 37.5665], name: "SEOUL, SOUTH KOREA", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk" },
-            { coords: [126.4504, 37.4634], name: "INCHEON, SOUTH KOREA", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk" },
-            { coords: [139.759455, 35.682839], name: "TOKYO, JAPAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT" },
-            { coords: [135.495951, 34.702485], name: "OSAKA, JAPAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT" },
-            { coords: [135.7681, 35.0116], name: "KYOTO, JAPAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT" },
-            { coords: [76.9285, 43.2383], name: "ALMATY, KAZAKHSTAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwYi6KTNpGONpqQCqz-LDK-" },
-            { coords: [71.449074, 51.169392], name: "ASTANA, KAZAKHSTAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwYi6KTNpGONpqQCqz-LDK-" },
-            { coords: [74.5893, 42.8746], name: "BISHKEK, KYRGYZSTAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw" }
+            { coords: [126.9780, 37.5665], name: "SEOUL, SOUTH KOREA" },
+            { coords: [126.4504, 37.4634], name: "INCHEON, SOUTH KOREA" },
+            { coords: [139.759455, 35.682839], name: "TOKYO, JAPAN" },
+            { coords: [135.495951, 34.702485], name: "OSAKA, JAPAN" },
+            { coords: [135.7681, 35.0116], name: "KYOTO, JAPAN" },
+            { coords: [76.9285, 43.2383], name: "ALMATY, KAZAKHSTAN" },
+            { coords: [71.449074, 51.169392], name: "ASTANA, KAZAKHSTAN" },
+            { coords: [74.5893, 42.8746], name: "BISHKEK, KYRGYZSTAN" }
         ];
 
-        // Add markers and popups
         cities.forEach(function(city) {
-            var el = document.createElement('div');
-            el.className = 'city-dot';
-            
-            new mapboxgl.Marker(el)
+            new mapboxgl.Marker()
                 .setLngLat(city.coords)
                 .setPopup(new mapboxgl.Popup({ offset: 25 }).setText(city.name))
                 .addTo(map);
-
-            el.addEventListener('click', function() {
-                window.open(city.url, '_blank');
-            });
         });
 
     </script>
