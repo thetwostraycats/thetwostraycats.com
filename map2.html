@@ -14,16 +14,6 @@
             font-family: 'Verdana', sans-serif;
             background-color: #f5f5f5;
         }
-        .marker {
-            background-color: #FF6347;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-        }
-        .marker:hover {
-            cursor: pointer;
-            background-color: #FFD700;
-        }
     </style>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet" />
@@ -32,20 +22,17 @@
     <div id="map"></div>
 
     <script>
-        // Initialize Mapbox with your token
         mapboxgl.accessToken = 'pk.eyJ1IjoidHdvc3RyYXljYXRzIiwiYSI6ImNtMDVwM3JnNTBnZmIyaXF4dHRoNGFnbmYifQ.dh7P4Ojmd_dQ3ALDFPDteA';
 
         var map = new mapboxgl.Map({
-            container: 'map', // container ID
-            style: 'mapbox://styles/mapbox/streets-v11', // style URL
-            center: [70.0, 35.0], // starting position [lng, lat]
-            zoom: 3 // starting zoom
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [70.0, 35.0],
+            zoom: 3
         });
 
-        // Add zoom and rotation controls to the map.
         map.addControl(new mapboxgl.NavigationControl());
 
-        // Define the GeoJSON data with correct transport modes
         var travelData = {
             "type": "FeatureCollection",
             "features": [
@@ -60,8 +47,7 @@
                         ]
                     },
                     "properties": {
-                        "transport": "train",
-                        "country": "South Korea"
+                        "transport": "train"
                     }
                 },
                 {
@@ -74,8 +60,7 @@
                         ]
                     },
                     "properties": {
-                        "transport": "plane",
-                        "country": "South Korea to Japan"
+                        "transport": "plane"
                     }
                 },
                 // Japan
@@ -85,40 +70,13 @@
                         "type": "LineString",
                         "coordinates": [
                             [139.6917, 35.6895], // Tokyo
-                            [135.5023, 34.6937]  // Osaka
-                        ]
-                    },
-                    "properties": {
-                        "transport": "plane",
-                        "country": "Japan"
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "LineString",
-                        "coordinates": [
                             [135.5023, 34.6937], // Osaka
-                            [135.7681, 35.0116]  // Kyoto
-                        ]
-                    },
-                    "properties": {
-                        "transport": "bus",
-                        "country": "Japan"
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "LineString",
-                        "coordinates": [
                             [135.7681, 35.0116], // Kyoto
                             [135.5023, 34.6937]  // Osaka
                         ]
                     },
                     "properties": {
-                        "transport": "bus",
-                        "country": "Japan"
+                        "transport": "bus"
                     }
                 },
                 {
@@ -131,8 +89,7 @@
                         ]
                     },
                     "properties": {
-                        "transport": "plane",
-                        "country": "Japan"
+                        "transport": "plane"
                     }
                 },
                 // Kazakhstan
@@ -146,8 +103,7 @@
                         ]
                     },
                     "properties": {
-                        "transport": "plane",
-                        "country": "Kazakhstan"
+                        "transport": "plane"
                     }
                 },
                 {
@@ -161,22 +117,7 @@
                         ]
                     },
                     "properties": {
-                        "transport": "plane", // Corrected to plane
-                        "country": "Kazakhstan"
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "LineString",
-                        "coordinates": [
-                            [76.9272, 43.2220], // Almaty
-                            [74.5866, 42.8746]  // Bishkek
-                        ]
-                    },
-                    "properties": {
-                        "transport": "car", // Car transport from Almaty to Bishkek
-                        "country": "Kazakhstan to Kyrgyzstan"
+                        "transport": "plane"
                     }
                 },
                 // Kyrgyzstan
@@ -185,13 +126,13 @@
                     "geometry": {
                         "type": "LineString",
                         "coordinates": [
+                            [76.9272, 43.2220], // Almaty
                             [74.5866, 42.8746], // Bishkek
                             [77.0679, 42.6496]  // Cholpon-Ata
                         ]
                     },
                     "properties": {
-                        "transport": "bus",
-                        "country": "Kyrgyzstan"
+                        "transport": "bus"
                     }
                 },
                 {
@@ -204,10 +145,10 @@
                         ]
                     },
                     "properties": {
-                        "transport": "bus",
-                        "country": "Kyrgyzstan"
+                        "transport": "bus" // Corrected to bus
                     }
                 },
+                // Uzbekistan
                 {
                     "type": "Feature",
                     "geometry": {
@@ -218,30 +159,15 @@
                         ]
                     },
                     "properties": {
-                        "transport": "plane",
-                        "country": "Kyrgyzstan to Uzbekistan"
+                        "transport": "train"
                     }
                 },
-                // Uzbekistan to Tajikistan and back
                 {
                     "type": "Feature",
                     "geometry": {
                         "type": "LineString",
                         "coordinates": [
                             [69.2401, 41.2995], // Tashkent
-                            [66.9781, 39.6270]  // Samarkand
-                        ]
-                    },
-                    "properties": {
-                        "transport": "train",
-                        "country": "Uzbekistan"
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "LineString",
-                        "coordinates": [
                             [66.9781, 39.6270], // Samarkand
                             [67.3841, 39.5050], // Panjakent
                             [68.7444, 39.1149], // Shing
@@ -249,8 +175,7 @@
                         ]
                     },
                     "properties": {
-                        "transport": "car",
-                        "country": "Tajikistan"
+                        "transport": "car"
                     }
                 },
                 {
@@ -263,8 +188,7 @@
                         ]
                     },
                     "properties": {
-                        "transport": "train",
-                        "country": "Tajikistan to Uzbekistan"
+                        "transport": "train"
                     }
                 },
                 {
@@ -277,8 +201,7 @@
                         ]
                     },
                     "properties": {
-                        "transport": "train",
-                        "country": "Uzbekistan"
+                        "transport": "train"
                     }
                 },
                 {
@@ -293,8 +216,7 @@
                         ]
                     },
                     "properties": {
-                        "transport": "plane",
-                        "country": "Uzbekistan to Azerbaijan"
+                        "transport": "plane"
                     }
                 },
                 // Azerbaijan to Georgia
@@ -313,21 +235,18 @@
                         ]
                     },
                     "properties": {
-                        "transport": "train",
-                        "country": "Azerbaijan to Georgia"
+                        "transport": "train"
                     }
                 }
             ]
         };
 
-        // Add the data source and layer
         map.on('load', function () {
             map.addSource('travelData', {
                 'type': 'geojson',
                 'data': travelData
             });
 
-            // Add the line layer
             map.addLayer({
                 'id': 'travel-routes',
                 'type': 'line',
@@ -354,29 +273,105 @@
 
         // Add markers with links
         const markers = [
-            {coordinates: [126.9780, 37.5665], popupText: "SEOUL, SOUTH KOREA", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk&si=CxzH7jEE-2hz9azS"},
-            {coordinates: [126.7061, 37.4602], popupText: "INCHEON, SOUTH KOREA", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk&si=CxzH7jEE-2hz9azS"},
-            {coordinates: [139.6917, 35.6895], popupText: "TOKYO, JAPAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT&si=4FCXgJ5tzXKvGzoO"},
-            {coordinates: [135.5023, 34.6937], popupText: "OSAKA, JAPAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT&si=4FCXgJ5tzXKvGzoO"},
-            {coordinates: [135.7681, 35.0116], popupText: "KYOTO, JAPAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT&si=4FCXgJ5tzXKvGzoO"},
-            {coordinates: [76.9272, 43.2220], popupText: "ALMATY, KAZAKHSTAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwYi6KTNpGONpqQCqz-LDK-&si=mVvmfKnEKTvQ9Kps"},
-            {coordinates: [71.4704, 51.1694], popupText: "ASTANA, KAZAKHSTAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwYi6KTNpGONpqQCqz-LDK-&si=mVvmfKnEKTvQ9Kps"},
-            {coordinates: [74.5866, 42.8746], popupText: "BISHKEK, KYRGYZSTAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw"},
-            {coordinates: [77.0679, 42.6496], popupText: "CHOLPON-ATA, KYRGYZSTAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw"},
-            {coordinates: [69.2401, 41.2995], popupText: "TASHKENT, UZBEKISTAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw"},
-            {coordinates: [66.9781, 39.6270], popupText: "SAMARKAND, UZBEKISTAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw"},
-            {coordinates: [64.5152, 39.7754], popupText: "BUKHARA, UZBEKISTAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw"},
-            {coordinates: [49.8671, 40.4093], popupText: "BAKU, AZERBAIJAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw"},
-            {coordinates: [46.3606, 40.6827], popupText: "GANJA, AZERBAIJAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw"},
-            {coordinates: [44.9505, 41.5317], popupText: "RUSTAVI, GEORGIA", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw"},
-            {coordinates: [44.7930, 41.7151], popupText: "TBILISI, GEORGIA", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw"},
-            {coordinates: [45.9204, 41.6209], popupText: "SIGHNAGHI, GEORGIA", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw"},
-            {coordinates: [41.6413, 41.6168], popupText: "BATUMI, GEORGIA", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw"}
+            {
+                coordinates: [126.9780, 37.5665],
+                popupText: "SEOUL, SOUTH KOREA",
+                link: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk&si=CxzH7jEE-2hz9azS"
+            },
+            {
+                coordinates: [126.7061, 37.4602],
+                popupText: "INCHEON, SOUTH KOREA",
+                link: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk&si=CxzH7jEE-2hz9azS"
+            },
+            {
+                coordinates: [139.6917, 35.6895],
+                popupText: "TOKYO, JAPAN",
+                link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT&si=4FCXgJ5tzXKvGzoO"
+            },
+            {
+                coordinates: [135.5023, 34.6937],
+                popupText: "OSAKA, JAPAN",
+                link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT&si=4FCXgJ5tzXKvGzoO"
+            },
+            {
+                coordinates: [135.7681, 35.0116],
+                popupText: "KYOTO, JAPAN",
+                link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT&si=4FCXgJ5tzXKvGzoO"
+            },
+            {
+                coordinates: [76.9272, 43.2220],
+                popupText: "ALMATY, KAZAKHSTAN",
+                link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwYi6KTNpGONpqQCqz-LDK-&si=mVvmfKnEKTvQ9Kps"
+            },
+            {
+                coordinates: [71.4704, 51.1694],
+                popupText: "ASTANA, KAZAKHSTAN",
+                link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwYi6KTNpGONpqQCqz-LDK-&si=mVvmfKnEKTvQ9Kps"
+            },
+            {
+                coordinates: [74.5866, 42.8746],
+                popupText: "BISHKEK, KYRGYZSTAN",
+                link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw"
+            },
+            {
+                coordinates: [77.0679, 42.6496],
+                popupText: "CHOLPON-ATA, KYRGYZSTAN",
+                link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw"
+            },
+            {
+                coordinates: [69.2401, 41.2995],
+                popupText: "TASHKENT, UZBEKISTAN",
+                link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw"
+            },
+            {
+                coordinates: [66.9781, 39.6270],
+                popupText: "SAMARKAND, UZBEKISTAN",
+                link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw"
+            },
+            {
+                coordinates: [64.5152, 39.7754],
+                popupText: "BUKHARA, UZBEKISTAN",
+                link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw"
+            },
+            {
+                coordinates: [49.8671, 40.4093],
+                popupText: "BAKU, AZERBAIJAN",
+                link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw"
+            },
+            {
+                coordinates: [46.3606, 40.6827],
+                popupText: "GANJA, AZERBAIJAN",
+                link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw"
+            },
+            {
+                coordinates: [44.9505, 41.5317],
+                popupText: "RUSTAVI, GEORGIA",
+                link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw"
+            },
+            {
+                coordinates: [44.7930, 41.7151],
+                popupText: "TBILISI, GEORGIA",
+                link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw"
+            },
+            {
+                coordinates: [45.9204, 41.6209],
+                popupText: "SIGHNAGHI, GEORGIA",
+                link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw"
+            },
+            {
+                coordinates: [41.6413, 41.6168],
+                popupText: "BATUMI, GEORGIA",
+                link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw"
+            }
         ];
 
         markers.forEach(marker => {
             const el = document.createElement('div');
             el.className = 'marker';
+            el.style.backgroundColor = '#FF6347';
+            el.style.width = '10px';
+            el.style.height = '10px';
+            el.style.borderRadius = '50%';
 
             const markerInstance = new mapboxgl.Marker(el)
                 .setLngLat(marker.coordinates)
