@@ -23,8 +23,8 @@
         }
         .marker {
             background-color: #FF6347;
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             cursor: pointer;
         }
@@ -51,14 +51,14 @@
         map.addControl(new mapboxgl.NavigationControl());
 
         var cities = [
-            { coords: [126.9780, 37.5665], name: "SEOUL, SOUTH KOREA", url: "https://www.youtube.com/playlist?list=SEOUL" },
-            { coords: [126.4504, 37.4634], name: "INCHEON, SOUTH KOREA", url: "https://www.youtube.com/playlist?list=INCHEON" },
-            { coords: [139.759455, 35.682839], name: "TOKYO, JAPAN", url: "https://www.youtube.com/playlist?list=TOKYO" },
-            { coords: [135.495951, 34.702485], name: "OSAKA, JAPAN", url: "https://www.youtube.com/playlist?list=OSAKA" },
-            { coords: [135.7681, 35.0116], name: "KYOTO, JAPAN", url: "https://www.youtube.com/playlist?list=KYOTO" },
-            { coords: [76.9285, 43.2383], name: "ALMATY, KAZAKHSTAN", url: "https://www.youtube.com/playlist?list=ALMATY" },
-            { coords: [71.449074, 51.169392], name: "ASTANA, KAZAKHSTAN", url: "https://www.youtube.com/playlist?list=ASTANA" },
-            { coords: [74.5893, 42.8746], name: "BISHKEK, KYRGYZSTAN", url: "https://www.youtube.com/playlist?list=BISHKEK" }
+            { coords: [126.9780, 37.5665], name: "SEOUL, SOUTH KOREA", url: "https://www.youtube.com/playlist?list=SEOUL_PLAYLIST" },
+            { coords: [126.4504, 37.4634], name: "INCHEON, SOUTH KOREA", url: "https://www.youtube.com/playlist?list=INCHEON_PLAYLIST" },
+            { coords: [139.759455, 35.682839], name: "TOKYO, JAPAN", url: "https://www.youtube.com/playlist?list=TOKYO_PLAYLIST" },
+            { coords: [135.495951, 34.702485], name: "OSAKA, JAPAN", url: "https://www.youtube.com/playlist?list=OSAKA_PLAYLIST" },
+            { coords: [135.7681, 35.0116], name: "KYOTO, JAPAN", url: "https://www.youtube.com/playlist?list=KYOTO_PLAYLIST" },
+            { coords: [76.9285, 43.2383], name: "ALMATY, KAZAKHSTAN", url: "https://www.youtube.com/playlist?list=ALMATY_PLAYLIST" },
+            { coords: [71.449074, 51.169392], name: "ASTANA, KAZAKHSTAN", url: "https://www.youtube.com/playlist?list=ASTANA_PLAYLIST" },
+            { coords: [74.5893, 42.8746], name: "BISHKEK, KYRGYZSTAN", url: "https://www.youtube.com/playlist?list=BISHKEK_PLAYLIST" }
         ];
 
         cities.forEach(function(city) {
@@ -75,25 +75,22 @@
                 .addTo(map);
         });
 
-        // Adding lines between the cities with different styles based on transport mode
+        function createCurve(start, end) {
+            var controlPoint = [
+                (start[0] + end[0]) / 2,
+                (start[1] + end[1]) / 2 + 10 // Adjusting for curvature
+            ];
+            return [start, controlPoint, end];
+        }
+
         var routes = [
             {
-                coords: [
-                    [126.9780, 37.5665], // Seoul
-                    [126.4504, 37.4634], // Incheon
-                    [139.759455, 35.682839], // Tokyo
-                ],
+                coords: createCurve([126.9780, 37.5665], [139.759455, 35.682839]), // Seoul to Tokyo
                 transport: 'plane'
             },
             {
                 coords: [
                     [139.759455, 35.682839], // Tokyo
-                    [135.495951, 34.702485], // Osaka
-                ],
-                transport: 'bus'
-            },
-            {
-                coords: [
                     [135.495951, 34.702485], // Osaka
                     [135.7681, 35.0116], // Kyoto
                     [135.495951, 34.702485], // Back to Osaka
