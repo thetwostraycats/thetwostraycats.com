@@ -44,95 +44,140 @@
             astana: { coordinates: [71.4704, 51.1694], name: "ASTANA, KAZAKHSTAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwYi6KTNpGONpqQCqz-LDK-&si=mVvmfKnEKTvQ9Kps" },
             bishkek: { coordinates: [74.5866, 42.8746], name: "BISHKEK, KYRGYZSTAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
             cholponata: { coordinates: [77.0679, 42.6496], name: "CHOLPON-ATA, KYRGYZSTAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
-            // Add more cities here
+            tashkent: { coordinates: [69.2401, 41.2995], name: "TASHKENT, UZBEKISTAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            samarkand: { coordinates: [66.9781, 39.6270], name: "SAMARKAND, UZBEKISTAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            bukhara: { coordinates: [64.5152, 39.7754], name: "BUKHARA, UZBEKISTAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            panjakent: { coordinates: [67.3841, 39.5050], name: "PANJAKENT, TAJIKISTAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            shing: { coordinates: [68.7444, 39.1149], name: "SHING, TAJIKISTAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            dushanbe: { coordinates: [68.7849, 38.5598], name: "DUSHANBE, TAJIKISTAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            baku: { coordinates: [49.8671, 40.4093], name: "BAKU, AZERBAIJAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            ganja: { coordinates: [46.3606, 40.6827], name: "GANJA, AZERBAIJAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            rustavi: { coordinates: [44.9505, 41.5317], name: "RUSTAVI, GEORGIA", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            tblisi: { coordinates: [44.7930, 41.7151], name: "TBILISI, GEORGIA", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            sighnaghi: { coordinates: [45.9204, 41.6209], name: "SIGHNAGHI, GEORGIA", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            batumi: { coordinates: [41.6413, 41.6168], name: "BATUMI, GEORGIA", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" }
         };
 
         // Step 2: Define Path Styles
         const pathStyles = {
-            plane: { color: '#1E90FF', width: 3 }, // Blue
-            bus: { color: '#FF6347', width: 3 }, // Tomato
-            train: { color: '#FFD700', width: 3 }, // Gold
-            car: { color: '#228B22', width: 3 }, // Forest Green
-            ferry: { color: '#8A2BE2', width: 3 } // Blue Violet
+            plane: { color: '#1E90FF', width: 3 },
+            bus: { color: '#FF6347', width: 3 },
+            train: { color: '#FFD700', width: 3 },
+            car: { color: '#228B22', width: 3 },
+            ferry: { color: '#8A2BE2', width: 3 }
         };
 
-        // Step 3: Connect Cities
+        // Step 3: Define Connections
         const connections = [
-            { from: cities.seoul, to: cities.incheon, transport: 'train' },
-            { from: cities.incheon, to: cities.tokyo, transport: 'plane' },
-            { from: cities.tokyo, to: cities.osaka, transport: 'bus' },
-            { from: cities.osaka, to: cities.kyoto, transport: 'bus' },
-            { from: cities.osaka, to: cities.tokyo, transport: 'plane' },
-            { from: cities.incheon, to: cities.almaty, transport: 'plane' },
-            { from: cities.almaty, to: cities.astana, transport: 'plane' },
-            { from: cities.astana, to: cities.almaty, transport: 'plane' },
-            { from: cities.almaty, to: cities.bishkek, transport: 'car' },
-            { from: cities.bishkek, to: cities.cholponata, transport: 'bus' },
-            { from: cities.cholponata, to: cities.bishkek, transport: 'bus' },
-            // Add more connections here
+            { from: 'seoul', to: 'incheon', transport: 'train' },
+            { from: 'incheon', to: 'tokyo', transport: 'plane' },
+            { from: 'tokyo', to: 'osaka', transport: 'bus' },
+            { from: 'osaka', to: 'kyoto', transport: 'bus' },
+            { from: 'kyoto', to: 'osaka', transport: 'bus' },
+            { from: 'osaka', to: 'tokyo', transport: 'plane' },
+            { from: 'incheon', to: 'almaty', transport: 'plane' },
+            { from: 'almaty', to: 'astana', transport: 'plane' },
+            { from: 'astana', to: 'almaty', transport: 'plane' },
+            { from: 'almaty', to: 'bishkek', transport: 'car' },
+            { from: 'bishkek', to: 'cholponata', transport: 'bus' },
+            { from: 'cholponata', to: 'bishkek', transport: 'bus' },
+            { from: 'bishkek', to: 'tashkent', transport: 'plane' },
+            { from: 'tashkent', to: 'samarkand', transport: 'train' },
+            { from: 'samarkand', to: 'panjakent', transport: 'car' },
+            { from: 'panjakent', to: 'shing', transport: 'car' },
+            { from: 'shing', to: 'dushanbe', transport: 'car' },
+            { from: 'dushanbe', to: 'samarkand', transport: 'train' },
+            { from: 'samarkand', to: 'bukhara', transport: 'train' },
+            { from: 'bukhara', to: 'samarkand', transport: 'train' },
+            { from: 'samarkand', to: 'tashkent', transport: 'train' },
+            { from: 'tashkent', to: 'baku', transport: 'plane' },
+            { from: 'baku', to: 'ganja', transport: 'train' },
+            { from: 'ganja', to: 'rustavi', transport: 'car' },
+            { from: 'rustavi', to: 'tblisi', transport: 'bus' },
+            { from: 'tblisi', to: 'sighnaghi', transport: 'bus' },
+            { from: 'sighnaghi', to: 'tblisi', transport: 'bus' },
+            { from: 'tblisi', to: 'batumi', transport: 'train' }
         ];
 
-        map.on('load', function () {
-            // Add the city markers
-            Object.values(cities).forEach(city => {
-                const el = document.createElement('div');
-                el.className = 'marker';
-                el.style.backgroundColor = '#FF6347';
-                el.style.width = '10px';
-                el.style.height = '10px';
-                el.style.borderRadius = '50%';
+        // Add markers with hover effects and links
+        Object.values(cities).forEach(city => {
+            const el = document.createElement('div');
+            el.className = 'marker';
+            el.style.backgroundColor = '#FF6347';
+            el.style.width = '10px';
+            el.style.height = '10px';
+            el.style.borderRadius = '50%';
 
-                const markerInstance = new mapboxgl.Marker(el)
-                    .setLngLat(city.coordinates)
-                    .setPopup(new mapboxgl.Popup({ offset: 25 })
-                        .setHTML(`<h3>${city.name}</h3>`))
-                    .addTo(map);
+            const markerInstance = new mapboxgl.Marker(el)
+                .setLngLat(city.coordinates)
+                .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(`<h3>${city.name}</h3>`))
+                .addTo(map);
 
-                el.addEventListener('mouseenter', () => {
-                    markerInstance.getElement().style.backgroundColor = '#FFD700';
-                    map.setPaintProperty('travel-routes', 'line-opacity', 0.5);
-                });
-
-                el.addEventListener('mouseleave', () => {
-                    markerInstance.getElement().style.backgroundColor = '#FF6347';
-                    map.setPaintProperty('travel-routes', 'line-opacity', 1);
-                });
-
-                el.addEventListener('click', () => {
-                    window.location.href = city.link;
-                });
+            el.addEventListener('mouseenter', () => {
+                markerInstance.getElement().style.backgroundColor = '#FFD700';
+                map.setPaintProperty('travel-routes', 'line-opacity', 0.5);
+                map.setPaintProperty('travel-routes', 'line-color', ['case',
+                    ['all', ['get', 'from'], ['get', 'to'], ['in', city.coordinates, ['get', 'coordinates']]], '#FFD700',
+                    pathStyles.plane.color // fallback color
+                ]);
             });
 
-            // Add the travel routes
-            connections.forEach(connection => {
-                map.addLayer({
-                    'id': `${connection.from.name}-to-${connection.to.name}`,
-                    'type': 'line',
-                    'source': {
-                        'type': 'geojson',
-                        'data': {
-                            'type': 'Feature',
-                            'geometry': {
-                                'type': 'LineString',
-                                'coordinates': [
-                                    connection.from.coordinates,
-                                    connection.to.coordinates
-                                ]
-                            }
-                        }
-                    },
-                    'layout': {
-                        'line-join': 'round',
-                        'line-cap': 'round'
-                    },
-                    'paint': {
-                        'line-color': pathStyles[connection.transport].color,
-                        'line-width': pathStyles[connection.transport].width
-                    }
-                });
+            el.addEventListener('mouseleave', () => {
+                markerInstance.getElement().style.backgroundColor = '#FF6347';
+                map.setPaintProperty('travel-routes', 'line-opacity', 1);
+                map.setPaintProperty('travel-routes', 'line-color', ['match',
+                    ['get', 'transport'],
+                    'plane', pathStyles.plane.color,
+                    'bus', pathStyles.bus.color,
+                    'train', pathStyles.train.color,
+                    'car', pathStyles.car.color,
+                    'ferry', pathStyles.ferry.color,
+                    '#000000' // fallback color
+                ]);
+            });
+
+            el.addEventListener('click', () => {
+                window.location.href = city.link;
             });
         });
 
+        // Draw connections
+        connections.forEach(conn => {
+            const fromCity = cities[conn.from];
+            const toCity = cities[conn.to];
+            const pathStyle = pathStyles[conn.transport];
+
+            map.addLayer({
+                'id': `path-${conn.from}-${conn.to}`,
+                'type': 'line',
+                'source': {
+                    'type': 'geojson',
+                    'data': {
+                        'type': 'Feature',
+                        'geometry': {
+                            'type': 'LineString',
+                            'coordinates': [
+                                fromCity.coordinates,
+                                toCity.coordinates
+                            ]
+                        },
+                        'properties': {
+                            'from': conn.from,
+                            'to': conn.to,
+                            'transport': conn.transport
+                        }
+                    }
+                },
+                'layout': {
+                    'line-join': 'round',
+                    'line-cap': 'round'
+                },
+                'paint': {
+                    'line-color': pathStyle.color,
+                    'line-width': pathStyle.width
+                }
+            });
+        });
     </script>
 </body>
 </html>
