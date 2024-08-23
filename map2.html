@@ -158,6 +158,202 @@
                         "transport": "plane",
                         "country": "Kyrgyzstan"
                     }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "LineString",
+                        "coordinates": [
+                            [74.5866, 42.8746], // Bishkek
+                            [69.2401, 41.2995]  // Tashkent
+                        ]
+                    },
+                    "properties": {
+                        "transport": "train",
+                        "country": "Uzbekistan"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "LineString",
+                        "coordinates": [
+                            [69.2401, 41.2995], // Tashkent
+                            [66.9781, 39.6270]  // Samarkand
+                        ]
+                    },
+                    "properties": {
+                        "transport": "car",
+                        "country": "Uzbekistan"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "LineString",
+                        "coordinates": [
+                            [66.9781, 39.6270], // Samarkand
+                            [67.3841, 39.5050]  // Panjakent
+                        ]
+                    },
+                    "properties": {
+                        "transport": "car",
+                        "country": "Tajikistan"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "LineString",
+                        "coordinates": [
+                            [67.3841, 39.5050], // Panjakent
+                            [68.7444, 39.1149]  // Shing
+                        ]
+                    },
+                    "properties": {
+                        "transport": "car",
+                        "country": "Tajikistan"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "LineString",
+                        "coordinates": [
+                            [68.7444, 39.1149], // Shing
+                            [68.7849, 38.5598]  // Dushanbe
+                        ]
+                    },
+                    "properties": {
+                        "transport": "train",
+                        "country": "Tajikistan"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "LineString",
+                        "coordinates": [
+                            [66.9781, 39.6270], // Samarkand
+                            [64.5152, 39.7754]  // Bukhara
+                        ]
+                    },
+                    "properties": {
+                        "transport": "train",
+                        "country": "Uzbekistan"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "LineString",
+                        "coordinates": [
+                            [64.5152, 39.7754], // Bukhara
+                            [66.9781, 39.6270]  // Samarkand
+                        ]
+                    },
+                    "properties": {
+                        "transport": "train",
+                        "country": "Uzbekistan"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "LineString",
+                        "coordinates": [
+                            [66.9781, 39.6270], // Samarkand
+                            [69.2401, 41.2995]  // Tashkent
+                        ]
+                    },
+                    "properties": {
+                        "transport": "plane",
+                        "country": "Uzbekistan"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "LineString",
+                        "coordinates": [
+                            [49.8671, 40.4093], // Baku
+                            [46.3606, 40.6827]  // Ganja
+                        ]
+                    },
+                    "properties": {
+                        "transport": "train",
+                        "country": "Azerbaijan"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "LineString",
+                        "coordinates": [
+                            [46.3606, 40.6827], // Ganja
+                            [44.9505, 41.5317]  // Rustavi
+                        ]
+                    },
+                    "properties": {
+                        "transport": "car",
+                        "country": "Georgia"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "LineString",
+                        "coordinates": [
+                            [44.9505, 41.5317], // Rustavi
+                            [44.7930, 41.7151]  // Tblisi
+                        ]
+                    },
+                    "properties": {
+                        "transport": "bus",
+                        "country": "Georgia"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "LineString",
+                        "coordinates": [
+                            [44.7930, 41.7151], // Tblisi
+                            [45.9204, 41.6209]  // Sighnaghi
+                        ]
+                    },
+                    "properties": {
+                        "transport": "bus",
+                        "country": "Georgia"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "LineString",
+                        "coordinates": [
+                            [45.9204, 41.6209], // Sighnaghi
+                            [44.7930, 41.7151]  // Tblisi
+                        ]
+                    },
+                    "properties": {
+                        "transport": "train",
+                        "country": "Georgia"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "LineString",
+                        "coordinates": [
+                            [44.7930, 41.7151], // Tblisi
+                            [41.6413, 41.6168]  // Batumi
+                        ]
+                    },
+                    "properties": {
+                        "transport": "car",
+                        "country": "Georgia"
+                    }
                 }
             ]
         };
@@ -182,10 +378,10 @@
                     'line-color': [
                         'match',
                         ['get', 'transport'],
-                        'plane', '#1E90FF',  // Blue
-                        'bus', '#FFD700',   // Gold
+                        'plane', '#1E90FF', // Blue
+                        'bus', '#FFD700', // Gold
                         'train', '#FF4500', // OrangeRed
-                        'car', '#008000',   // Green
+                        'car', '#008000', // Green
                         'ferry', '#DAA520', // GoldenRod
                         '#000000' // fallback color
                     ],
@@ -240,6 +436,66 @@
                 coordinates: [77.0679, 42.6496],
                 popupText: "CHOLPON-ATA, KYRGYZSTAN",
                 link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw"
+            },
+            {
+                coordinates: [69.2401, 41.2995],
+                popupText: "TASHKENT, UZBEKISTAN",
+                link: "#"
+            },
+            {
+                coordinates: [66.9781, 39.6270],
+                popupText: "SAMARKAND, UZBEKISTAN",
+                link: "#"
+            },
+            {
+                coordinates: [67.3841, 39.5050],
+                popupText: "PANJAKENT, TAJIKISTAN",
+                link: "#"
+            },
+            {
+                coordinates: [68.7444, 39.1149],
+                popupText: "SHING, TAJIKISTAN",
+                link: "#"
+            },
+            {
+                coordinates: [68.7849, 38.5598],
+                popupText: "DUSHANBE, TAJIKISTAN",
+                link: "#"
+            },
+            {
+                coordinates: [64.5152, 39.7754],
+                popupText: "BUKHARA, UZBEKISTAN",
+                link: "#"
+            },
+            {
+                coordinates: [49.8671, 40.4093],
+                popupText: "BAKU, AZERBAIJAN",
+                link: "#"
+            },
+            {
+                coordinates: [46.3606, 40.6827],
+                popupText: "GANJA, AZERBAIJAN",
+                link: "#"
+            },
+            {
+                coordinates: [44.9505, 41.5317],
+                popupText: "RUSTAVI, GEORGIA",
+                link: "#"
+            },
+            {
+                coordinates: [44.7930, 41.7151],
+                popupText: "TBILISI, GEORGIA",
+                link: "#"
+            },
+            {
+                coordinates: [45.9204, 41.6209],
+                popupText: "SIGHNAGHI, GEORGIA",
+                link: "#"
+            },
+            {
+                coordinates: [41.6413, 41.6168],
+                popupText: "BATUMI, GEORGIA",
+                link: "#"
             }
         ];
 
@@ -258,18 +514,18 @@
                     .setHTML(`<h3>${marker.popupText}</h3>`))
                 .addTo(map);
 
-            el.addEventListener('click', () => {
-                window.location.href = marker.link;
-            });
-
             el.addEventListener('mouseenter', () => {
-                markerInstance.getElement().style.backgroundColor = '#FF4500';
+                markerInstance.getElement().style.backgroundColor = '#FFD700';
                 map.setPaintProperty('travel-routes', 'line-opacity', 0.5);
             });
 
             el.addEventListener('mouseleave', () => {
                 markerInstance.getElement().style.backgroundColor = '#FF6347';
-                map.setPaintProperty('travel-routes', 'line-opacity', 1.0);
+                map.setPaintProperty('travel-routes', 'line-opacity', 1);
+            });
+
+            el.addEventListener('click', () => {
+                window.location.href = marker.link;
             });
         });
 
