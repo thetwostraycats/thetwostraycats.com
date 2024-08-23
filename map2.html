@@ -14,6 +14,10 @@
             font-family: 'Verdana', sans-serif;
             background-color: #f5f5f5;
         }
+        .marker:hover {
+            cursor: pointer;
+            background-color: #FFD700; /* Changes marker color on hover */
+        }
     </style>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet" />
@@ -39,36 +43,21 @@
         var travelData = {
             "type": "FeatureCollection",
             "features": [
-                // South Korea
                 {
                     "type": "Feature",
                     "geometry": {
                         "type": "LineString",
                         "coordinates": [
                             [126.9780, 37.5665], // Seoul
-                            [126.7061, 37.4602]  // Incheon
-                        ]
-                    },
-                    "properties": {
-                        "transport": "train",
-                        "country": "South Korea"
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "LineString",
-                        "coordinates": [
                             [126.7061, 37.4602], // Incheon
                             [139.6917, 35.6895]  // Tokyo
                         ]
                     },
                     "properties": {
                         "transport": "plane",
-                        "country": "South Korea to Japan"
+                        "country": "South Korea"
                     }
                 },
-                // Japan
                 {
                     "type": "Feature",
                     "geometry": {
@@ -99,7 +88,6 @@
                         "country": "Japan"
                     }
                 },
-                // Kazakhstan
                 {
                     "type": "Feature",
                     "geometry": {
@@ -124,7 +112,7 @@
                         ]
                     },
                     "properties": {
-                        "transport": "plane",
+                        "transport": "plane",  // Changed to plane
                         "country": "Kazakhstan"
                     }
                 },
@@ -138,11 +126,10 @@
                         ]
                     },
                     "properties": {
-                        "transport": "car",
+                        "transport": "plane",  // Changed to plane
                         "country": "Kazakhstan"
                     }
                 },
-                // Kyrgyzstan
                 {
                     "type": "Feature",
                     "geometry": {
@@ -183,7 +170,7 @@
                 'data': travelData
             });
 
-            // Add the line layer with color coding for different transport modes
+            // Add the line layer
             map.addLayer({
                 'id': 'travel-routes',
                 'type': 'line',
@@ -196,14 +183,40 @@
                     'line-color': [
                         'match',
                         ['get', 'transport'],
-                        'plane', '#1E90FF', // DodgerBlue
-                        'train', '#FF4500', // OrangeRed
-                        'bus', '#32CD32', // LimeGreen
-                        'car', '#FFD700', // Gold
-                        '#000000' // fallback color
+                        'plane', '#1E90FF',  // DodgerBlue
+                        'train', '#FF4500',  // OrangeRed
+                        'bus', '#32CD32',    // LimeGreen
+                        'car', '#FFD700',    // Gold
+                        '#000000'            // fallback color
                     ],
                     'line-width': 3
                 }
+            });
+
+            // Line transparency on marker hover
+            markers.forEach(marker => {
+                map.addLayer({
+                    'id': marker.popupText + '-line',
+                    'type': 'line',
+                    'source': 'travelData',
+                    'layout': {
+                        'line-join': 'round',
+                        'line-cap': 'round'
+                    },
+                    'paint': {
+                        'line-color': '#000',  // Default line color
+                        'line-width': 3,
+                        'line-opacity': 1  // Full opacity
+                    }
+                });
+            });
+
+            map.on('mouseenter', 'marker', function (e) {
+                map.setPaintProperty(e.features[0].layer.id + '-line', 'line-opacity', 0.5);  // Set line to 50% opacity on hover
+            });
+
+            map.on('mouseleave', 'marker', function (e) {
+                map.setPaintProperty(e.features[0].layer.id + '-line', 'line-opacity', 1);  // Restore full opacity when not hovering
             });
         });
 
@@ -272,6 +285,16 @@
 
             el.addEventListener('click', () => {
                 window.location.href = marker.link;
+            });
+
+            el.addEventListener('mouseenter', () => {
+                map.setPaintProperty('travel-routes', 'line-opacity', 0.5);  // Set line to 50% opacity on hover
+                el.style.backgroundColor = '#FFD700';  // Change marker color on hover
+            });
+
+            el.addEventListener('mouseleave', () => {
+                map.setPaintProperty('travel-routes', 'line-opacity', 1);  // Restore full opacity when not hovering
+                el.style.backgroundColor = '#FF6347';  // Revert marker color
             });
         });
 
