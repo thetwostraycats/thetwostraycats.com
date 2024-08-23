@@ -14,6 +14,9 @@
             font-family: 'Verdana', sans-serif;
             background-color: #f5f5f5;
         }
+        .marker {
+            cursor: pointer;
+        }
     </style>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet" />
@@ -179,11 +182,11 @@
                     'line-color': [
                         'match',
                         ['get', 'transport'],
-                        'plane', '#1E90FF',
-                        'bus', '#00008B',
-                        'train', '#000080',
-                        'car', '#008000',
-                        'ferry', '#DAA520', // Added ferry color
+                        'plane', '#1E90FF',  // Blue
+                        'bus', '#FFD700',   // Gold
+                        'train', '#FF4500', // OrangeRed
+                        'car', '#008000',   // Green
+                        'ferry', '#DAA520', // GoldenRod
                         '#000000' // fallback color
                     ],
                     'line-width': 3
@@ -247,6 +250,7 @@
             el.style.width = '10px';
             el.style.height = '10px';
             el.style.borderRadius = '50%';
+            el.style.cursor = 'pointer';  // Ensure the cursor changes on hover
 
             const markerInstance = new mapboxgl.Marker(el)
                 .setLngLat(marker.coordinates)
