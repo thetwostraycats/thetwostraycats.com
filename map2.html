@@ -23,8 +23,8 @@
         }
         .marker {
             background-color: #FF6347;
-            width: 20px;
-            height: 20px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
             cursor: pointer;
         }
@@ -64,15 +64,72 @@
         cities.forEach(function(city) {
             var el = document.createElement('div');
             el.className = 'marker';
+            el.addEventListener('mouseenter', function() {
+                el.style.backgroundColor = '#FF4500';
+            });
+            el.addEventListener('mouseleave', function() {
+                el.style.backgroundColor = '#FF6347';
+            });
             el.addEventListener('click', function() {
                 window.open(city.url, '_blank');
             });
 
             new mapboxgl.Marker(el)
                 .setLngLat(city.coords)
-                .setPopup(new mapboxgl.Popup({ offset: 25 })
+                .setPopup(new mapboxgl.Popup({ offset: 25, closeOnMove: true })
                     .setHTML('<a href="' + city.url + '" target="_blank">' + city.name + '</a>'))
                 .addTo(map);
+        });
+
+        // Adding lines between the cities
+        var geojson = {
+            'type': 'FeatureCollection',
+            'features': [
+                {
+                    'type': 'Feature',
+                    'geometry': {
+                        'type': 'LineString',
+                        'coordinates': [
+                            [126.9780, 37.5665], // Seoul
+                            [126.4504, 37.4634], // Incheon
+                            [139.759455, 35.682839], // Tokyo
+                            [135.495951, 34.702485], // Osaka
+                            [135.7681, 35.0116], // Kyoto
+                            [135.495951, 34.702485], // Back to Osaka
+                            [139.759455, 35.682839], // Back to Tokyo
+                            [126.4504, 37.4634], // Back to Incheon
+                            [76.9285, 43.2383], // Almaty
+                            [71.449074, 51.169392], // Astana
+                            [74.5893, 42.8746], // Bishkek
+                        ]
+                    },
+                    'properties': {
+                        'transport': 'plane'
+                    }
+                }
+            ]
+        };
+
+        map.on('load', function () {
+            map.addSource('route', {
+                'type': 'geojson',
+                'data': geojson
+            });
+
+            map.addLayer({
+                'id': 'route-layer',
+                'type': 'line',
+                'source': 'route',
+                'layout': {
+                    'line-join': 'round',
+                    'line-cap': 'round'
+                },
+                'paint': {
+                    'line-color': ['case', ['==', ['get', 'transport'], 'plane'], '#1E90FF', '#32CD32'],
+                    'line-width': 4,
+                    'line-opacity': 0.8
+                }
+            });
         });
 
     </script>
