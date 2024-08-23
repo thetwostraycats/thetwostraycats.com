@@ -25,9 +25,6 @@
         .city-dot:hover {
             background-color: #FF6347;
         }
-        .mapboxgl-popup {
-            max-width: 200px;
-        }
         .mapboxgl-popup-content {
             text-align: center;
             font-family: 'Verdana', sans-serif;
@@ -61,16 +58,17 @@
         map.addControl(new mapboxgl.NavigationControl());
 
         var cities = [
-            { coords: [126.9780, 37.5665], name: "SOUTH KOREA", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk", transport: 'train' },
-            { coords: [126.4504, 37.4634], name: "SOUTH KOREA", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk", transport: 'plane' },
-            { coords: [139.759455, 35.682839], name: "JAPAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT", transport: 'plane' },
-            { coords: [135.495951, 34.702485], name: "JAPAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT", transport: 'bus' },
-            { coords: [135.7681, 35.0116], name: "JAPAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT", transport: 'bus' },
-            { coords: [76.9285, 43.2383], name: "KAZAKHSTAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwYi6KTNpGONpqQCqz-LDK-", transport: 'plane' },
-            { coords: [71.449074, 51.169392], name: "KAZAKHSTAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwYi6KTNpGONpqQCqz-LDK-", transport: 'car' },
-            { coords: [74.5893, 42.8746], name: "KYRGYZSTAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw", transport: 'bus' }
+            { coords: [126.9780, 37.5665], name: "SEOUL, SOUTH KOREA", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk", transport: 'train' },
+            { coords: [126.4504, 37.4634], name: "INCHEON, SOUTH KOREA", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk", transport: 'plane' },
+            { coords: [139.759455, 35.682839], name: "TOKYO, JAPAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT", transport: 'plane' },
+            { coords: [135.495951, 34.702485], name: "OSAKA, JAPAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT", transport: 'bus' },
+            { coords: [135.7681, 35.0116], name: "KYOTO, JAPAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT", transport: 'bus' },
+            { coords: [76.9285, 43.2383], name: "ALMATY, KAZAKHSTAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwYi6KTNpGONpqQCqz-LDK-", transport: 'plane' },
+            { coords: [71.449074, 51.169392], name: "ASTANA, KAZAKHSTAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwYi6KTNpGONpqQCqz-LDK-", transport: 'car' },
+            { coords: [74.5893, 42.8746], name: "BISHKEK, KYRGYZSTAN", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw", transport: 'bus' }
         ];
 
+        // Add markers
         cities.forEach(function(city) {
             var el = document.createElement('div');
             el.className = 'city-dot';
@@ -85,11 +83,14 @@
             });
         });
 
-        for (let i = 1; i < cities.length; i++) {
-            let color = '#0000FF';
-            let dashArray = [];
+        // Add lines
+        cities.forEach(function(city, index) {
+            if (index === 0) return; // Skip the first city
 
-            switch (cities[i].transport) {
+            var color;
+            var dashArray = [];
+
+            switch (city.transport) {
                 case 'plane':
                     color = '#1E90FF';
                     dashArray = [2, 2];
@@ -103,7 +104,7 @@
             }
 
             map.addLayer({
-                id: 'route-' + i,
+                id: 'route-' + index,
                 type: 'line',
                 source: {
                     type: 'geojson',
@@ -111,7 +112,7 @@
                         type: 'Feature',
                         geometry: {
                             type: 'LineString',
-                            coordinates: [cities[i - 1].coords, cities[i].coords]
+                            coordinates: [cities[index - 1].coords, city.coords]
                         }
                     }
                 },
@@ -122,7 +123,8 @@
                     'line-opacity': 0.8
                 }
             });
-        }
+        });
+
     </script>
 </body>
 </html>
