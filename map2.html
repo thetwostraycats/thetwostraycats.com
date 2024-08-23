@@ -64,12 +64,6 @@
         cities.forEach(function(city) {
             var el = document.createElement('div');
             el.className = 'marker';
-            el.addEventListener('mouseenter', function() {
-                el.style.backgroundColor = '#FF4500';
-            });
-            el.addEventListener('mouseleave', function() {
-                el.style.backgroundColor = '#FF6347';
-            });
             el.addEventListener('click', function() {
                 window.open(city.url, '_blank');
             });
@@ -81,54 +75,66 @@
                 .addTo(map);
         });
 
-        // Adding lines between the cities
-        var geojson = {
-            'type': 'FeatureCollection',
-            'features': [
-                {
-                    'type': 'Feature',
-                    'geometry': {
-                        'type': 'LineString',
-                        'coordinates': [
-                            [126.9780, 37.5665], // Seoul
-                            [126.4504, 37.4634], // Incheon
-                            [139.759455, 35.682839], // Tokyo
-                            [135.495951, 34.702485], // Osaka
-                            [135.7681, 35.0116], // Kyoto
-                            [135.495951, 34.702485], // Back to Osaka
-                            [139.759455, 35.682839], // Back to Tokyo
-                            [126.4504, 37.4634], // Back to Incheon
-                            [76.9285, 43.2383], // Almaty
-                            [71.449074, 51.169392], // Astana
-                            [74.5893, 42.8746], // Bishkek
-                        ]
-                    },
-                    'properties': {
-                        'transport': 'plane'
-                    }
-                }
-            ]
-        };
+        // Adding lines between the cities with different styles based on transport mode
+        var routes = [
+            {
+                coords: [
+                    [126.9780, 37.5665], // Seoul
+                    [126.4504, 37.4634], // Incheon
+                    [139.759455, 35.682839], // Tokyo
+                ],
+                transport: 'plane'
+            },
+            {
+                coords: [
+                    [139.759455, 35.682839], // Tokyo
+                    [135.495951, 34.702485], // Osaka
+                ],
+                transport: 'bus'
+            },
+            {
+                coords: [
+                    [135.495951, 34.702485], // Osaka
+                    [135.7681, 35.0116], // Kyoto
+                    [135.495951, 34.702485], // Back to Osaka
+                    [139.759455, 35.682839], // Back to Tokyo
+                    [126.4504, 37.4634], // Back to Incheon
+                    [76.9285, 43.2383], // Almaty
+                    [71.449074, 51.169392], // Astana
+                    [76.9285, 43.2383], // Back to Almaty
+                    [74.5893, 42.8746], // Bishkek
+                ],
+                transport: 'train'
+            }
+        ];
 
         map.on('load', function () {
-            map.addSource('route', {
-                'type': 'geojson',
-                'data': geojson
-            });
+            routes.forEach(function(route) {
+                map.addSource('route-' + route.transport, {
+                    'type': 'geojson',
+                    'data': {
+                        'type': 'Feature',
+                        'geometry': {
+                            'type': 'LineString',
+                            'coordinates': route.coords
+                        }
+                    }
+                });
 
-            map.addLayer({
-                'id': 'route-layer',
-                'type': 'line',
-                'source': 'route',
-                'layout': {
-                    'line-join': 'round',
-                    'line-cap': 'round'
-                },
-                'paint': {
-                    'line-color': ['case', ['==', ['get', 'transport'], 'plane'], '#1E90FF', '#32CD32'],
-                    'line-width': 4,
-                    'line-opacity': 0.8
-                }
+                map.addLayer({
+                    'id': 'route-layer-' + route.transport,
+                    'type': 'line',
+                    'source': 'route-' + route.transport,
+                    'layout': {
+                        'line-join': 'round',
+                        'line-cap': 'round'
+                    },
+                    'paint': {
+                        'line-color': route.transport === 'plane' ? '#1E90FF' : route.transport === 'bus' ? '#87CEEB' : '#00008B',
+                        'line-width': 4,
+                        'line-opacity': 0.8
+                    }
+                });
             });
         });
 
