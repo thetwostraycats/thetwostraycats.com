@@ -14,31 +14,6 @@
             font-family: 'Verdana', sans-serif;
             background-color: #f5f5f5;
         }
-        .mapboxgl-popup-content {
-            background: #f0f8ff;
-            color: #333;
-            font-family: 'Verdana', sans-serif;
-            font-size: 14px;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-        }
-        .mapboxgl-popup-close-button {
-            color: #333;
-        }
-        .mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
-            border-top-color: #f0f8ff;
-        }
-        .marker {
-            background-color: #ff6347; /* Tomato color */
-            border: 2px solid #32cd32; /* Lime Green border */
-            border-radius: 50%;
-            width: 8px;
-            height: 8px;
-            cursor: pointer;
-        }
-        .marker:hover {
-            background-color: #ffa07a; /* Light Salmon */
-        }
     </style>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet" />
@@ -48,7 +23,7 @@
 
     <script>
         // Initialize Mapbox with your token
-        mapboxgl.accessToken = 'pk.eyJ1IjoidHdvc3RyYXljYXRzIiwiYSI6ImNtMDVwM3JnNTBnZmIyaXF4dHRoNGFnbmYifQ.dh7P4Ojmd_dQ3ALDFPDteA';
+        mapboxgl.accessToken = 'your_mapbox_token_here';
 
         var map = new mapboxgl.Map({
             container: 'map', // container ID
@@ -60,109 +35,28 @@
         // Add zoom and rotation controls to the map.
         map.addControl(new mapboxgl.NavigationControl());
 
-        const route = [
-            { coords: [37.5665, 126.978], transport: 'train', title: "Seoul, South Korea" },
-            { coords: [37.4563, 126.7052], transport: 'plane', title: "Incheon, South Korea" },
-            { coords: [35.682839, 139.759455], transport: 'plane', title: "Tokyo, Japan" },
-            { coords: [34.6937, 135.5023], transport: 'bus', title: "Osaka, Japan" },
-            { coords: [35.0116, 135.7681], transport: 'bus', title: "Kyoto, Japan" },
-            { coords: [34.6937, 135.5023], transport: 'plane', title: "Osaka, Japan" },
-            { coords: [35.682839, 139.759455], transport: 'plane', title: "Tokyo, Japan" },
-            { coords: [37.4563, 126.7052], transport: 'plane', title: "Incheon, South Korea" },
-            { coords: [43.2220, 76.8512], transport: 'plane', title: "Almaty, Kazakhstan" },
-            { coords: [51.1694, 71.4491], transport: 'plane', title: "Astana, Kazakhstan" },
-            { coords: [43.2220, 76.8512], transport: 'car', title: "Almaty, Kazakhstan" },
-            { coords: [42.8746, 74.5698], transport: 'bus', title: "Bishkek, Kyrgyzstan" },
-            { coords: [42.6494, 77.0810], transport: 'bus', title: "Cholpon-Ata, Kyrgyzstan" },
-            { coords: [42.8746, 74.5698], transport: 'plane', title: "Bishkek, Kyrgyzstan" },
-            { coords: [41.2995, 69.2401], transport: 'train', title: "Tashkent, Uzbekistan" },
-            { coords: [39.6542, 66.9597], transport: 'car', title: "Samarkand, Uzbekistan" },
-            { coords: [39.5036, 67.6160], transport: 'car', title: "Panjakent, Tajikistan" },
-            { coords: [39.2191, 67.9790], transport: 'car', title: "Shing, Tajikistan" },
-            { coords: [38.5598, 68.7870], transport: 'train', title: "Dushanbe, Tajikistan" },
-            { coords: [39.6542, 66.9597], transport: 'train', title: "Samarkand, Uzbekistan" },
-            { coords: [39.7747, 64.4289], transport: 'train', title: "Bukhara, Uzbekistan" },
-            { coords: [39.6542, 66.9597], transport: 'train', title: "Samarkand, Uzbekistan" },
-            { coords: [41.2995, 69.2401], transport: 'plane', title: "Tashkent, Uzbekistan" },
-            { coords: [40.4093, 49.8671], transport: 'train', title: "Baku, Azerbaijan" },
-            { coords: [40.6828, 46.3606], transport: 'car', title: "Ganja, Azerbaijan" },
-            { coords: [41.5421, 45.0010], transport: 'bus', title: "Rustavi, Georgia" },
-            { coords: [41.7151, 44.8271], transport: 'bus', title: "Tblisi, Georgia" },
-            { coords: [41.6206, 45.9217], transport: 'bus', title: "Sighnaghi, Georgia" },
-            { coords: [41.7151, 44.8271], transport: 'train', title: "Tblisi, Georgia" },
-            { coords: [41.6168, 41.6367], transport: 'car', title: "Batumi, Georgia" }
-        ];
+        // Load the simplified GeoJSON data
+        map.on('load', function () {
+            map.addSource('simplified-route', {
+                type: 'geojson',
+                data: 'path_to_your_downloaded_geojson_file' // Update this path
+            });
 
-        route.forEach((location, i) => {
-            var el = document.createElement('div');
-            el.className = 'marker';
-
-            new mapboxgl.Marker(el)
-                .setLngLat(location.coords)
-                .setPopup(new mapboxgl.Popup({ offset: 25 })
-                .setHTML(`<h4>${location.title}</h4>`))
-                .addTo(map);
-
-            if (i > 0) {
-                const previous = route[i - 1];
-
-                // Create a curved line for flights
-                if (location.transport === 'plane') {
-                    const line = {
-                        'type': 'Feature',
-                        'geometry': {
-                            'type': 'LineString',
-                            'coordinates': [
-                                previous.coords,
-                                [(previous.coords[0] + location.coords[0]) / 2, (previous.coords[1] + location.coords[1]) / 2 + 5], // curve point
-                                location.coords
-                            ]
-                        }
-                    };
-                    map.addSource(`line-${i}`, { 'type': 'geojson', 'data': line });
-                    map.addLayer({
-                        'id': `line-${i}`,
-                        'type': 'line',
-                        'source': `line-${i}`,
-                        'layout': {
-                            'line-join': 'round',
-                            'line-cap': 'round'
-                        },
-                        'paint': {
-                            'line-color': '#FF6347',
-                            'line-width': 4,
-                            'line-opacity': 0.7
-                        }
-                    });
-                } else {
-                    // Straight line for other transports
-                    const line = {
-                        'type': 'Feature',
-                        'geometry': {
-                            'type': 'LineString',
-                            'coordinates': [
-                                previous.coords,
-                                location.coords
-                            ]
-                        }
-                    };
-                    map.addSource(`line-${i}`, { 'type': 'geojson', 'data': line });
-                    map.addLayer({
-                        'id': `line-${i}`,
-                        'type': 'line',
-                        'source': `line-${i}`,
-                        'layout': {
-                            'line-join': 'round',
-                            'line-cap': 'round'
-                        },
-                        'paint': {
-                            'line-color': location.transport === 'bus' ? '#32CD32' : '#FF6347',
-                            'line-width': 4,
-                            'line-opacity': 0.7
-                        }
-                    });
+            // Add the line layer
+            map.addLayer({
+                'id': 'route',
+                'type': 'line',
+                'source': 'simplified-route',
+                'layout': {
+                    'line-join': 'round',
+                    'line-cap': 'round'
+                },
+                'paint': {
+                    'line-color': ['case', ['==', ['get', 'transport'], 'plane'], '#FF6347', '#32CD32'], // Different color for flights
+                    'line-width': 4,
+                    'line-opacity': 0.7
                 }
-            }
+            });
         });
     </script>
 </body>
