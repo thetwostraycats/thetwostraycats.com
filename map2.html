@@ -21,6 +21,16 @@
             padding: 5px;
             border-radius: 3px;
         }
+        .marker {
+            background-color: #FF6347;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .marker:hover {
+            background-color: #FF4500;
+        }
     </style>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet" />
@@ -41,20 +51,27 @@
         map.addControl(new mapboxgl.NavigationControl());
 
         var cities = [
-            { coords: [126.9780, 37.5665], name: "SEOUL, SOUTH KOREA" },
-            { coords: [126.4504, 37.4634], name: "INCHEON, SOUTH KOREA" },
-            { coords: [139.759455, 35.682839], name: "TOKYO, JAPAN" },
-            { coords: [135.495951, 34.702485], name: "OSAKA, JAPAN" },
-            { coords: [135.7681, 35.0116], name: "KYOTO, JAPAN" },
-            { coords: [76.9285, 43.2383], name: "ALMATY, KAZAKHSTAN" },
-            { coords: [71.449074, 51.169392], name: "ASTANA, KAZAKHSTAN" },
-            { coords: [74.5893, 42.8746], name: "BISHKEK, KYRGYZSTAN" }
+            { coords: [126.9780, 37.5665], name: "SEOUL, SOUTH KOREA", url: "https://www.youtube.com/playlist?list=SEOUL" },
+            { coords: [126.4504, 37.4634], name: "INCHEON, SOUTH KOREA", url: "https://www.youtube.com/playlist?list=INCHEON" },
+            { coords: [139.759455, 35.682839], name: "TOKYO, JAPAN", url: "https://www.youtube.com/playlist?list=TOKYO" },
+            { coords: [135.495951, 34.702485], name: "OSAKA, JAPAN", url: "https://www.youtube.com/playlist?list=OSAKA" },
+            { coords: [135.7681, 35.0116], name: "KYOTO, JAPAN", url: "https://www.youtube.com/playlist?list=KYOTO" },
+            { coords: [76.9285, 43.2383], name: "ALMATY, KAZAKHSTAN", url: "https://www.youtube.com/playlist?list=ALMATY" },
+            { coords: [71.449074, 51.169392], name: "ASTANA, KAZAKHSTAN", url: "https://www.youtube.com/playlist?list=ASTANA" },
+            { coords: [74.5893, 42.8746], name: "BISHKEK, KYRGYZSTAN", url: "https://www.youtube.com/playlist?list=BISHKEK" }
         ];
 
         cities.forEach(function(city) {
-            new mapboxgl.Marker()
+            var el = document.createElement('div');
+            el.className = 'marker';
+            el.addEventListener('click', function() {
+                window.open(city.url, '_blank');
+            });
+
+            new mapboxgl.Marker(el)
                 .setLngLat(city.coords)
-                .setPopup(new mapboxgl.Popup({ offset: 25 }).setText(city.name))
+                .setPopup(new mapboxgl.Popup({ offset: 25 })
+                    .setHTML('<a href="' + city.url + '" target="_blank">' + city.name + '</a>'))
                 .addTo(map);
         });
 
