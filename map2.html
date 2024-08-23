@@ -34,8 +34,8 @@
         var map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/streets-v11',
-            center: [70.0, 35.0],
-            zoom: 3
+            center: [30.0, 40.0], // Adjusted to fit the extended regions
+            zoom: 4 // Adjusted to show a broader region
         });
 
         map.addControl(new mapboxgl.NavigationControl());
@@ -63,6 +63,26 @@
             tblisi: { coordinates: [44.7930, 41.7151], name: "TBILISI, GEORGIA", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
             sighnaghi: { coordinates: [45.9204, 41.6209], name: "SIGHNAGHI, GEORGIA", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
             batumi: { coordinates: [41.6413, 41.6168], name: "BATUMI, GEORGIA", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            sarpi: { coordinates: [41.5352, 41.5511], name: "SARPI, GEORGIA", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            hopa: { coordinates: [41.3933, 41.4239], name: "HOPA, TURKEY", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            erzurum: { coordinates: [41.2769, 39.9042], name: "ERZURUM, TURKEY", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            ankara: { coordinates: [32.8597, 39.9334], name: "ANKARA, TURKEY", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            konya: { coordinates: [32.4849, 37.8716], name: "KONYA, TURKEY", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            antalya: { coordinates: [30.7133, 36.8969], name: "ANTALYA, TURKEY", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            fethiye: { coordinates: [29.1263, 36.6213], name: "FETHIYE, TURKEY", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            rhodes: { coordinates: [28.2284, 36.4340], name: "RHODES, GREECE", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            kos: { coordinates: [27.2875, 36.8928], name: "KOS, GREECE", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            bodrum: { coordinates: [27.4289, 37.0344], name: "BODRUM, TURKEY", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            istanbul: { coordinates: [28.9784, 41.0082], name: "ISTANBUL, TURKEY", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            plovdiv: { coordinates: [24.7449, 42.1354], name: "PLOVDIV, BULGARIA", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            sofia: { coordinates: [23.3219, 42.6977], name: "SOFIA, BULGARIA", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            skopje: { coordinates: [21.4317, 41.9981], name: "SKOPJE, NORTH MACEDONIA", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            ohrid: { coordinates: [20.8016, 41.1231], name: "OHRID, NORTH MACEDONIA", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            tirana: { coordinates: [19.8189, 41.3275], name: "TIRANA, ALBANIA", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            vlore: { coordinates: [19.4897, 40.4663], name: "VLORE, ALBANIA", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            rome: { coordinates: [12.4964, 41.9028], name: "ROME, ITALY", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            lisbon: { coordinates: [-9.1393, 38.7223], name: "LISBON, PORTUGAL", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" },
+            faro: { coordinates: [-7.9331, 37.0174], name: "FARO, PORTUGAL", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw&si=Lmmlk_vW625ullxw" }
         };
 
         // Step 2: Define Path Styles
@@ -76,25 +96,23 @@
 
         // Step 3: Define Connections
         const connections = [
-            // South Korea
+            // South Korea & Japan
             { from: 'seoul', to: 'incheon', transport: 'train' },
             { from: 'incheon', to: 'tokyo', transport: 'plane' },
-            // Japan
             { from: 'tokyo', to: 'osaka', transport: 'plane' },
             { from: 'osaka', to: 'kyoto', transport: 'bus' },
             { from: 'kyoto', to: 'osaka', transport: 'bus' },
             { from: 'osaka', to: 'tokyo', transport: 'plane' },
             { from: 'tokyo', to: 'incheon', transport: 'plane' },
-            // Kazakhstan
+            // Kazakhstan & Kyrgyzstan
             { from: 'incheon', to: 'almaty', transport: 'plane' },
             { from: 'almaty', to: 'astana', transport: 'plane' },
-            { from: 'astana', to: 'almaty', transport: 'car' },
-            // Kyrgyzstan
-            { from: 'almaty', to: 'bishkek', transport: 'bus' },
+            { from: 'astana', to: 'almaty', transport: 'plane' },
+            { from: 'almaty', to: 'bishkek', transport: 'plane' },
             { from: 'bishkek', to: 'cholponata', transport: 'bus' },
             { from: 'cholponata', to: 'bishkek', transport: 'bus' },
             { from: 'bishkek', to: 'tashkent', transport: 'plane' },
-            // Uzbekistan
+            // Uzbekistan & Tajikistan
             { from: 'tashkent', to: 'samarkand', transport: 'train' },
             { from: 'samarkand', to: 'panjakent', transport: 'car' },
             { from: 'panjakent', to: 'shing', transport: 'car' },
@@ -111,6 +129,33 @@
             { from: 'tblisi', to: 'sighnaghi', transport: 'bus' },
             { from: 'sighnaghi', to: 'tblisi', transport: 'bus' },
             { from: 'tblisi', to: 'batumi', transport: 'train' },
+            { from: 'batumi', to: 'sarpi', transport: 'car' },
+            // Turkey
+            { from: 'sarpi', to: 'hopa', transport: 'car' },
+            { from: 'hopa', to: 'erzurum', transport: 'bus' },
+            { from: 'erzurum', to: 'ankara', transport: 'train' },
+            { from: 'ankara', to: 'konya', transport: 'train' },
+            { from: 'konya', to: 'antalya', transport: 'bus' },
+            { from: 'antalya', to: 'fethiye', transport: 'bus' },
+            { from: 'fethiye', to: 'rhodes', transport: 'ferry' },
+            // Greece
+            { from: 'rhodes', to: 'kos', transport: 'ferry' },
+            // Turkey Continued
+            { from: 'kos', to: 'bodrum', transport: 'ferry' },
+            { from: 'bodrum', to: 'istanbul', transport: 'bus' },
+            // Bulgaria & North Macedonia
+            { from: 'istanbul', to: 'plovdiv', transport: 'train' },
+            { from: 'plovdiv', to: 'sofia', transport: 'train' },
+            { from: 'sofia', to: 'skopje', transport: 'bus' },
+            { from: 'skopje', to: 'ohrid', transport: 'bus' },
+            // Albania
+            { from: 'ohrid', to: 'tirana', transport: 'bus' },
+            { from: 'tirana', to: 'vlore', transport: 'bus' },
+            { from: 'vlore', to: 'tirana', transport: 'bus' },
+            { from: 'tirana', to: 'rome', transport: 'plane' },
+            // Italy & Portugal
+            { from: 'rome', to: 'lisbon', transport: 'plane' },
+            { from: 'lisbon', to: 'faro', transport: 'bus' }
         ];
 
         // Step 4: Add Paths to the Map
