@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Map Test</title>
+    <title>Interactive Travel Map</title>
     <style>
         #map {
-            background-color: #e0e0e0;
             height: 100vh;
             width: 100%;
+        }
+        body {
+            margin: 0;
+            font-family: 'Verdana', sans-serif;
+            background-color: #f5f5f5;
         }
     </style>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
@@ -16,20 +20,48 @@
 </head>
 <body>
     <div id="map"></div>
+
     <script>
-        mapboxgl.accessToken = 'pk.eyJ1IjoidHdvc3RyYXljYXRzIiwiYSI6ImNtMDVwM3JnNTBnZmIyaXF4dHRoNGFnbmYifQ.dh7P4Ojmd_dQ3ALDFPDteA';
+        mapboxgl.accessToken = 'pk.eyJ1IjoidHdvc3RyYXljYXRzIiwiYSI6ImNtMDVvNWg0MDBtYTUyanMyd3l0c2dkZ3MifQ.rMTSjEzGk3UJJ_44yksV9Q';
 
         var map = new mapboxgl.Map({
             container: 'map',
-            style: 'mapbox://styles/mapbox/light-v10', // Use a different style to test
-            center: [20.0, 45.0],
+            style: 'mapbox://styles/mapbox/light-v10',
+            center: [70.0, 35.0],
             zoom: 3
         });
 
-        // Add a simple marker for testing
-        new mapboxgl.Marker()
-            .setLngLat([20.0, 45.0])
-            .addTo(map);
+        // Add zoom and rotation controls to the map.
+        map.addControl(new mapboxgl.NavigationControl());
+
+        // Define cities with coordinates and transport methods
+        var cities = [
+            { coords: [126.9780, 37.5665], name: "Seoul", transport: "train", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk" },
+            { coords: [126.4504, 37.4634], name: "Incheon", transport: "plane", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk" },
+            { coords: [139.759455, 35.682839], name: "Tokyo", transport: "plane", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT" },
+            { coords: [135.495951, 34.702485], name: "Osaka", transport: "bus", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT" },
+            { coords: [135.7681, 35.0116], name: "Kyoto", transport: "bus", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT" },
+            { coords: [135.495951, 34.702485], name: "Osaka", transport: "plane", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT" },
+            { coords: [139.759455, 35.682839], name: "Tokyo", transport: "plane", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT" },
+            { coords: [126.4504, 37.4634], name: "Incheon", transport: "plane", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk" },
+            { coords: [76.9285, 43.2383], name: "Almaty", transport: "plane", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwYi6KTNpGONpqQCqz-LDK-" },
+            { coords: [71.449074, 51.169392], name: "Astana", transport: "plane", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwYi6KTNpGONpqQCqz-LDK-" },
+            { coords: [74.5893, 42.8746], name: "Bishkek", transport: "bus", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw" }
+            // Add more cities as needed
+        ];
+
+        cities.forEach(function(city) {
+            // Create a marker for each city
+            var marker = new mapboxgl.Marker({ scale: 0.7 }) // Smaller marker
+                .setLngLat(city.coords)
+                .setPopup(new mapboxgl.Popup({ offset: 25 }).setText(city.name)) // Popup on hover
+                .addTo(map);
+
+            // Add click event to open YouTube playlist
+            marker.getElement().addEventListener('click', function() {
+                window.open(city.url, '_blank');
+            });
+        });
     </script>
 </body>
 </html>
