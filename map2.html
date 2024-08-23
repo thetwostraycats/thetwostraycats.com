@@ -14,6 +14,17 @@
             font-family: 'Verdana', sans-serif;
             background-color: #f5f5f5;
         }
+        .city-dot {
+            background-color: #007cbf;
+            border-radius: 50%;
+            width: 10px;
+            height: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .city-dot:hover {
+            background-color: #FF6347; /* Change color on hover */
+        }
     </style>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet" />
@@ -22,12 +33,12 @@
     <div id="map"></div>
 
     <script>
-        // Initialize Mapbox with the correct token
+        // Initialize Mapbox with your token
         mapboxgl.accessToken = 'pk.eyJ1IjoidHdvc3RyYXljYXRzIiwiYSI6ImNtMDVwM3JnNTBnZmIyaXF4dHRoNGFnbmYifQ.dh7P4Ojmd_dQ3ALDFPDteA';
 
         var map = new mapboxgl.Map({
             container: 'map',
-            style: 'mapbox://styles/mapbox/streets-v11', // use a different map style to see if the issue persists
+            style: 'mapbox://styles/mapbox/streets-v11',
             center: [70.0, 35.0],
             zoom: 3
         });
@@ -37,29 +48,30 @@
 
         // Define cities with coordinates and transport methods
         var cities = [
-            { coords: [126.9780, 37.5665], name: "Seoul", transport: "train", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk" },
-            { coords: [126.4504, 37.4634], name: "Incheon", transport: "plane", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk" },
-            { coords: [139.759455, 35.682839], name: "Tokyo", transport: "plane", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT" },
-            { coords: [135.495951, 34.702485], name: "Osaka", transport: "bus", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT" },
-            { coords: [135.7681, 35.0116], name: "Kyoto", transport: "bus", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT" },
-            { coords: [135.495951, 34.702485], name: "Osaka", transport: "plane", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT" },
-            { coords: [139.759455, 35.682839], name: "Tokyo", transport: "plane", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT" },
-            { coords: [126.4504, 37.4634], name: "Incheon", transport: "plane", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk" },
-            { coords: [76.9285, 43.2383], name: "Almaty", transport: "plane", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwYi6KTNpGONpqQCqz-LDK-" },
-            { coords: [71.449074, 51.169392], name: "Astana", transport: "plane", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwYi6KTNpGONpqQCqz-LDK-" },
-            { coords: [74.5893, 42.8746], name: "Bishkek", transport: "bus", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw" }
+            { coords: [126.9780, 37.5665], name: "South Korea", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk" },
+            { coords: [126.4504, 37.4634], name: "South Korea", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk" },
+            { coords: [139.759455, 35.682839], name: "Japan", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT" },
+            { coords: [135.495951, 34.702485], name: "Japan", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT" },
+            { coords: [135.7681, 35.0116], name: "Japan", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT" },
+            { coords: [76.9285, 43.2383], name: "Kazakhstan", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwYi6KTNpGONpqQCqz-LDK-" },
+            { coords: [71.449074, 51.169392], name: "Kazakhstan", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwYi6KTNpGONpqQCqz-LDK-" },
+            { coords: [74.5893, 42.8746], name: "Kyrgyzstan", url: "https://youtube.com/playlist?list=PLbZGBFUIvyuwwLoItS8p23pqavfBAboFw" }
             // Add more cities as needed
         ];
 
         cities.forEach(function(city) {
             // Create a marker for each city
-            var marker = new mapboxgl.Marker({ scale: 0.7 }) // Smaller marker
+            var el = document.createElement('div');
+            el.className = 'city-dot';
+            
+            // Create a marker using the custom element
+            var marker = new mapboxgl.Marker(el)
                 .setLngLat(city.coords)
-                .setPopup(new mapboxgl.Popup({ offset: 25 }).setText(city.name)) // Popup on hover
+                .setPopup(new mapboxgl.Popup({ offset: 25 }).setText(city.name)) // Show country name on hover
                 .addTo(map);
 
             // Add click event to open YouTube playlist
-            marker.getElement().addEventListener('click', function() {
+            el.addEventListener('click', function() {
                 window.open(city.url, '_blank');
             });
         });
