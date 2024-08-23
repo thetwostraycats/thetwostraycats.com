@@ -31,6 +31,10 @@
         .marker:hover {
             background-color: #FF4500;
         }
+        .icon {
+            width: 20px;
+            height: 20px;
+        }
     </style>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet" />
@@ -78,9 +82,30 @@
         function createFlightCurve(start, end) {
             var controlPoint = [
                 (start[0] + end[0]) / 2,
-                (start[1] + end[1]) / 2 + 10 // Adjusting for a better curve appearance
+                (start[1] + end[1]) / 2 + 5 // Adjusting for a subtler curve
             ];
             return [start, controlPoint, end];
+        }
+
+        function addIconForTransport(transport, coordinates) {
+            var iconURL = '';
+            if (transport === 'plane') {
+                iconURL = 'path-to-plane-icon.png'; // Replace with actual icon URL
+            } else if (transport === 'train') {
+                iconURL = 'path-to-train-icon.png'; // Replace with actual icon URL
+            } else if (transport === 'bus') {
+                iconURL = 'path-to-bus-icon.png'; // Replace with actual icon URL
+            } else if (transport === 'car') {
+                iconURL = 'path-to-car-icon.png'; // Replace with actual icon URL
+            }
+
+            var el = document.createElement('img');
+            el.src = iconURL;
+            el.className = 'icon';
+
+            new mapboxgl.Marker(el)
+                .setLngLat(coordinates)
+                .addTo(map);
         }
 
         var routes = [
@@ -132,9 +157,13 @@
                         'line-opacity': 0.8
                     }
                 });
+
+                // Add icons for the transport mode at each waypoint
+                for (let i = 1; i < route.coords.length; i++) {
+                    addIconForTransport(route.transport, route.coords[i]);
+                }
             });
         });
-
     </script>
 </body>
 </html>
