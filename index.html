@@ -173,4 +173,48 @@
                     <a href="https://www.instagram.com/thetwostraycats" target="_blank">
                         <img src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png" alt="Instagram Icon">Instagram
                     </a>
-                    <a href="htt
+                    <a href="https://www.facebook.com/thetwostraycats" target="_blank">
+                        <img src="https://img.icons8.com/ios-filled/50/000000/facebook-new.png" alt="Facebook Icon">Facebook
+                    </a>
+                    <a href="https://www.reddit.com/r/twostraycats/" target="_blank">
+                        <img src="https://img.icons8.com/ios-filled/50/000000/reddit.png" alt="Reddit Icon">Reddit
+                    </a>
+                </div>
+            </div>
+            <div class="credit">
+                Site by <a href="https://instagram.com/sate.adam" target="_blank">@Adam</a>
+            </div>
+        </div>
+
+        <!-- Stats container -->
+        <div class="stats-container">
+            <h2>YouTube Stats</h2>
+            <div class="stats" id="youtube-stats">
+                <!-- Stats will be injected here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript to fetch and display YouTube stats -->
+    <script>
+        fetch('https://thetsc.netlify.app/.netlify/functions/fetch-stats')
+            .then(response => response.json())
+            .then(data => {
+                const stats = {
+                    subscribers: data.items[0].statistics.subscriberCount,
+                    videos: data.items[0].statistics.videoCount,
+                    hours: (parseInt(data.items[0].statistics.viewCount) / 60).toFixed(2)
+                };
+                document.getElementById('youtube-stats').innerHTML = `
+                    <div class="stat-item"><span>Subscribers</span><span>${stats.subscribers}</span></div>
+                    <div class="stat-item"><span>Videos</span><span>${stats.videos}</span></div>
+                    <div class="stat-item"><span>Hours Watched</span><span>${stats.hours}</span></div>
+                `;
+            })
+            .catch(error => {
+                console.error('Error fetching YouTube stats:', error);
+                document.getElementById('youtube-stats').innerHTML = '<p>Failed to load stats.</p>';
+            });
+    </script>
+</body>
+</html>
