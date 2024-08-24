@@ -33,7 +33,9 @@
             box-sizing: border-box;
         }
 
-        .container, .stats-container, .video-container {
+        .container,
+        .stats-container,
+        .video-container {
             flex: 1;
             min-width: 300px;
             max-width: 350px;
@@ -62,7 +64,7 @@
 
         /* Main Headings */
         h1 {
-            font-size: 1.2em; /* Larger size for main headings */
+            font-size: 1.2em;
             font-weight: 600;
             margin-bottom: 15px;
             color: #333;
@@ -70,21 +72,24 @@
 
         /* Secondary Headings */
         h2 {
-            font-size: 1em; /* Uniform size for all secondary headings */
+            font-size: 1em;
             font-weight: 600;
             margin-bottom: 10px;
             color: #555;
             text-align: center;
         }
 
-        .links, .stats, .support {
+        .links,
+        .stats,
+        .support {
             display: flex;
             flex-direction: column;
             gap: 10px;
             width: 100%;
         }
 
-        .links a, .support-item {
+        .links a,
+        .support-item {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -99,19 +104,22 @@
             position: relative;
         }
 
-        .links a img, .support-item img {
+        .links a img,
+        .support-item img {
             width: 20px;
             height: 20px;
             position: absolute;
             left: 10px;
         }
 
-        .links a span, .support-item span {
+        .links a span,
+        .support-item span {
             flex: 1;
             text-align: center;
         }
 
-        .links a:hover, .support-item:hover {
+        .links a:hover,
+        .support-item:hover {
             background-color: #d0e4f7;
             transform: scale(1.03);
         }
@@ -165,6 +173,14 @@
             text-decoration: underline;
         }
 
+        /* Style for video iframe to match circular logo border */
+        .video-container iframe {
+            border: 2px solid #ddd; /* Matching border style */
+            border-radius: 10px; /* Optional: add a slight radius to match the panel */
+            width: 100%;
+            max-width: 100%;
+        }
+
         /* Media query for mobile view */
         @media screen and (max-width: 768px) {
             .container-wrapper {
@@ -173,7 +189,9 @@
                 padding: 0 20px;
             }
 
-            .container, .stats-container, .video-container {
+            .container,
+            .stats-container,
+            .video-container {
                 width: 100%;
                 max-width: none;
                 margin-bottom: 20px;
@@ -187,7 +205,8 @@
                 overflow-y: auto;
             }
 
-            .links a, .stat-item {
+            .links a,
+            .stat-item {
                 justify-content: center;
                 text-align: center;
             }
@@ -214,7 +233,7 @@
                     <img src="https://img.icons8.com/ios-filled/50/000000/cafe.png" alt="Buy Us A Coffee Icon"><span>Coffee?</span>
                 </a>
             </div>
-            
+
         </div>
 
         <!-- Links Container -->
@@ -286,7 +305,7 @@
             .then(data => {
                 const latestVideoId = data.items[0].snippet.resourceId.videoId;
                 document.getElementById('latest-video').innerHTML = `
-                    <iframe width="100%" height="auto" src="https://www.youtube.com/embed/${latestVideoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe class="video-frame" width="100%" height="auto" src="https://www.youtube.com/embed/${latestVideoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 `;
             })
             .catch(error => {
