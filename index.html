@@ -19,6 +19,7 @@
             background: url('https://github.com/thetwostraycats/thetwostraycats.com/blob/main/tsc-wallpaper.png?raw=true') no-repeat center center fixed;
             background-size: cover;
             color: #333;
+            overflow: hidden; /* Prevents content from being hidden on the top */
         }
 
         .container-wrapper {
@@ -29,6 +30,7 @@
             max-width: 1200px;
             gap: 20px;
             padding: 20px;
+            box-sizing: border-box;
         }
 
         .container, .stats-container {
@@ -43,14 +45,13 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            box-sizing: border-box;
         }
 
         .logo {
             width: 100px;
             height: 100px;
             margin-bottom: 15px;
-            border-radius: 50%;
-            border: 2px solid #ddd;
         }
 
         h1 {
@@ -71,7 +72,7 @@
         .links a, .stat-item {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             text-decoration: none;
             padding: 12px;
             border-radius: 25px;
@@ -81,6 +82,11 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease, transform 0.2s ease;
             position: relative;
+            text-align: left; /* Aligns text to the left */
+        }
+
+        .stat-item span:first-child {
+            font-weight: bold; /* Bold for the first part */
         }
 
         .links a:hover, .stat-item:hover {
@@ -127,39 +133,49 @@
             .container-wrapper {
                 flex-direction: column;
                 align-items: center; /* Center-align the columns */
+                padding: 0 20px; /* Add padding on the sides */
             }
 
             .container, .stats-container {
-                width: calc(100% - 40px); /* Add some padding on the sides */
+                width: 100%; /* Full width */
                 max-width: none; /* Remove the max-width constraint */
                 margin-bottom: 20px; /* Space between panels */
+                box-sizing: border-box;
             }
 
             body {
                 height: auto; /* Allow height to adjust based on content */
+                padding: 20px; /* Add padding around the body */
             }
+        }
+
+        /* Ensure panels stay within window on any zoom level */
+        html, body {
+            height: 100%;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+
+        .container-wrapper {
+            height: 100%;
+        }
+
+        .container, .stats-container {
+            flex: 1 1 auto;
+            overflow: auto;
+        }
+
+        iframe {
+            width: 100%;
+            max-width: 350px;
+            border: none;
+            border-radius: 10px;
+            margin-top: 10px;
         }
     </style>
 </head>
 
 <body>
     <div class="container-wrapper">
-        <!-- Stats Container -->
-        <div class="stats-container">
-            <a href="https://youtube.com/@twostraycats" target="_blank">
-                <img src="https://yt3.ggpht.com/QfRoegBDiIT6F_Un_qo-zvB8pXRhlhrmCRvDkf3jreN0Tl_gIih26XkGt9puYGPMPaPTbpXPCQo=s600-c-k-c0x00ffffff-no-rj-rp-mo" alt="@twostraycats Logo" class="logo">
-                <h1>@twostraycats</h1>
-            </a>
-            <h2>YouTube Stats</h2>
-            <div class="stats" id="youtube-stats">
-                <!-- Stats will be injected here by JavaScript -->
-            </div>
-            <h2>Latest upload:</h2>
-            <div id="latest-video">
-                <!-- Latest video iframe will be inserted here -->
-            </div>
-        </div>
-
         <!-- Links Container -->
         <div class="container">
             <a href="https://thetwostraycats.com/">
@@ -190,6 +206,22 @@
             </div>
             <div class="credit">
                 Site by <a href="https://instagram.com/sate.adam" target="_blank">@Adam</a>
+            </div>
+        </div>
+
+        <!-- Stats Container -->
+        <div class="stats-container">
+            <a href="https://youtube.com/@twostraycats" target="_blank">
+                <img src="https://yt3.ggpht.com/QfRoegBDiIT6F_Un_qo-zvB8pXRhlhrmCRvDkf3jreN0Tl_gIih26XkGt9puYGPMPaPTbpXPCQo=s600-c-k-c0x00ffffff-no-rj-rp-mo" alt="@twostraycats Logo" class="logo">
+            </a>
+            <h1>@twostraycats</h1>
+            <h2>YouTube Stats</h2>
+            <div class="stats" id="youtube-stats">
+                <!-- Stats will be injected here by JavaScript -->
+            </div>
+            <h2>Latest upload:</h2>
+            <div id="latest-video">
+                <!-- Latest video iframe will be inserted here -->
             </div>
         </div>
     </div>
