@@ -23,8 +23,8 @@
 
         .container-wrapper {
             display: flex;
-            justify-content: space-around; /* Centers the panels with even spacing */
-            align-items: flex-start; /* Aligns panels at the top */
+            justify-content: space-around;
+            align-items: flex-start;
             width: 100%;
             max-width: 1200px;
             gap: 20px;
@@ -45,12 +45,12 @@
             flex-direction: column;
             align-items: center;
             box-sizing: border-box;
-            height: 80vh; /* Fixed panel height */
+            height: 80vh;
         }
 
         .empty-container {
-            background-color: transparent; /* Empty panel */
-            box-shadow: none; /* No shadow for empty panel */
+            background-color: transparent;
+            box-shadow: none;
         }
 
         .logo {
@@ -60,23 +60,23 @@
         }
 
         .circular-logo {
-            border-radius: 50%; /* Apply circle style to the stats panel logo only */
+            border-radius: 50%;
             border: 2px solid #ddd;
         }
 
-        h1 {
+        h1, h2 {
             font-size: 1.2em;
             font-weight: 600;
             margin-bottom: 20px;
             color: #333;
         }
 
-        .links h1 {
-            text-align: center; /* Center align for links panel title */
+        .links h1, .stats-container h2 {
+            text-align: center;
         }
 
         .stats-container h1 {
-            text-align: left; /* Left align for stats panel title */
+            text-align: left;
             cursor: pointer;
         }
 
@@ -90,7 +90,7 @@
         .links a, .stat-item {
             display: flex;
             align-items: center;
-            justify-content: center; /* Center text within the links */
+            justify-content: center;
             text-decoration: none;
             padding: 12px;
             border-radius: 25px;
@@ -100,16 +100,7 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease, transform 0.2s ease;
             position: relative;
-            text-align: center; /* Center text for links */
-        }
-
-        .stat-item span:first-child {
-            font-weight: bold; /* Bold for the first part */
-            text-align: left; /* Align text left for stats titles */
-        }
-
-        .stat-item span:last-child {
-            text-align: right; /* Align text right for stats values */
+            text-align: center;
         }
 
         .links a:hover, .stat-item:hover {
@@ -120,8 +111,18 @@
         .links a img {
             width: 24px;
             height: 24px;
-            position: absolute;
-            left: 15px;
+            margin-right: 10px;
+        }
+
+        .stat-item span:first-child {
+            font-weight: bold;
+            text-align: left;
+            flex-grow: 1;
+        }
+
+        .stat-item span:last-child {
+            text-align: right;
+            flex-grow: 1;
         }
 
         .socials {
@@ -139,7 +140,7 @@
             margin-top: auto;
             font-size: 0.7em;
             color: #999;
-            padding-top: 20px; /* Added padding above the credit section */
+            padding-top: 20px;
         }
 
         .credit a {
@@ -155,27 +156,35 @@
         @media screen and (max-width: 768px) {
             .container-wrapper {
                 flex-direction: column;
-                align-items: center; /* Center-align the columns */
-                padding: 0 20px; /* Add padding on the sides */
+                align-items: center;
+                padding: 0 20px;
             }
 
             .container, .stats-container, .empty-container {
-                width: 100%; /* Full width */
-                max-width: none; /* Remove the max-width constraint */
-                margin-bottom: 20px; /* Space between panels */
+                width: 100%;
+                max-width: none;
+                margin-bottom: 20px;
                 box-sizing: border-box;
-                height: auto; /* Auto height for better mobile fit */
+                height: auto;
             }
 
             body {
-                height: auto; /* Allow height to adjust based on content */
-                padding: 20px; /* Add padding around the body */
-                overflow-y: auto; /* Allows scrolling on mobile */
+                height: auto;
+                padding: 20px;
+                overflow-y: auto;
             }
 
             .links a, .stat-item {
-                justify-content: center; /* Center text on mobile */
-                text-align: center; /* Center align text for mobile */
+                justify-content: center;
+                text-align: center;
+            }
+
+            .container-wrapper {
+                order: 1;
+            }
+
+            .stats-container {
+                order: 2;
             }
         }
 
@@ -191,22 +200,6 @@
 
 <body>
     <div class="container-wrapper">
-        <!-- Stats Container -->
-        <div class="stats-container">
-            <a href="https://youtube.com/@twostraycats" target="_blank">
-                <img src="https://yt3.ggpht.com/QfRoegBDiIT6F_Un_qo-zvB8pXRhlhrmCRvDkf3jreN0Tl_gIih26XkGt9puYGPMPaPTbpXPCQo=s600-c-k-c0x00ffffff-no-rj-rp-mo" alt="@twostraycats Logo" class="logo circular-logo">
-            </a>
-            <h1>@twostraycats</h1>
-            <h2>YouTube Stats</h2>
-            <div class="stats" id="youtube-stats">
-                <!-- Stats will be injected here by JavaScript -->
-            </div>
-            <h2>Latest upload:</h2>
-            <div id="latest-video">
-                <!-- Latest video iframe will be inserted here -->
-            </div>
-        </div>
-
         <!-- Links Container -->
         <div class="container">
             <a href="https://thetwostraycats.com/">
@@ -240,6 +233,22 @@
             </div>
         </div>
 
+        <!-- Stats Container -->
+        <div class="stats-container">
+            <a href="https://youtube.com/@twostraycats" target="_blank">
+                <img src="https://yt3.ggpht.com/QfRoegBDiIT6F_Un_qo-zvB8pXRhlhrmCRvDkf3jreN0Tl_gIih26XkGt9puYGPMPaPTbpXPCQo=s600-c-k-c0x00ffffff-no-rj-rp-mo" alt="@twostraycats Logo" class="logo circular-logo">
+            </a>
+            <h1>@twostraycats</h1>
+            <h2>YouTube Stats</h2>
+            <div class="stats" id="youtube-stats">
+                <!-- Stats will be injected here by JavaScript -->
+            </div>
+            <h2>Latest upload:</h2>
+            <div id="latest-video">
+                <!-- Latest video iframe will be inserted here -->
+            </div>
+        </div>
+
         <!-- Empty Container for Future Panel -->
         <div class="empty-container"></div>
     </div>
@@ -256,13 +265,13 @@
                     views: data.items[0].statistics.viewCount,
                 };
                 document.getElementById('youtube-stats').innerHTML = `
-                    <a class="stat-item" href="https://youtube.com/@twostraycats" target="_blank"><span>Subscribers</span><span>${stats.subscribers}</span></a>
-                    <a class="stat-item" href="https://www.youtube.com/@twostraycats/videos" target="_blank"><span>Total Videos</span><span>${stats.videos}</span></a>
-                    <a class="stat-item" href="https://youtube.com/@twostraycats" target="_blank"><span>Total Views</span><span>${stats.views}</span></a>
+                    <div class="stat-item"><span>Subscribers</span><span>${stats.subscribers}</span></div>
+                    <div class="stat-item"><span>Total Videos</span><span>${stats.videos}</span></div>
+                    <div class="stat-item"><span>Total Views</span><span>${stats.views}</span></div>
                 `;
                 
                 // Fetch and display the latest video
-                const latestVideoId = data.items[0].id; // Ensure this correctly fetches the video ID
+                const latestVideoId = data.items[0].id.videoId; // Ensure this correctly fetches the video ID
                 document.getElementById('latest-video').innerHTML = `
                     <iframe width="100%" height="200" src="https://www.youtube.com/embed/${latestVideoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 `;
