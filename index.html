@@ -19,28 +19,26 @@
             background: url('https://github.com/thetwostraycats/thetwostraycats.com/blob/main/images/tsc-wallpaper.png?raw=true') no-repeat center center fixed;
             background-size: cover;
             color: #333;
-            /* Removed zoom and javascript zoom logic for cleaner approach */
         }
 
         .container-wrapper {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            align-items: center; /* Align items vertically */
+            align-items: flex-start;
             width: 100%;
-            max-width: 1100px;
-            gap: 80px; /* Increased gap between panels */
+            max-width: 1400px;
+            gap: 80px;
             padding: 20px;
             box-sizing: border-box;
-            min-height: 80vh; /* Minimum height to help with vertical centering */
         }
 
         .container,
         .stats-container,
         .video-container {
             flex: 1;
-            min-width: 300px;
-            max-width: 330px;
+            min-width: 320px;
+            max-width: 380px;
             min-height: 500px;
             padding: 20px;
             text-align: center;
@@ -129,7 +127,7 @@
         .stat-item {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: space-between; /* Ensures text stays aligned properly */
             text-decoration: none;
             padding: 10px;
             border-radius: 20px;
@@ -189,7 +187,6 @@
                 flex-direction: column;
                 align-items: center;
                 padding: 0 20px;
-                min-height: auto; /* Reset minimum height for mobile view */
             }
 
             .container,
@@ -210,8 +207,8 @@
 
             .links a,
             .stat-item {
-                justify-content: center;
-                text-align: center;
+                justify-content: space-between; /* Ensures proper alignment in mobile view */
+                text-align: left; /* Keeps text alignment as desired */
             }
         }
     </style>
@@ -284,6 +281,11 @@
 
     <!-- JavaScript to fetch stats and latest video -->
     <script>
+        // Adjust screen zoom to 90% on load
+        window.onload = function() {
+            document.body.style.zoom = "0.9";
+        };
+
         // Fetch YouTube stats from the Netlify function
         fetch('https://thetsc.netlify.app/.netlify/functions/fetch-stats')
             .then(response => response.json())
