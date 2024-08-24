@@ -28,7 +28,7 @@
             align-items: flex-start;
             width: 100%;
             max-width: 1100px;
-            gap: 40px; /* Increase gap between panels */
+            gap: 40px; /* Increased gap between panels */
             padding: 20px;
             box-sizing: border-box;
         }
@@ -38,7 +38,7 @@
         .video-container {
             flex: 1;
             min-width: 300px;
-            max-width: 350px;
+            max-width: 330px; /* Reduced max-width for better spacing */
             min-height: 500px;
             padding: 20px;
             text-align: center;
@@ -173,13 +173,15 @@
             text-decoration: underline;
         }
 
-        /* Add border around the video similar to the logo */
+        /* Style for video iframe to match circular logo border */
         .video-container iframe {
             border: 2px solid #ddd;
             border-radius: 10px;
+            width: 100%;
+            max-width: 100%;
         }
 
-        /* Improved mobile view */
+        /* Media query for mobile view */
         @media screen and (max-width: 768px) {
             .container-wrapper {
                 flex-direction: column;
@@ -194,28 +196,6 @@
                 max-width: none;
                 margin-bottom: 20px;
                 box-sizing: border-box;
-                height: auto;
-            }
-
-            .stats-container {
-                align-items: flex-start; /* Align content to the start for mobile */
-            }
-
-            .stat-item {
-                justify-content: space-between;
-                width: 100%;
-            }
-
-            .stat-item span:first-child {
-                text-align: left;
-            }
-
-            .stat-item span:last-child {
-                text-align: right;
-            }
-
-            .video-container iframe {
-                width: 100%;
                 height: auto;
             }
 
@@ -324,7 +304,7 @@
             .then(data => {
                 const latestVideoId = data.items[0].snippet.resourceId.videoId;
                 document.getElementById('latest-video').innerHTML = `
-                    <iframe width="100%" height="auto" src="https://www.youtube.com/embed/${latestVideoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe class="video-frame" width="100%" height="auto" src="https://www.youtube.com/embed/${latestVideoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 `;
             })
             .catch(error => {
