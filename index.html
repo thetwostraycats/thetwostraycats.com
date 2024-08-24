@@ -19,29 +19,28 @@
             background: url('https://github.com/thetwostraycats/thetwostraycats.com/blob/main/images/tsc-wallpaper.png?raw=true') no-repeat center center fixed;
             background-size: cover;
             color: #333;
+            /* Removed zoom and javascript zoom logic for cleaner approach */
         }
 
         .container-wrapper {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            align-items: flex-start;
+            align-items: center; /* Align items vertically */
             width: 100%;
-            max-width: 1400px; /* Increased max-width for wider panels */
+            max-width: 1100px;
             gap: 80px; /* Increased gap between panels */
             padding: 20px;
             box-sizing: border-box;
-            position: relative;
-            top: 50%;
-            transform: translateY(-50%);
+            min-height: 80vh; /* Minimum height to help with vertical centering */
         }
 
         .container,
         .stats-container,
         .video-container {
             flex: 1;
-            min-width: 320px;
-            max-width: 380px; /* Increased max-width for wider panels */
+            min-width: 300px;
+            max-width: 330px;
             min-height: 500px;
             padding: 20px;
             text-align: center;
@@ -190,6 +189,7 @@
                 flex-direction: column;
                 align-items: center;
                 padding: 0 20px;
+                min-height: auto; /* Reset minimum height for mobile view */
             }
 
             .container,
