@@ -28,7 +28,7 @@
             align-items: flex-start;
             width: 100%;
             max-width: 1400px;
-            gap: 30px;
+            gap: 80px;
             padding: 20px;
             box-sizing: border-box;
         }
@@ -38,7 +38,8 @@
         .video-container {
             flex: 1;
             min-width: 320px;
-            max-width: 400px;
+            max-width: 380px;
+            min-height: 500px;
             padding: 20px;
             text-align: center;
             background-color: rgba(255, 255, 255, 0.9);
@@ -48,7 +49,6 @@
             flex-direction: column;
             align-items: center;
             box-sizing: border-box;
-            transition: transform 0.3s ease;
         }
 
         .logo {
@@ -127,7 +127,7 @@
         .stat-item {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: space-between; /* Ensures text stays aligned properly */
             text-decoration: none;
             padding: 10px;
             border-radius: 20px;
@@ -199,9 +199,16 @@
                 height: auto;
             }
 
+            body {
+                height: auto;
+                padding: 20px;
+                overflow-y: auto;
+            }
+
             .links a,
             .stat-item {
-                justify-content: space-between; /* Keep alignment on mobile */
+                justify-content: space-between; /* Ensures proper alignment in mobile view */
+                text-align: left; /* Keeps text alignment as desired */
             }
         }
     </style>
@@ -274,6 +281,11 @@
 
     <!-- JavaScript to fetch stats and latest video -->
     <script>
+        // Adjust screen zoom to 90% on load
+        window.onload = function() {
+            document.body.style.zoom = "0.9";
+        };
+
         // Fetch YouTube stats from the Netlify function
         fetch('https://thetsc.netlify.app/.netlify/functions/fetch-stats')
             .then(response => response.json())
@@ -307,11 +319,6 @@
                 console.error('Error fetching the latest video:', error);
                 document.getElementById('latest-video').innerHTML = '<p>Failed to load the latest video.</p>';
             });
-    </script>
-
-    <!-- JavaScript to set initial zoom level -->
-    <script>
-        document.body.style.zoom = '0.9';  // This sets the initial zoom level to 90%
     </script>
 
 </body>
