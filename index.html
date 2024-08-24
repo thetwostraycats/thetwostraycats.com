@@ -14,7 +14,7 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
             background: url('https://github.com/thetwostraycats/thetwostraycats.com/blob/main/tsc-wallpaper.png?raw=true') no-repeat center center fixed;
             background-size: cover;
@@ -23,7 +23,8 @@
 
         .container-wrapper {
             display: flex;
-            justify-content: space-around; /* Centers the panels with even spacing */
+            flex-wrap: wrap; /* Allows wrapping for smaller screens */
+            justify-content: center; /* Centers the panels horizontally */
             align-items: flex-start; /* Aligns panels at the top */
             width: 100%;
             max-width: 1200px;
@@ -33,10 +34,11 @@
         }
 
         .container, .stats-container, .empty-container {
-            width: 100%;
-            max-width: 350px; /* Reduced max width to scale down */
-            min-height: 450px; /* Reduced min height to scale down */
-            padding: 15px; /* Reduced padding */
+            flex: 1; /* Allows the panel to grow and shrink */
+            min-width: 300px; /* Minimum width to maintain content readability */
+            max-width: 400px;
+            min-height: 500px;
+            padding: 20px;
             text-align: center;
             background-color: rgba(255, 255, 255, 0.9);
             border-radius: 10px;
@@ -45,71 +47,64 @@
             flex-direction: column;
             align-items: center;
             box-sizing: border-box;
-            height: 70vh; /* Adjusted panel height */
         }
 
         .empty-container {
-            background-color: transparent; /* Empty panel */
-            box-shadow: none; /* No shadow for empty panel */
+            background-color: transparent;
+            box-shadow: none;
         }
 
         .logo {
-            width: 80px; /* Reduced logo size */
-            height: 80px; /* Reduced logo size */
-            margin-bottom: 10px; /* Reduced margin */
+            width: 80px; /* Reduced logo size for better scaling */
+            height: 80px;
+            margin-bottom: 15px;
         }
 
         .circular-logo {
-            border-radius: 50%; /* Apply circle style to the stats panel logo only */
+            border-radius: 50%;
             border: 2px solid #ddd;
         }
 
         h1 {
-            font-size: 1em; /* Reduced font size */
+            font-size: 1em; /* Reduced heading size for better scaling */
             font-weight: 600;
-            margin-bottom: 15px; /* Reduced margin */
+            margin-bottom: 15px;
             color: #333;
         }
 
-        .links h1 {
-            text-align: center; /* Center align for links panel title */
-        }
-
-        .stats-container h1 {
-            text-align: left; /* Left align for stats panel title */
-            cursor: pointer;
+        .links h1, .stats-container h1 {
+            text-align: center;
         }
 
         .links, .stats {
             display: flex;
             flex-direction: column;
-            gap: 8px; /* Reduced gap */
+            gap: 10px;
             width: 100%;
         }
 
         .links a, .stat-item {
             display: flex;
             align-items: center;
-            justify-content: center; /* Center text within the links */
+            justify-content: center;
             text-decoration: none;
-            padding: 10px; /* Reduced padding */
-            border-radius: 25px;
+            padding: 10px;
+            border-radius: 20px;
             background-color: #f0f4f8;
             color: #333;
-            font-size: 0.9em; /* Reduced font size */
+            font-size: 1em; /* Adjust font size for scaling */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease, transform 0.2s ease;
             position: relative;
-            text-align: center; /* Center text for links */
         }
 
         .stat-item span:first-child {
-            font-weight: bold; /* Bold for the first part */
-            text-align: left; /* Align text left for stats titles */
+            font-weight: bold;
+            text-align: left;
         }
 
         .stat-item span:last-child {
-            text-align: right; /* Align text right for stats values */
+            text-align: right;
         }
 
         .links a:hover, .stat-item:hover {
@@ -118,28 +113,28 @@
         }
 
         .links a img {
-            width: 20px; /* Reduced icon size */
-            height: 20px; /* Reduced icon size */
+            width: 20px;
+            height: 20px;
             position: absolute;
-            left: 10px; /* Adjusted icon position */
+            left: 10px;
         }
 
         .socials {
-            margin-top: 15px; /* Reduced margin */
+            margin-top: 15px;
             width: 100%;
         }
 
         .socials h2 {
-            margin-bottom: 8px; /* Reduced margin */
-            font-size: 1em; /* Reduced font size */
+            margin-bottom: 8px;
+            font-size: 1em;
             color: #555;
         }
 
         .credit {
             margin-top: auto;
-            font-size: 0.6em; /* Reduced font size */
+            font-size: 0.7em;
             color: #999;
-            padding-top: 15px; /* Reduced padding */
+            padding-top: 20px;
         }
 
         .credit a {
@@ -155,34 +150,29 @@
         @media screen and (max-width: 768px) {
             .container-wrapper {
                 flex-direction: column;
-                align-items: center; /* Center-align the columns */
-                padding: 0 15px; /* Add padding on the sides */
+                align-items: center;
+                padding: 0 20px;
             }
 
             .container, .stats-container, .empty-container {
-                width: 100%; /* Full width */
-                max-width: none; /* Remove the max-width constraint */
-                margin-bottom: 15px; /* Space between panels */
+                width: 100%;
+                max-width: none;
+                margin-bottom: 20px;
                 box-sizing: border-box;
-                height: auto; /* Auto height for better mobile fit */
-            }
-
-            .stats-container {
-                display: none; /* Hide stats container on mobile */
+                height: auto;
             }
 
             body {
-                height: auto; /* Allow height to adjust based on content */
-                padding: 15px; /* Add padding around the body */
-                overflow-y: auto; /* Allows scrolling on mobile */
+                height: auto;
+                padding: 20px;
+                overflow-y: auto;
             }
 
             .links a, .stat-item {
-                justify-content: center; /* Center text on mobile */
-                text-align: center; /* Center align text for mobile */
+                justify-content: center;
+                text-align: center;
             }
         }
-
     </style>
 </head>
 
@@ -237,9 +227,8 @@
         <div class="empty-container"></div>
     </div>
 
-    <!-- Add the script here -->
+    <!-- JavaScript to fetch stats -->
     <script>
-        // Fetch YouTube stats from the Netlify function
         fetch('https://thetsc.netlify.app/.netlify/functions/fetch-stats')
             .then(response => response.json())
             .then(data => {
@@ -259,7 +248,6 @@
                 document.getElementById('youtube-stats').innerHTML = '<p>Failed to load stats.</p>';
             });
     </script>
-
 </body>
 
 </html>
