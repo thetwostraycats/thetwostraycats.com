@@ -24,7 +24,7 @@
 
         .container-wrapper {
             display: flex;
-            justify-content: space-between; /* Space out the panels */
+            justify-content: space-around; /* Centers the panels with even spacing */
             align-items: flex-start; /* Aligns panels at the top */
             width: 100%;
             max-width: 1200px;
@@ -90,7 +90,7 @@
         .links a, .stat-item {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center; /* Center text within the links */
             text-decoration: none;
             padding: 12px;
             border-radius: 25px;
@@ -100,11 +100,16 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease, transform 0.2s ease;
             position: relative;
-            text-align: left; /* Aligns text to the left */
+            text-align: center; /* Center text for links */
         }
 
         .stat-item span:first-child {
             font-weight: bold; /* Bold for the first part */
+            text-align: left; /* Align text left for stats titles */
+        }
+
+        .stat-item span:last-child {
+            text-align: right; /* Align text right for stats values */
         }
 
         .links a:hover, .stat-item:hover {
@@ -165,6 +170,11 @@
                 height: auto; /* Allow height to adjust based on content */
                 padding: 20px; /* Add padding around the body */
                 overflow-y: auto; /* Allows scrolling on mobile */
+            }
+
+            .links a, .stat-item {
+                justify-content: center; /* Center text on mobile */
+                text-align: center; /* Center align text for mobile */
             }
         }
 
