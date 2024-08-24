@@ -27,10 +27,13 @@
             justify-content: center;
             align-items: flex-start;
             width: 100%;
-            max-width: 1400px;
-            gap: 80px;
+            max-width: 1400px; /* Increased max-width for wider panels */
+            gap: 80px; /* Increased gap between panels */
             padding: 20px;
             box-sizing: border-box;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
         .container,
@@ -38,7 +41,7 @@
         .video-container {
             flex: 1;
             min-width: 320px;
-            max-width: 380px;
+            max-width: 380px; /* Increased max-width for wider panels */
             min-height: 500px;
             padding: 20px;
             text-align: center;
@@ -127,7 +130,7 @@
         .stat-item {
             display: flex;
             align-items: center;
-            justify-content: space-between; /* Ensures text stays aligned properly */
+            justify-content: space-between;
             text-decoration: none;
             padding: 10px;
             border-radius: 20px;
@@ -207,8 +210,8 @@
 
             .links a,
             .stat-item {
-                justify-content: space-between; /* Ensures proper alignment in mobile view */
-                text-align: left; /* Keeps text alignment as desired */
+                justify-content: center;
+                text-align: center;
             }
         }
     </style>
@@ -281,11 +284,6 @@
 
     <!-- JavaScript to fetch stats and latest video -->
     <script>
-        // Adjust screen zoom to 90% on load
-        window.onload = function() {
-            document.body.style.zoom = "0.9";
-        };
-
         // Fetch YouTube stats from the Netlify function
         fetch('https://thetsc.netlify.app/.netlify/functions/fetch-stats')
             .then(response => response.json())
