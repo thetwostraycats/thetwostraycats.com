@@ -64,15 +64,15 @@
             border: 2px solid #ddd;
         }
 
-        h1, h2 {
+        h1 {
             font-size: 1.2em;
             font-weight: 600;
             margin-bottom: 20px;
             color: #333;
         }
 
-        .links h1, .stats-container h2 {
-            text-align: center; /* Center align for panel titles */
+        .links h1 {
+            text-align: center; /* Center align for links panel title */
         }
 
         .stats-container h1 {
@@ -90,7 +90,7 @@
         .links a, .stat-item {
             display: flex;
             align-items: center;
-            justify-content: space-between; /* Align text within the links */
+            justify-content: center; /* Center text within the links */
             text-decoration: none;
             padding: 12px;
             border-radius: 25px;
@@ -100,18 +100,16 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease, transform 0.2s ease;
             position: relative;
-            text-align: left; /* Align text for links */
+            text-align: center; /* Center text for links */
         }
 
         .stat-item span:first-child {
             font-weight: bold; /* Bold for the first part */
             text-align: left; /* Align text left for stats titles */
-            flex-grow: 1; /* Make titles grow to fill space */
         }
 
         .stat-item span:last-child {
             text-align: right; /* Align text right for stats values */
-            flex-grow: 1; /* Make stats values grow to fill space */
         }
 
         .links a:hover, .stat-item:hover {
@@ -179,14 +177,6 @@
                 justify-content: center; /* Center text on mobile */
                 text-align: center; /* Center align text for mobile */
             }
-
-            .container-wrapper {
-                order: 2; /* Make the links panel appear second */
-            }
-
-            .stats-container {
-                order: 1; /* Make the stats panel appear first */
-            }
         }
 
         iframe {
@@ -201,6 +191,22 @@
 
 <body>
     <div class="container-wrapper">
+        <!-- Stats Container -->
+        <div class="stats-container">
+            <a href="https://youtube.com/@twostraycats" target="_blank">
+                <img src="https://yt3.ggpht.com/QfRoegBDiIT6F_Un_qo-zvB8pXRhlhrmCRvDkf3jreN0Tl_gIih26XkGt9puYGPMPaPTbpXPCQo=s600-c-k-c0x00ffffff-no-rj-rp-mo" alt="@twostraycats Logo" class="logo circular-logo">
+            </a>
+            <h1>@twostraycats</h1>
+            <h2>YouTube Stats</h2>
+            <div class="stats" id="youtube-stats">
+                <!-- Stats will be injected here by JavaScript -->
+            </div>
+            <h2>Latest upload:</h2>
+            <div id="latest-video">
+                <!-- Latest video iframe will be inserted here -->
+            </div>
+        </div>
+
         <!-- Links Container -->
         <div class="container">
             <a href="https://thetwostraycats.com/">
@@ -234,22 +240,6 @@
             </div>
         </div>
 
-        <!-- Stats Container -->
-        <div class="stats-container">
-            <a href="https://youtube.com/@twostraycats" target="_blank">
-                <img src="https://yt3.ggpht.com/QfRoegBDiIT6F_Un_qo-zvB8pXRhlhrmCRvDkf3jreN0Tl_gIih26XkGt9puYGPMPaPTbpXPCQo=s600-c-k-c0x00ffffff-no-rj-rp-mo" alt="@twostraycats Logo" class="logo circular-logo">
-            </a>
-            <h1>@twostraycats</h1>
-            <h2>YouTube Stats</h2>
-            <div class="stats" id="youtube-stats">
-                <!-- Stats will be injected here by JavaScript -->
-            </div>
-            <h2>Latest upload:</h2>
-            <div id="latest-video">
-                <!-- Latest video iframe will be inserted here -->
-            </div>
-        </div>
-
         <!-- Empty Container for Future Panel -->
         <div class="empty-container"></div>
     </div>
@@ -272,7 +262,7 @@
                 `;
                 
                 // Fetch and display the latest video
-                const latestVideoId = data.items[0].snippet.resourceId.videoId; // Replace with actual path to latest video ID
+                const latestVideoId = data.items[0].id; // Ensure this correctly fetches the video ID
                 document.getElementById('latest-video').innerHTML = `
                     <iframe width="100%" height="200" src="https://www.youtube.com/embed/${latestVideoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 `;
