@@ -9,14 +9,16 @@ exports.handler = async function (event, context) {
         const response = await fetch(url);
 
         if (!response.ok) {
-            throw new Error(`YouTube API response not OK: ${response.status} ${response.statusText}`);
+            // Log detailed error response from YouTube API
+            const errorText = await response.text();
+            throw new Error(`YouTube API response not OK: ${response.status} ${response.statusText}. Details: ${errorText}`);
         }
 
         const data = await response.json();
 
         // Check if the API returned the expected data
         if (!data || !data.items || !data.items[0]) {
-            throw new Error('Invalid response from YouTube API');
+            throw new Error('Invalid response from YouTube API: ' + JSON.stringify(data));
         }
 
         // Return the result with CORS headers
