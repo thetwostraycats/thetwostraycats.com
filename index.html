@@ -23,8 +23,8 @@
 
         .container-wrapper {
             display: flex;
-            justify-content: center;
-            align-items: flex-start;
+            justify-content: space-around; /* Centers the panels with even spacing */
+            align-items: flex-start; /* Aligns panels at the top */
             width: 100%;
             max-width: 1200px;
             gap: 20px;
@@ -32,7 +32,7 @@
             box-sizing: border-box;
         }
 
-        .container, .stats-container {
+        .container, .stats-container, .empty-container {
             width: 100%;
             max-width: 400px;
             min-height: 500px;
@@ -45,14 +45,12 @@
             flex-direction: column;
             align-items: center;
             box-sizing: border-box;
+            height: 80vh; /* Fixed panel height */
         }
 
-        .container {
-            height: auto;
-        }
-
-        .stats-container {
-            height: 80vh; /* Fixed panel height for consistent size */
+        .empty-container {
+            background-color: transparent; /* Empty panel */
+            box-shadow: none; /* No shadow for empty panel */
         }
 
         .logo {
@@ -62,15 +60,24 @@
         }
 
         .circular-logo {
-            border-radius: 50%;
+            border-radius: 50%; /* Apply circle style to the stats panel logo only */
             border: 2px solid #ddd;
         }
 
-        h1, h2 {
+        h1 {
             font-size: 1.2em;
             font-weight: 600;
             margin-bottom: 20px;
             color: #333;
+        }
+
+        .links h1 {
+            text-align: center; /* Center align for links panel title */
+        }
+
+        .stats-container h1 {
+            text-align: left; /* Left align for stats panel title */
+            cursor: pointer;
         }
 
         .links, .stats {
@@ -83,16 +90,26 @@
         .links a, .stat-item {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center; /* Center text within the links */
             text-decoration: none;
-            padding: 10px;
+            padding: 12px;
             border-radius: 25px;
             background-color: #f0f4f8;
             color: #333;
-            font-size: 1em;
+            font-size: 1.1em;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease, transform 0.2s ease;
             position: relative;
+            text-align: center; /* Center text for links */
+        }
+
+        .stat-item span:first-child {
+            font-weight: bold; /* Bold for the first part */
+            text-align: left; /* Align text left for stats titles */
+        }
+
+        .stat-item span:last-child {
+            text-align: right; /* Align text right for stats values */
         }
 
         .links a:hover, .stat-item:hover {
@@ -103,16 +120,8 @@
         .links a img {
             width: 24px;
             height: 24px;
-            margin-right: 10px;
-        }
-
-        .stat-item span:first-child {
-            font-weight: bold;
-            text-align: left;
-        }
-
-        .stat-item span:last-child {
-            text-align: right;
+            position: absolute;
+            left: 15px;
         }
 
         .socials {
@@ -130,7 +139,7 @@
             margin-top: auto;
             font-size: 0.7em;
             color: #999;
-            padding-top: 20px;
+            padding-top: 20px; /* Added padding above the credit section */
         }
 
         .credit a {
@@ -146,31 +155,27 @@
         @media screen and (max-width: 768px) {
             .container-wrapper {
                 flex-direction: column;
-                align-items: center;
-                padding: 0 20px;
+                align-items: center; /* Center-align the columns */
+                padding: 0 20px; /* Add padding on the sides */
             }
 
-            .stats-container {
-                display: none; /* Hide stats container on mobile */
-            }
-
-            .container {
-                width: 100%;
-                max-width: none;
-                margin-bottom: 20px;
-                height: auto;
+            .container, .stats-container, .empty-container {
+                width: 100%; /* Full width */
+                max-width: none; /* Remove the max-width constraint */
+                margin-bottom: 20px; /* Space between panels */
                 box-sizing: border-box;
+                height: auto; /* Auto height for better mobile fit */
             }
 
             body {
-                height: auto;
-                padding: 20px;
-                overflow-y: auto;
+                height: auto; /* Allow height to adjust based on content */
+                padding: 20px; /* Add padding around the body */
+                overflow-y: auto; /* Allows scrolling on mobile */
             }
 
             .links a, .stat-item {
-                justify-content: center;
-                text-align: center;
+                justify-content: center; /* Center text on mobile */
+                text-align: center; /* Center align text for mobile */
             }
         }
 
@@ -186,7 +191,7 @@
 
 <body>
     <div class="container-wrapper">
-        <!-- Stats Container (Visible only on desktop) -->
+        <!-- Stats Container -->
         <div class="stats-container">
             <a href="https://youtube.com/@twostraycats" target="_blank">
                 <img src="https://yt3.ggpht.com/QfRoegBDiIT6F_Un_qo-zvB8pXRhlhrmCRvDkf3jreN0Tl_gIih26XkGt9puYGPMPaPTbpXPCQo=s600-c-k-c0x00ffffff-no-rj-rp-mo" alt="@twostraycats Logo" class="logo circular-logo">
@@ -234,6 +239,9 @@
                 Site by <a href="https://instagram.com/sate.adam" target="_blank">@Adam</a>
             </div>
         </div>
+
+        <!-- Empty Container for Future Panel -->
+        <div class="empty-container"></div>
     </div>
 
     <!-- Add the script here -->
@@ -248,13 +256,13 @@
                     views: data.items[0].statistics.viewCount,
                 };
                 document.getElementById('youtube-stats').innerHTML = `
-                    <div class="stat-item"><span>Subscribers</span><span>${stats.subscribers}</span></div>
-                    <div class="stat-item"><span>Total Videos</span><span>${stats.videos}</span></div>
-                    <div class="stat-item"><span>Total Views</span><span>${stats.views}</span></div>
+                    <a class="stat-item" href="https://youtube.com/@twostraycats" target="_blank"><span>Subscribers</span><span>${stats.subscribers}</span></a>
+                    <a class="stat-item" href="https://www.youtube.com/@twostraycats/videos" target="_blank"><span>Total Videos</span><span>${stats.videos}</span></a>
+                    <a class="stat-item" href="https://youtube.com/@twostraycats" target="_blank"><span>Total Views</span><span>${stats.views}</span></a>
                 `;
                 
                 // Fetch and display the latest video
-                const latestVideoId = data.items[0].snippet.resourceId.videoId; // Update to correct video ID path
+                const latestVideoId = data.items[0].id; // Ensure this correctly fetches the video ID
                 document.getElementById('latest-video').innerHTML = `
                     <iframe width="100%" height="200" src="https://www.youtube.com/embed/${latestVideoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 `;
