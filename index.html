@@ -24,6 +24,7 @@
         .container-wrapper {
             display: flex;
             justify-content: center;
+            align-items: flex-start; /* Aligns panels at the top */
             width: 100%;
             max-width: 1200px;
             gap: 20px;
@@ -33,7 +34,7 @@
         .container, .stats-container {
             width: 100%;
             max-width: 400px;
-            min-height: 500px; /* Ensuring equal height for both containers */
+            min-height: 500px;
             padding: 20px;
             text-align: center;
             background-color: rgba(255, 255, 255, 0.9);
@@ -48,9 +49,6 @@
             width: 100px;
             height: 100px;
             margin-bottom: 15px;
-        }
-
-        .circular-logo {
             border-radius: 50%;
             border: 2px solid #ddd;
         }
@@ -60,16 +58,17 @@
             font-weight: 600;
             margin-bottom: 20px;
             color: #333;
+            cursor: pointer;
         }
 
-        .links {
+        .links, .stats {
             display: flex;
             flex-direction: column;
             gap: 10px;
             width: 100%;
         }
 
-        .links a {
+        .links a, .stat-item {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -111,6 +110,7 @@
             margin-top: auto;
             font-size: 0.7em;
             color: #999;
+            padding-top: 20px; /* Added padding above the credit section */
         }
 
         .credit a {
@@ -122,31 +122,21 @@
             text-decoration: underline;
         }
 
-        .stats {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            width: 100%;
-        }
-
-        .stat-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px;
-            border-radius: 8px;
-            background-color: #f0f4f8;
-            font-size: 1.1em;
-            color: #333;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            width: 100%;
-            text-decoration: none;
-        }
-
-        /* Media query to keep links centered and stats on the left on larger screens */
-        @media screen and (min-width: 768px) {
+        /* Media query for mobile view */
+        @media screen and (max-width: 768px) {
             .container-wrapper {
-                flex-direction: row;
+                flex-direction: column;
+                align-items: center; /* Center-align the columns */
+            }
+
+            .container, .stats-container {
+                width: calc(100% - 40px); /* Add some padding on the sides */
+                max-width: none; /* Remove the max-width constraint */
+                margin-bottom: 20px; /* Space between panels */
+            }
+
+            body {
+                height: auto; /* Allow height to adjust based on content */
             }
         }
     </style>
@@ -156,17 +146,25 @@
     <div class="container-wrapper">
         <!-- Stats Container -->
         <div class="stats-container">
-            <img src="https://yt3.ggpht.com/QfRoegBDiIT6F_Un_qo-zvB8pXRhlhrmCRvDkf3jreN0Tl_gIih26XkGt9puYGPMPaPTbpXPCQo=s600-c-k-c0x00ffffff-no-rj-rp-mo" alt="@twostraycats Logo" class="logo circular-logo">
-            <h1>@twostraycats</h1>
+            <a href="https://youtube.com/@twostraycats" target="_blank">
+                <img src="https://yt3.ggpht.com/QfRoegBDiIT6F_Un_qo-zvB8pXRhlhrmCRvDkf3jreN0Tl_gIih26XkGt9puYGPMPaPTbpXPCQo=s600-c-k-c0x00ffffff-no-rj-rp-mo" alt="@twostraycats Logo" class="logo">
+                <h1>@twostraycats</h1>
+            </a>
             <h2>YouTube Stats</h2>
             <div class="stats" id="youtube-stats">
                 <!-- Stats will be injected here by JavaScript -->
+            </div>
+            <h2>Latest upload:</h2>
+            <div id="latest-video">
+                <!-- Latest video iframe will be inserted here -->
             </div>
         </div>
 
         <!-- Links Container -->
         <div class="container">
-            <img src="https://raw.githubusercontent.com/thetwostraycats/thetwostraycats.com/main/tsc-logo.png" alt="Two Stray Cats Logo" class="logo">
+            <a href="https://thetwostraycats.com/">
+                <img src="https://raw.githubusercontent.com/thetwostraycats/thetwostraycats.com/main/tsc-logo.png" alt="Two Stray Cats Logo" class="logo">
+            </a>
             <h1>Two Stray Cats</h1>
             <div class="links">
                 <a href="https://www.youtube.com/@twostraycats" target="_blank">
@@ -208,10 +206,16 @@
                     hours: (parseInt(data.items[0].statistics.viewCount) / 60).toFixed(2) // Example calculation for hours
                 };
                 document.getElementById('youtube-stats').innerHTML = `
-                <a class="stat-item" href="https://youtube.com/@twostraycats" target="_blank"><span>Subscribers</span><span>${stats.subscribers}</span></a>
-                <a class="stat-item" href="https://www.youtube.com/@twostraycats/videos" target="_blank"><span>Videos</span><span>${stats.videos}</span></a>
-                <a class="stat-item" href="https://youtube.com/@twostraycats" target="_blank"><span>Hours Watched</span><span>${stats.hours}</span></a>
-            `;
+                    <a class="stat-item" href="https://youtube.com/@twostraycats" target="_blank"><span>Subscribers</span><span>${stats.subscribers}</span></a>
+                    <a class="stat-item" href="https://www.youtube.com/@twostraycats/videos" target="_blank"><span>Videos</span><span>${stats.videos}</span></a>
+                    <a class="stat-item" href="https://youtube.com/@twostraycats" target="_blank"><span>Hours Watched</span><span>${stats.hours}</span></a>
+                `;
+                
+                // Fetch and display the latest video
+                const latestVideoId = data.items[0].latestVideoId; // Replace with actual path to latest video ID
+                document.getElementById('latest-video').innerHTML = `
+                    <iframe width="100%" height="200" src="https://www.youtube.com/embed/${latestVideoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                `;
             })
             .catch(error => {
                 console.error('Error fetching YouTube stats:', error);
