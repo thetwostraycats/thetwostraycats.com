@@ -35,10 +35,10 @@
 
         .container, .stats-container, .empty-container {
             flex: 1;
-            min-width: 300px;
-            max-width: 400px;
-            min-height: 500px;
-            padding: 20px;
+            min-width: 280px;
+            max-width: 380px;
+            min-height: 460px;
+            padding: 15px;
             text-align: center;
             background-color: rgba(255, 255, 255, 0.9);
             border-radius: 10px;
@@ -76,7 +76,7 @@
             text-align: center;
         }
 
-        .links, .stats, .support {
+        .links, .stats {
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -117,7 +117,7 @@
         }
 
         /* Styling for Stats Tab */
-        .stat-item {
+        .stat-item, .support-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -140,38 +140,7 @@
             text-align: right; /* Align stat value to the right */
         }
 
-        .stat-item:hover {
-            background-color: #d0e4f7;
-            transform: scale(1.03);
-        }
-
-        .support a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            padding: 10px;
-            border-radius: 20px;
-            background-color: #f0f4f8;
-            color: #333;
-            font-size: 1em;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        .support a img {
-            width: 20px;
-            height: 20px;
-            position: absolute;
-            left: 10px;
-        }
-
-        .support a span {
-            flex: 1;
-            text-align: center;
-        }
-
-        .support a:hover {
+        .stat-item:hover, .support-item:hover {
             background-color: #d0e4f7;
             transform: scale(1.03);
         }
@@ -181,7 +150,7 @@
             width: 100%;
         }
 
-        .socials h2 {
+        .socials h2, .stats-container h2, .stats-container h3 {
             margin-bottom: 8px;
             font-size: 1em;
             color: #555;
@@ -225,7 +194,7 @@
                 overflow-y: auto;
             }
 
-            .links a, .stat-item, .support a {
+            .links a, .stat-item, .support-item {
                 justify-content: center;
                 text-align: center;
             }
@@ -245,10 +214,11 @@
             <div class="stats" id="youtube-stats">
                 <!-- Stats will be injected here by JavaScript -->
             </div>
+            <h3>Support us:</h3>
             <div class="support">
-                <h2>Support us:</h2>
-                <a href="https://buymeacoffee.com/twostraycats" target="_blank">
-                    <img src="https://img.icons8.com/ios-filled/50/000000/cafe.png" alt="Buy Us A Coffee Icon"><span>Coffee?</span>
+                <a href="https://buymeacoffee.com/twostraycats" target="_blank" class="support-item">
+                    <img src="https://img.icons8.com/ios-filled/50/000000/cafe.png" alt="Buy Us A Coffee Icon">
+                    <span>Coffee?</span>
                 </a>
             </div>
         </div>
