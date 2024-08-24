@@ -33,7 +33,7 @@
             box-sizing: border-box;
         }
 
-        .container, .stats-container, .empty-container {
+        .container, .stats-container, .video-container {
             flex: 1;
             min-width: 300px;
             max-width: 350px; /* Reduced max-width for more padding */
@@ -180,7 +180,7 @@
                 padding: 0 20px;
             }
 
-            .container, .stats-container, .empty-container {
+            .container, .stats-container, .video-container {
                 width: 100%;
                 max-width: none;
                 margin-bottom: 20px;
@@ -257,11 +257,16 @@
             </div>
         </div>
 
-        <!-- Empty Container for Future Panel -->
-        <div class="empty-container"></div>
+        <!-- Video Container (Hidden Right Panel) -->
+        <div class="video-container">
+            <h2>Latest Video</h2>
+            <div id="latest-video">
+                <!-- Latest video iframe will be inserted here by JavaScript -->
+            </div>
+        </div>
     </div>
 
-    <!-- JavaScript to fetch stats -->
+    <!-- JavaScript to fetch stats and latest video -->
     <script>
         // Fetch YouTube stats from the Netlify function
         fetch('https://thetsc.netlify.app/.netlify/functions/fetch-stats')
@@ -281,6 +286,20 @@
             .catch(error => {
                 console.error('Error fetching YouTube stats:', error);
                 document.getElementById('youtube-stats').innerHTML = '<p>Failed to load stats.</p>';
+            });
+
+        // Fetch the latest YouTube video from the Netlify function
+        fetch('https://thetsc.netlify.app/.netlify/functions/fetch-latest-video')
+            .then(response => response.json())
+            .then(data => {
+                const latestVideoId = data.items[0].snippet.resourceId.videoId;
+                document.getElementById('latest-video').innerHTML = `
+                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/${latestVideoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                `;
+            })
+            .catch(error => {
+                console.error('Error fetching the latest video:', error);
+                document.getElementById('latest-video').innerHTML = '<p>Failed to load the latest video.</p>';
             });
     </script>
 
