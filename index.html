@@ -34,9 +34,9 @@
 
         .container, .stats-container, .empty-container {
             width: 100%;
-            max-width: 400px;
-            min-height: 500px;
-            padding: 20px;
+            max-width: 350px; /* Reduced max width to scale down */
+            min-height: 450px; /* Reduced min height to scale down */
+            padding: 15px; /* Reduced padding */
             text-align: center;
             background-color: rgba(255, 255, 255, 0.9);
             border-radius: 10px;
@@ -45,7 +45,7 @@
             flex-direction: column;
             align-items: center;
             box-sizing: border-box;
-            height: 80vh; /* Fixed panel height */
+            height: 70vh; /* Adjusted panel height */
         }
 
         .empty-container {
@@ -54,9 +54,9 @@
         }
 
         .logo {
-            width: 100px;
-            height: 100px;
-            margin-bottom: 15px;
+            width: 80px; /* Reduced logo size */
+            height: 80px; /* Reduced logo size */
+            margin-bottom: 10px; /* Reduced margin */
         }
 
         .circular-logo {
@@ -65,9 +65,9 @@
         }
 
         h1 {
-            font-size: 1.2em;
+            font-size: 1em; /* Reduced font size */
             font-weight: 600;
-            margin-bottom: 20px;
+            margin-bottom: 15px; /* Reduced margin */
             color: #333;
         }
 
@@ -83,7 +83,7 @@
         .links, .stats {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px; /* Reduced gap */
             width: 100%;
         }
 
@@ -92,11 +92,11 @@
             align-items: center;
             justify-content: center; /* Center text within the links */
             text-decoration: none;
-            padding: 12px;
+            padding: 10px; /* Reduced padding */
             border-radius: 25px;
             background-color: #f0f4f8;
             color: #333;
-            font-size: 1.1em;
+            font-size: 0.9em; /* Reduced font size */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease, transform 0.2s ease;
             position: relative;
@@ -118,28 +118,28 @@
         }
 
         .links a img {
-            width: 24px;
-            height: 24px;
+            width: 20px; /* Reduced icon size */
+            height: 20px; /* Reduced icon size */
             position: absolute;
-            left: 15px;
+            left: 10px; /* Adjusted icon position */
         }
 
         .socials {
-            margin-top: 20px;
+            margin-top: 15px; /* Reduced margin */
             width: 100%;
         }
 
         .socials h2 {
-            margin-bottom: 10px;
-            font-size: 1.2em;
+            margin-bottom: 8px; /* Reduced margin */
+            font-size: 1em; /* Reduced font size */
             color: #555;
         }
 
         .credit {
             margin-top: auto;
-            font-size: 0.7em;
+            font-size: 0.6em; /* Reduced font size */
             color: #999;
-            padding-top: 20px; /* Added padding above the credit section */
+            padding-top: 15px; /* Reduced padding */
         }
 
         .credit a {
@@ -156,20 +156,24 @@
             .container-wrapper {
                 flex-direction: column;
                 align-items: center; /* Center-align the columns */
-                padding: 0 20px; /* Add padding on the sides */
+                padding: 0 15px; /* Add padding on the sides */
             }
 
             .container, .stats-container, .empty-container {
                 width: 100%; /* Full width */
                 max-width: none; /* Remove the max-width constraint */
-                margin-bottom: 20px; /* Space between panels */
+                margin-bottom: 15px; /* Space between panels */
                 box-sizing: border-box;
                 height: auto; /* Auto height for better mobile fit */
             }
 
+            .stats-container {
+                display: none; /* Hide stats container on mobile */
+            }
+
             body {
                 height: auto; /* Allow height to adjust based on content */
-                padding: 20px; /* Add padding around the body */
+                padding: 15px; /* Add padding around the body */
                 overflow-y: auto; /* Allows scrolling on mobile */
             }
 
@@ -179,13 +183,6 @@
             }
         }
 
-        iframe {
-            width: 100%;
-            max-width: 350px;
-            border: none;
-            border-radius: 10px;
-            margin-top: 10px;
-        }
     </style>
 </head>
 
@@ -200,10 +197,6 @@
             <h2>YouTube Stats</h2>
             <div class="stats" id="youtube-stats">
                 <!-- Stats will be injected here by JavaScript -->
-            </div>
-            <h2>Latest upload:</h2>
-            <div id="latest-video">
-                <!-- Latest video iframe will be inserted here -->
             </div>
         </div>
 
@@ -259,12 +252,6 @@
                     <a class="stat-item" href="https://youtube.com/@twostraycats" target="_blank"><span>Subscribers</span><span>${stats.subscribers}</span></a>
                     <a class="stat-item" href="https://www.youtube.com/@twostraycats/videos" target="_blank"><span>Total Videos</span><span>${stats.videos}</span></a>
                     <a class="stat-item" href="https://youtube.com/@twostraycats" target="_blank"><span>Total Views</span><span>${stats.views}</span></a>
-                `;
-                
-                // Fetch and display the latest video
-                const latestVideoId = data.items[0].id; // Ensure this correctly fetches the video ID
-                document.getElementById('latest-video').innerHTML = `
-                    <iframe width="100%" height="200" src="https://www.youtube.com/embed/${latestVideoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 `;
             })
             .catch(error => {
