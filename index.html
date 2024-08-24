@@ -72,8 +72,11 @@
             color: #333;
         }
 
-        .links h1, .stats-container h1 {
+        .links h1, .stats-container h1, .stats-container h2, .socials h2 {
             text-align: center;
+            font-size: 1em; /* Ensure all headings are the same size */
+            margin-bottom: 8px; /* Consistent spacing for all headings */
+            color: #555; /* Consistent color for all headings */
         }
 
         .links, .stats {
@@ -145,15 +148,9 @@
             transform: scale(1.03);
         }
 
-        .socials {
+        .socials, .support-us {
             margin-top: 15px;
             width: 100%;
-        }
-
-        .socials h2 {
-            margin-bottom: 8px;
-            font-size: 1em;
-            color: #555;
         }
 
         .credit {
@@ -214,6 +211,14 @@
             <div class="stats" id="youtube-stats">
                 <!-- Stats will be injected here by JavaScript -->
             </div>
+
+            <!-- Support us Section -->
+            <div class="support-us">
+                <h2>Support us:</h2>
+                <a href="https://buymeacoffee.com/twostraycats" target="_blank">
+                    <img src="https://img.icons8.com/ios-filled/50/000000/cafe.png" alt="Buy Us A Coffee Icon"><span>Coffee?</span>
+                </a>
+            </div>
         </div>
 
         <!-- Links Container -->
@@ -225,9 +230,6 @@
             <div class="links">
                 <a href="https://www.youtube.com/@twostraycats" target="_blank">
                     <img src="https://img.icons8.com/ios-filled/50/000000/youtube-play.png" alt="YouTube Icon"><span>YouTube</span>
-                </a>
-                <a href="https://buymeacoffee.com/twostraycats" target="_blank">
-                    <img src="https://img.icons8.com/ios-filled/50/000000/cafe.png" alt="Buy Us A Coffee Icon"><span>Coffee?</span>
                 </a>
             </div>
             <div class="socials">
