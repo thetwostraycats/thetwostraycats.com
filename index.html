@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,31 +11,47 @@
         body {
             font-family: 'Courier Prime', monospace;
             display: flex;
-            justify-content: space-between; /* Space between the containers */
+            justify-content: center;
             align-items: center;
-            flex-direction: row; /* Arrange containers in a row */
+            flex-direction: column;
             height: 100vh;
             margin: 0;
-            background: url('https://github.com/thetwostraycats/thetwostraycats.com/blob/main/tsc-wallpaper.png?raw=true') no-repeat center center fixed; 
+            background: url('https://github.com/thetwostraycats/thetwostraycats.com/blob/main/tsc-wallpaper.png?raw=true') no-repeat center center fixed;
             background-size: cover;
             color: #333;
         }
 
+        .container-wrapper {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            max-width: 1200px;
+            gap: 20px;
+            padding: 20px;
+        }
+
         .container, .stats-container {
-            width: 30%; /* Make both containers the same width */
+            width: 100%;
+            max-width: 400px;
+            min-height: 500px; /* Ensuring equal height for both containers */
             padding: 20px;
             text-align: center;
             background-color: rgba(255, 255, 255, 0.9);
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin: 0 10px; /* Add margin to create gaps */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .logo {
             width: 100px;
             height: 100px;
-            border-radius: 50%;
             margin-bottom: 15px;
+        }
+
+        .circular-logo {
+            border-radius: 50%;
             border: 2px solid #ddd;
         }
 
@@ -49,6 +66,7 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
+            width: 100%;
         }
 
         .links a {
@@ -66,7 +84,7 @@
             position: relative;
         }
 
-        .links a:hover {
+        .links a:hover, .stat-item:hover {
             background-color: #d0e4f7;
             transform: scale(1.03);
         }
@@ -80,6 +98,7 @@
 
         .socials {
             margin-top: 20px;
+            width: 100%;
         }
 
         .socials h2 {
@@ -89,7 +108,7 @@
         }
 
         .credit {
-            margin-top: 25px;
+            margin-top: auto;
             font-size: 0.7em;
             color: #999;
         }
@@ -103,11 +122,11 @@
             text-decoration: underline;
         }
 
-        /* Styles for the stats panel */
         .stats {
             display: flex;
             flex-direction: column;
             gap: 10px;
+            width: 100%;
         }
 
         .stat-item {
@@ -120,92 +139,79 @@
             color: #333;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        .stat-item:hover {
-            background-color: #d0e4f7;
-            transform: scale(1.03);
-        }
-
-        .stat-item a {
-            text-decoration: none;
-            color: #333;
             width: 100%;
-            display: flex;
-            justify-content: space-between;
+            text-decoration: none;
         }
 
-        /* Media query for mobile view */
-        @media screen and (max-width: 768px) {
-            body {
-                flex-direction: column; /* Stack containers on top of each other */
-                justify-content: center;
-            }
-            .container, .stats-container {
-                width: 80%; /* Full width for smaller screens */
-                margin-bottom: 20px; /* Add spacing between containers */
+        /* Media query to keep links centered and stats on the left on larger screens */
+        @media screen and (min-width: 768px) {
+            .container-wrapper {
+                flex-direction: row;
             }
         }
     </style>
 </head>
-<body>
-    <!-- Stats Container -->
-    <div class="stats-container">
-        <img src="https://yt3.ggpht.com/QfRoegBDiIT6F_Un_qo-zvB8pXRhlhrmCRvDkf3jreN0Tl_gIih26XkGt9puYGPMPaPTbpXPCQo=s600-c-k-c0x00ffffff-no-rj-rp-mo" alt="@twostraycats Logo" class="logo">
-        <h1>@twostraycats</h1>
-        <h2>YouTube Stats</h2>
-        <div class="stats" id="youtube-stats">
-            <!-- Stats will be injected here by JavaScript -->
-        </div>
-    </div>
 
-    <!-- Links Container -->
-    <div class="container">
-        <img src="https://github.com/thetwostraycats/thetwostraycats.com/blob/main/tsc-logo.png?raw=true" alt="Two Stray Cats Logo" class="logo">
-        <h1>Two Stray Cats</h1>
-        <div class="links">
-            <a href="https://www.youtube.com/@twostraycats" target="_blank">
-                <img src="https://img.icons8.com/ios-filled/50/000000/youtube-play.png" alt="YouTube Icon">YouTube
-            </a>
-            <a href="https://buymeacoffee.com/twostraycats" target="_blank">
-                <img src="https://img.icons8.com/ios-filled/50/000000/cafe.png" alt="Buy Us A Coffee Icon">Coffee?
-            </a>
-        </div>
-        <div class="socials">
-            <h2>Socials:</h2>
-            <div class="links">
-                <a href="https://www.instagram.com/thetwostraycats" target="_blank">
-                    <img src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png" alt="Instagram Icon">Instagram
-                </a>
-                <a href="https://www.facebook.com/thetwostraycats" target="_blank">
-                    <img src="https://img.icons8.com/ios-filled/50/000000/facebook-new.png" alt="Facebook Icon">Facebook
-                </a>
-                <a href="https://www.reddit.com/r/twostraycats/" target="_blank">
-                    <img src="https://img.icons8.com/ios-filled/50/000000/reddit.png" alt="Reddit Icon">Reddit
-                </a>
+<body>
+    <div class="container-wrapper">
+        <!-- Stats Container -->
+        <div class="stats-container">
+            <img src="https://yt3.ggpht.com/QfRoegBDiIT6F_Un_qo-zvB8pXRhlhrmCRvDkf3jreN0Tl_gIih26XkGt9puYGPMPaPTbpXPCQo=s600-c-k-c0x00ffffff-no-rj-rp-mo" alt="@twostraycats Logo" class="logo circular-logo">
+            <h1>@twostraycats</h1>
+            <h2>YouTube Stats</h2>
+            <div class="stats" id="youtube-stats">
+                <!-- Stats will be injected here by JavaScript -->
             </div>
         </div>
-        <div class="credit">
-            Site by <a href="https://instagram.com/sate.adam" target="_blank">@Adam</a>
+
+        <!-- Links Container -->
+        <div class="container">
+            <img src="https://raw.githubusercontent.com/thetwostraycats/thetwostraycats.com/main/tsc-logo.png" alt="Two Stray Cats Logo" class="logo">
+            <h1>Two Stray Cats</h1>
+            <div class="links">
+                <a href="https://www.youtube.com/@twostraycats" target="_blank">
+                    <img src="https://img.icons8.com/ios-filled/50/000000/youtube-play.png" alt="YouTube Icon">YouTube
+                </a>
+                <a href="https://buymeacoffee.com/twostraycats" target="_blank">
+                    <img src="https://img.icons8.com/ios-filled/50/000000/cafe.png" alt="Buy Us A Coffee Icon">Coffee?
+                </a>
+            </div>
+            <div class="socials">
+                <h2>Socials:</h2>
+                <div class="links">
+                    <a href="https://www.instagram.com/thetwostraycats" target="_blank">
+                        <img src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png" alt="Instagram Icon">Instagram
+                    </a>
+                    <a href="https://www.facebook.com/thetwostraycats" target="_blank">
+                        <img src="https://img.icons8.com/ios-filled/50/000000/facebook-new.png" alt="Facebook Icon">Facebook
+                    </a>
+                    <a href="https://www.reddit.com/r/twostraycats/" target="_blank">
+                        <img src="https://img.icons8.com/ios-filled/50/000000/reddit.png" alt="Reddit Icon">Reddit
+                    </a>
+                </div>
+            </div>
+            <div class="credit">
+                Site by <a href="https://instagram.com/sate.adam" target="_blank">@Adam</a>
+            </div>
         </div>
     </div>
 
     <!-- Add the script here -->
     <script>
         // Fetch YouTube stats from the Netlify function
-        fetch('https://thetsc.netlify.app/.netlify/functions/fetch-stats') // Updated to correct Netlify URL
+        fetch('https://thetsc.netlify.app/.netlify/functions/fetch-stats')
             .then(response => response.json())
             .then(data => {
                 const stats = {
                     subscribers: data.items[0].statistics.subscriberCount,
                     videos: data.items[0].statistics.videoCount,
-                    hours: (parseInt(data.items[0].statistics.viewCount) / 60).toFixed(2)  // Example calculation for hours
+                    hours: (parseInt(data.items[0].statistics.viewCount) / 60).toFixed(2) // Example calculation for hours
                 };
                 document.getElementById('youtube-stats').innerHTML = `
-                    <div class="stat-item"><a href="https://youtube.com/@twostraycats" target="_blank"><span>Subscribers</span><span>${stats.subscribers}</span></a></div>
-                    <div class="stat-item"><a href="https://www.youtube.com/@twostraycats/videos" target="_blank"><span>Videos</span><span>${stats.videos}</span></a></div>
-                    <div class="stat-item"><a href="https://youtube.com/@twostraycats" target="_blank"><span>Hours Watched</span><span>${stats.hours}</span></a></div>
-                `;
+                <a class="stat-item" href="https://youtube.com/@twostraycats" target="_blank"><span>Subscribers</span><span>${stats.subscribers}</span></a>
+                <a class="stat-item" href="https://www.youtube.com/@twostraycats/videos" target="_blank"><span>Videos</span><span>${stats.videos}</span></a>
+                <a class="stat-item" href="https://youtube.com/@twostraycats" target="_blank"><span>Hours Watched</span><span>${stats.hours}</span></a>
+            `;
             })
             .catch(error => {
                 console.error('Error fetching YouTube stats:', error);
@@ -214,4 +220,5 @@
     </script>
 
 </body>
+
 </html>
