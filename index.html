@@ -72,14 +72,11 @@
             color: #333;
         }
 
-        .links h1, .stats-container h1, .stats-container h2, .socials h2 {
+        .links h1, .stats-container h1 {
             text-align: center;
-            font-size: 1em; /* Ensure all headings are the same size */
-            margin-bottom: 8px; /* Consistent spacing for all headings */
-            color: #555; /* Consistent color for all headings */
         }
 
-        .links, .stats {
+        .links, .stats, .support {
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -148,9 +145,46 @@
             transform: scale(1.03);
         }
 
-        .socials, .support-us {
+        .support a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 20px;
+            background-color: #f0f4f8;
+            color: #333;
+            font-size: 1em;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .support a img {
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            left: 10px;
+        }
+
+        .support a span {
+            flex: 1;
+            text-align: center;
+        }
+
+        .support a:hover {
+            background-color: #d0e4f7;
+            transform: scale(1.03);
+        }
+
+        .socials {
             margin-top: 15px;
             width: 100%;
+        }
+
+        .socials h2 {
+            margin-bottom: 8px;
+            font-size: 1em;
+            color: #555;
         }
 
         .credit {
@@ -191,7 +225,7 @@
                 overflow-y: auto;
             }
 
-            .links a, .stat-item {
+            .links a, .stat-item, .support a {
                 justify-content: center;
                 text-align: center;
             }
@@ -211,9 +245,7 @@
             <div class="stats" id="youtube-stats">
                 <!-- Stats will be injected here by JavaScript -->
             </div>
-
-            <!-- Support us Section -->
-            <div class="support-us">
+            <div class="support">
                 <h2>Support us:</h2>
                 <a href="https://buymeacoffee.com/twostraycats" target="_blank">
                     <img src="https://img.icons8.com/ios-filled/50/000000/cafe.png" alt="Buy Us A Coffee Icon"><span>Coffee?</span>
