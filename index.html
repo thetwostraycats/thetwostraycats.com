@@ -27,8 +27,8 @@
             justify-content: center;
             align-items: flex-start;
             width: 100%;
-            max-width: 1100px; /* Reduced max-width for more padding */
-            gap: 30px; /* Increased gap to match panel margin */
+            max-width: 1100px;
+            gap: 30px;
             padding: 20px;
             box-sizing: border-box;
         }
@@ -36,7 +36,7 @@
         .container, .stats-container, .video-container {
             flex: 1;
             min-width: 300px;
-            max-width: 350px; /* Reduced max-width for more padding */
+            max-width: 350px;
             min-height: 500px;
             padding: 20px;
             text-align: center;
@@ -47,11 +47,6 @@
             flex-direction: column;
             align-items: center;
             box-sizing: border-box;
-        }
-
-        .empty-container {
-            background-color: transparent;
-            box-shadow: none;
         }
 
         .logo {
@@ -65,16 +60,21 @@
             border: 2px solid #ddd;
         }
 
+        /* Main Headings */
         h1 {
-            font-size: 1.5em; /* Heading size for main titles */
+            font-size: 1.2em; /* Larger size for main headings */
             font-weight: 600;
             margin-bottom: 15px;
             color: #333;
         }
 
-        .links h1, .stats-container h1, .video-container h1 {
+        /* Secondary Headings */
+        h2 {
+            font-size: 1em; /* Uniform size for all secondary headings */
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #555;
             text-align: center;
-            font-size: 1em; /* Unified secondary heading size */
         }
 
         .links, .stats, .support {
@@ -84,7 +84,6 @@
             width: 100%;
         }
 
-        /* Styling for Links Tab */
         .links a, .support-item {
             display: flex;
             align-items: center;
@@ -104,12 +103,12 @@
             width: 20px;
             height: 20px;
             position: absolute;
-            left: 10px; /* Align icon to the left */
+            left: 10px;
         }
 
         .links a span, .support-item span {
             flex: 1;
-            text-align: center; /* Center text for links */
+            text-align: center;
         }
 
         .links a:hover, .support-item:hover {
@@ -117,7 +116,6 @@
             transform: scale(1.03);
         }
 
-        /* Styling for Stats Tab */
         .stat-item {
             display: flex;
             align-items: center;
@@ -134,11 +132,11 @@
 
         .stat-item span:first-child {
             font-weight: bold;
-            text-align: left; /* Align stat title to the left */
+            text-align: left;
         }
 
         .stat-item span:last-child {
-            text-align: right; /* Align stat value to the right */
+            text-align: right;
         }
 
         .stat-item:hover {
@@ -149,21 +147,6 @@
         .socials {
             margin-top: 15px;
             width: 100%;
-        }
-
-        .socials h2, .support h2 {
-            margin-bottom: 8px;
-            font-size: 1em; /* Unified secondary heading size */
-            color: #555;
-        }
-
-        .video-container iframe {
-            width: 100%;
-            height: auto;
-            aspect-ratio: 16/9; /* Maintain the 16:9 aspect ratio */
-            border: 0;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .credit {
@@ -267,12 +250,10 @@
             </div>
         </div>
 
-        <!-- Video Container -->
+        <!-- Latest Video Container -->
         <div class="video-container">
             <h2>Latest Video</h2>
-            <div id="latest-video">
-                <!-- YouTube video iframe will be injected here -->
-            </div>
+            <div id="latest-video"></div>
         </div>
     </div>
 
@@ -298,19 +279,21 @@
                 document.getElementById('youtube-stats').innerHTML = '<p>Failed to load stats.</p>';
             });
 
-        // Fetch the latest YouTube video from the Netlify function
+        // Fetch the latest video from the Netlify function
         fetch('https://thetsc.netlify.app/.netlify/functions/fetch-latest-video')
             .then(response => response.json())
             .then(data => {
                 const latestVideoId = data.items[0].snippet.resourceId.videoId;
-                const iframe = `<iframe width="100%" height="auto" src="https://www.youtube.com/embed/${latestVideoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-                document.getElementById('latest-video').innerHTML = iframe;
+                document.getElementById('latest-video').innerHTML = `
+                    <iframe width="100%" height="auto" src="https://www.youtube.com/embed/${latestVideoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                `;
             })
             .catch(error => {
                 console.error('Error fetching the latest video:', error);
                 document.getElementById('latest-video').innerHTML = '<p>Failed to load the latest video.</p>';
             });
     </script>
+
 </body>
 
 </html>
