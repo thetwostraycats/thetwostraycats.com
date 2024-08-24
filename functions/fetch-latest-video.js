@@ -14,13 +14,25 @@ exports.handler = async function (event, context) {
     const videosResponse = await fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsPlaylistId}&maxResults=1&key=${API_KEY}`);
     const videosData = await videosResponse.json();
 
+    // Add CORS headers
     return {
       statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*', // Allow all origins
+        'Access-Control-Allow-Methods': 'GET', // Allow only GET requests
+        'Access-Control-Allow-Headers': 'Content-Type', // Allow specific headers
+      },
       body: JSON.stringify(videosData)
     };
   } catch (error) {
+    // Add CORS headers for error response
     return {
       statusCode: 500,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET',
+        'Access-Control-Allow-Headers': 'Content-Type',
+      },
       body: JSON.stringify({ error: 'Failed to fetch latest video' })
     };
   }
