@@ -20,14 +20,26 @@
             color: #333;
         }
 
-        .container {
+        .main-container {
+            display: flex;
+            flex-direction: row;
             width: 90%;
-            max-width: 400px;
+            max-width: 800px;
+            justify-content: center;
+        }
+
+        .container, .stats-container {
+            flex: 1;
             padding: 20px;
             text-align: center;
             background-color: rgba(255, 255, 255, 0.9);
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+        }
+
+        .container {
+            max-width: 400px;
         }
 
         .logo {
@@ -103,9 +115,9 @@
             text-decoration: underline;
         }
 
-        /* New styles for the stats panel */
         .stats-container {
-            margin-top: 20px;
+            max-width: 300px;
+            text-align: left;
         }
 
         .stats {
@@ -125,74 +137,40 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        /* Media query to show the stats panel only on non-mobile devices */
-        @media screen and (min-width: 768px) {
+        /* Media query to stack containers for mobile view */
+        @media screen and (max-width: 767px) {
+            .main-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .container, .stats-container {
+                max-width: 100%;
+            }
+
             .stats-container {
-                display: block;
+                margin-top: 20px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <img src="https://yt3.ggpht.com/QfRoegBDiIT6F_Un_qo-zvB8pXRhlhrmCRvDkf3jreN0Tl_gIih26XkGt9puYGPMPaPTbpXPCQo=s600-c-k-c0x00ffffff-no-rj-rp-mo" alt="@twostraycats Logo" class="logo">
-        <h1>@twostraycats</h1>
-        <div class="links">
-            <a href="https://www.youtube.com/@twostraycats" target="_blank">
-                <img src="https://img.icons8.com/ios-filled/50/000000/youtube-play.png" alt="YouTube Icon">YouTube
-            </a>
-            <a href="https://buymeacoffee.com/twostraycats" target="_blank">
-                <img src="https://img.icons8.com/ios-filled/50/000000/cafe.png" alt="Buy Us A Coffee Icon">Coffee?
-            </a>
-        </div>
-        <div class="socials">
-            <h2>Socials:</h2>
+    <div class="main-container">
+        <div class="container">
+            <img src="https://yt3.ggpht.com/QfRoegBDiIT6F_Un_qo-zvB8pXRhlhrmCRvDkf3jreN0Tl_gIih26XkGt9puYGPMPaPTbpXPCQo=s600-c-k-c0x00ffffff-no-rj-rp-mo" alt="@twostraycats Logo" class="logo">
+            <h1>@twostraycats</h1>
             <div class="links">
-                <a href="https://www.instagram.com/thetwostraycats" target="_blank">
-                    <img src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png" alt="Instagram Icon">Instagram
+                <a href="https://www.youtube.com/@twostraycats" target="_blank">
+                    <img src="https://img.icons8.com/ios-filled/50/000000/youtube-play.png" alt="YouTube Icon">YouTube
                 </a>
-                <a href="https://www.facebook.com/thetwostraycats" target="_blank">
-                    <img src="https://img.icons8.com/ios-filled/50/000000/facebook-new.png" alt="Facebook Icon">Facebook
-                </a>
-                <a href="https://www.reddit.com/r/twostraycats/" target="_blank">
-                    <img src="https://img.icons8.com/ios-filled/50/000000/reddit.png" alt="Reddit Icon">Reddit
+                <a href="https://buymeacoffee.com/twostraycats" target="_blank">
+                    <img src="https://img.icons8.com/ios-filled/50/000000/cafe.png" alt="Buy Us A Coffee Icon">Coffee?
                 </a>
             </div>
-        </div>
-        <!-- New stats panel -->
-        <div class="stats-container">
-            <h2>YouTube Stats</h2>
-            <div class="stats" id="youtube-stats">
-                <!-- Stats will be injected here by JavaScript -->
-            </div>
-        </div>
-        <div class="credit">
-            Site by <a href="https://instagram.com/sate.adam" target="_blank">@Adam</a>
-        </div>
-    </div>
-
-    <!-- Add the script here -->
-   <script>
-    // Fetch YouTube stats from the Netlify function
-    fetch('https://thetsc.netlify.app/.netlify/functions/fetch-stats') // Updated to correct Netlify URL
-        .then(response => response.json())
-        .then(data => {
-            const stats = {
-                subscribers: data.items[0].statistics.subscriberCount,
-                videos: data.items[0].statistics.videoCount,
-                hours: (parseInt(data.items[0].statistics.viewCount) / 60).toFixed(2)  // Example calculation for hours
-            };
-            document.getElementById('youtube-stats').innerHTML = `
-                <div class="stat-item"><span>Subscribers</span><span>${stats.subscribers}</span></div>
-                <div class="stat-item"><span>Videos</span><span>${stats.videos}</span></div>
-                <div class="stat-item"><span>Hours Watched</span><span>${stats.hours}</span></div>
-            `;
-        })
-        .catch(error => {
-            console.error('Error fetching YouTube stats:', error);
-            document.getElementById('youtube-stats').innerHTML = '<p>Failed to load stats.</p>';
-        });
-</script>
-
-</body>
-</html>
+            <div class="socials">
+                <h2>Socials:</h2>
+                <div class="links">
+                    <a href="https://www.instagram.com/thetwostraycats" target="_blank">
+                        <img src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png" alt="Instagram Icon">Instagram
+                    </a>
+                    <a href="htt
