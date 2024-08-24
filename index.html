@@ -66,14 +66,15 @@
         }
 
         h1 {
-            font-size: 1em;
+            font-size: 1.5em; /* Heading size for main titles */
             font-weight: 600;
             margin-bottom: 15px;
             color: #333;
         }
 
-        .links h1, .stats-container h1 {
+        .links h1, .stats-container h1, .video-container h1 {
             text-align: center;
+            font-size: 1em; /* Unified secondary heading size */
         }
 
         .links, .stats, .support {
@@ -152,8 +153,17 @@
 
         .socials h2, .support h2 {
             margin-bottom: 8px;
-            font-size: 1em;
+            font-size: 1em; /* Unified secondary heading size */
             color: #555;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16/9; /* Maintain the 16:9 aspect ratio */
+            border: 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .credit {
@@ -257,11 +267,11 @@
             </div>
         </div>
 
-        <!-- Video Container (Hidden Right Panel) -->
+        <!-- Video Container -->
         <div class="video-container">
             <h2>Latest Video</h2>
             <div id="latest-video">
-                <!-- Latest video iframe will be inserted here by JavaScript -->
+                <!-- YouTube video iframe will be injected here -->
             </div>
         </div>
     </div>
@@ -293,16 +303,14 @@
             .then(response => response.json())
             .then(data => {
                 const latestVideoId = data.items[0].snippet.resourceId.videoId;
-                document.getElementById('latest-video').innerHTML = `
-                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/${latestVideoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                `;
+                const iframe = `<iframe width="100%" height="auto" src="https://www.youtube.com/embed/${latestVideoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                document.getElementById('latest-video').innerHTML = iframe;
             })
             .catch(error => {
                 console.error('Error fetching the latest video:', error);
                 document.getElementById('latest-video').innerHTML = '<p>Failed to load the latest video.</p>';
             });
     </script>
-
 </body>
 
 </html>
