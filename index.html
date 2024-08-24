@@ -23,20 +23,20 @@
 
         .container-wrapper {
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
             align-items: flex-start;
             width: 100%;
-            max-width: 1100px; /* Reduced max-width for more padding */
-            gap: 30px; /* Increased gap to match panel margin */
+            max-width: 1200px;
+            gap: 20px;
             padding: 20px;
             box-sizing: border-box;
+            position: relative;
         }
 
         .container, .stats-container, .empty-container {
             flex: 1;
             min-width: 300px;
-            max-width: 350px; /* Reduced max-width for more padding */
+            max-width: 400px;
             min-height: 500px;
             padding: 20px;
             text-align: center;
@@ -76,7 +76,7 @@
             text-align: center;
         }
 
-        .links, .stats, .support {
+        .links, .stats {
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -84,7 +84,7 @@
         }
 
         /* Styling for Links Tab */
-        .links a, .support-item {
+        .links a {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -99,19 +99,19 @@
             position: relative;
         }
 
-        .links a img, .support-item img {
+        .links a img {
             width: 20px;
             height: 20px;
             position: absolute;
             left: 10px; /* Align icon to the left */
         }
 
-        .links a span, .support-item span {
+        .links a span {
             flex: 1;
             text-align: center; /* Center text for links */
         }
 
-        .links a:hover, .support-item:hover {
+        .links a:hover {
             background-color: #d0e4f7;
             transform: scale(1.03);
         }
@@ -150,7 +150,7 @@
             width: 100%;
         }
 
-        .socials h2, .support h2 {
+        .socials h2 {
             margin-bottom: 8px;
             font-size: 1em;
             color: #555;
@@ -199,6 +199,22 @@
                 text-align: center;
             }
         }
+
+        .stats-container {
+            position: absolute;
+            left: 10%; /* Position stats panel relative to the screen width */
+            transform: translateX(-50%); /* Center it between the left edge and the middle */
+        }
+
+        .container {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%); /* Always center the links panel */
+        }
+
+        .support-section {
+            margin-top: 30px; /* Increased padding above the "Support us" heading */
+        }
     </style>
 </head>
 
@@ -214,12 +230,13 @@
             <div class="stats" id="youtube-stats">
                 <!-- Stats will be injected here by JavaScript -->
             </div>
-            <!-- Support Section -->
-            <div class="support">
+            <div class="support-section">
                 <h2>Support us:</h2>
-                <a class="support-item" href="https://buymeacoffee.com/twostraycats" target="_blank">
-                    <img src="https://img.icons8.com/ios-filled/50/000000/cafe.png" alt="Buy Us A Coffee Icon"><span>Coffee?</span>
-                </a>
+                <div class="links">
+                    <a href="https://buymeacoffee.com/twostraycats" target="_blank">
+                        <img src="https://img.icons8.com/ios-filled/50/000000/cafe.png" alt="Buy Us A Coffee Icon"><span>Coffee?</span>
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -279,7 +296,6 @@
                 document.getElementById('youtube-stats').innerHTML = '<p>Failed to load stats.</p>';
             });
     </script>
-
 </body>
 
 </html>
