@@ -185,6 +185,14 @@
 
 /* Media query for mobile view */
 @media screen and (max-width: 768px) {
+    body {
+        height: 100vh; /* Set body height to 100% of the viewport */
+        padding: 0; /* Remove padding to fit content without scroll */
+        overflow-y: hidden; /* Disable vertical scrolling */
+        background: url('https://github.com/thetwostraycats/thetwostraycats.com/blob/main/images/tsc-wallpaper.png') no-repeat center center fixed;
+        background-size: cover; /* Ensure the image covers the entire background */
+    }
+    
     .container-wrapper {
         flex-direction: column;
         align-items: center;
