@@ -193,26 +193,26 @@
     .container,
     .stats-container,
     .video-container {
+        display: none; /* Hide all containers by default */
+    }
+
+    /* Only display the links container on mobile */
+    .container {
+        display: flex; /* Make the links container visible */
         width: 100%;
         max-width: none;
-        margin-bottom: 20px;
+        margin-bottom: 0; /* Remove margin to fit without scroll */
         box-sizing: border-box;
-        height: auto;
-        margin-top: 0; /* Remove the top margin on mobile */
+        height: 100vh; /* Fill the entire viewport height */
     }
 
     body {
-        height: auto;
-        padding: 20px;
-        overflow-y: auto;
-    }
-
-    .links a,
-    .stat-item {
-        justify-content: space-between; /* Ensures proper alignment in mobile view */
-        text-align: left; /* Keeps text alignment as desired */
+        height: 100vh; /* Set body height to 100% of the viewport */
+        padding: 0; /* Remove padding to fit content without scroll */
+        overflow-y: hidden; /* Disable vertical scrolling */
     }
 }
+
 
     </style>
 </head>
