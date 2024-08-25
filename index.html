@@ -187,8 +187,7 @@
         @media screen and (max-width: 768px) {
             body {
                 min-height: 100vh; /* Set body min-height to 100% of the viewport */
-                padding: 0; /* Remove padding to fit content without scroll */
-                margin: 0; /* Remove default margin to prevent overflow */
+                padding: 0; /* Remove padding to fit content without unnecessary scroll */
                 background: url('https://github.com/thetwostraycats/thetwostraycats.com/blob/main/images/tsc-wallpaper.png?raw=true') no-repeat center center fixed;
                 background-size: cover; /* Ensure the image covers the entire background */
                 overflow-y: auto; /* Allow vertical scrolling for pull-to-refresh */
@@ -212,13 +211,12 @@
             .container {
                 display: flex; /* Make the links container visible */
                 flex-direction: column;
-                justify-content: space-between; /* Space out the contents */
+                justify-content: flex-start; /* Align items to the start */
                 align-items: center;
                 width: 100%;
                 max-width: none;
                 margin: 0; /* Remove all margin */
                 box-sizing: border-box;
-                min-height: 100vh; /* Ensure it fills the viewport height */
                 padding: 40px 20px; /* Adjust padding for more space around the content */
             }
         
@@ -227,17 +225,15 @@
                 margin-top: 30px; /* Add space above the logo */
             }
         
+            .links a {
+                margin-bottom: 15px; /* Increase spacing between each link */
+            }
+        
             .credit {
-                margin-top: auto; /* Push the credit to the bottom */
-                padding-top: 30px;
+                margin-top: 20px; /* Add some space above the credit */
                 padding-bottom: 30px; /* Add space below the credit */
             }
         }
-
-
-
-
-
 
     </style>
 </head>
