@@ -194,42 +194,40 @@
     .container,
     .stats-container,
     .video-container {
-        width: 100%;
-        max-width: none;
-        margin-bottom: 20px;
-        box-sizing: border-box;
-        height: auto;
-        margin-top: 0; /* Remove the top margin on mobile */
+        display: none; /* Hide all containers by default */
     }
 
-    /* Additional styles for the links container on mobile */
+    /* Only display the links container on mobile */
     .container {
-        padding: 40px 20px; /* Increase padding to add space inside the container */
-        margin-bottom: 30px; /* Increase bottom margin for extra spacing below the container */
+        display: flex; /* Make the links container visible */
+        flex-direction: column;
+        justify-content: space-between; /* Space out the contents */
+        align-items: center;
+        width: 100%;
+        max-width: none;
+        margin-bottom: 0; /* Remove margin to fit without scroll */
+        box-sizing: border-box;
+        height: 100vh; /* Fill the entire viewport height */
+        padding: 40px 20px; /* Adjust padding for more space around the content */
     }
 
     .logo {
-        margin-bottom: 25px; /* Increase space below the logo */
-        margin-top: 25px; /* Add space above the logo */
+        margin-bottom: 30px; /* Increase space below the logo */
+        margin-top: 30px; /* Add space above the logo */
     }
 
-    .links,
-    .support {
-        gap: 15px; /* Increase gap between links and support items for better spacing */
+    .credit {
+        margin-top: auto; /* Push the credit to the bottom */
+        padding-bottom: 30px; /* Add space below the credit */
     }
 
     body {
-        height: auto;
-        padding: 20px;
-        overflow-y: auto;
-    }
-
-    .links a,
-    .stat-item {
-        justify-content: space-between; /* Ensures proper alignment in mobile view */
-        text-align: left; /* Keeps text alignment as desired */
+        height: 100vh; /* Set body height to 100% of the viewport */
+        padding: 0; /* Remove padding to fit content without scroll */
+        overflow-y: hidden; /* Disable vertical scrolling */
     }
 }
+
 
 
 
