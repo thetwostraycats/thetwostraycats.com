@@ -182,38 +182,38 @@
             max-width: 100%;
         }
 
-        /* Media query for mobile view */
-        @media screen and (max-width: 768px) {
-            .container-wrapper {
-                flex-direction: column;
-                align-items: center;
-                padding: 0 20px;
-            }
+       /* Media query for mobile view */
+@media screen and (max-width: 768px) {
+    .container-wrapper {
+        flex-direction: column;
+        align-items: center;
+        padding: 0 20px;
+    }
 
-            .container,
-            .stats-container,
-            .video-container {
-                width: 100%;
-                max-width: none;
-                margin-bottom: 20px;
-                box-sizing: border-box;
-                height: auto;
-                @media screen and (max-width: 768px) 
-                margin-top: 0; /* Remove the top margin on mobile */
-            }
+    .container,
+    .stats-container,
+    .video-container {
+        width: 100%;
+        max-width: none;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+        height: auto;
+        margin-top: 0; /* Remove the top margin on mobile */
+    }
 
-            body {
-                height: auto;
-                padding: 20px;
-                overflow-y: auto;
-            }
+    body {
+        height: auto;
+        padding: 20px;
+        overflow-y: auto;
+    }
 
-            .links a,
-            .stat-item {
-                justify-content: space-between; /* Ensures proper alignment in mobile view */
-                text-align: left; /* Keeps text alignment as desired */
-            }
-        }
+    .links a,
+    .stat-item {
+        justify-content: space-between; /* Ensures proper alignment in mobile view */
+        text-align: left; /* Keeps text alignment as desired */
+    }
+}
+
     </style>
 </head>
 
