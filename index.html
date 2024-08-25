@@ -183,52 +183,57 @@
             max-width: 100%;
         }
 
-/* Media query for mobile view */
-@media screen and (max-width: 768px) {
-    body {
-        height: 100vh; /* Set body height to 100% of the viewport */
-        padding: 0; /* Remove padding to fit content without scroll */
-        background: url('https://github.com/thetwostraycats/thetwostraycats.com/blob/main/images/tsc-wallpaper.png') no-repeat center center fixed;
-        background-size: cover; /* Ensure the image covers the entire background */
-    }
-    
-    .container-wrapper {
-        flex-direction: column;
-        align-items: center;
-        padding: 0 20px;
-    }
+        /* Media query for mobile view */
+        @media screen and (max-width: 768px) {
+            body {
+                height: 100vh; /* Set body height to 100% of the viewport */
+                padding: 0; /* Remove padding to fit content without scroll */
+                margin: 0; /* Remove default margin to prevent overflow */
+                overflow: hidden; /* Prevent overflow to stop scrolling */
+                background: url('https://github.com/thetwostraycats/thetwostraycats.com/blob/main/images/tsc-wallpaper.png?raw=true') no-repeat center center fixed; /* Correct URL with raw content */
+                background-size: cover; /* Ensure the image covers the entire background */
+            }
+        
+            .container-wrapper {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 0 20px;
+                margin: 0; /* Remove margin to prevent overflow */
+            }
+        
+            .container,
+            .stats-container,
+            .video-container {
+                display: none; /* Hide all containers by default */
+            }
+        
+            /* Only display the links container on mobile */
+            .container {
+                display: flex; /* Make the links container visible */
+                flex-direction: column;
+                justify-content: space-between; /* Space out the contents */
+                align-items: center;
+                width: 100%;
+                max-width: none;
+                margin: 0; /* Remove all margin */
+                box-sizing: border-box;
+                height: calc(100vh - 40px); /* Adjust height to prevent overflow, considering padding */
+                padding: 40px 20px; /* Adjust padding for more space around the content */
+            }
+        
+            .logo {
+                margin-bottom: 30px; /* Increase space below the logo */
+                margin-top: 30px; /* Add space above the logo */
+            }
+        
+            .credit {
+                margin-top: auto; /* Push the credit to the bottom */
+                padding-top: 30px;
+                padding-bottom: 30px; /* Add space below the credit */
+            }
+        }
 
-    .container,
-    .stats-container,
-    .video-container {
-        display: none; /* Hide all containers by default */
-    }
-
-    /* Only display the links container on mobile */
-    .container {
-        display: flex; /* Make the links container visible */
-        flex-direction: column;
-        justify-content: space-between; /* Space out the contents */
-        align-items: center;
-        width: 100%;
-        max-width: none;
-        margin-bottom: 0; /* Remove margin to fit without scroll */
-        box-sizing: border-box;
-        height: 100vh; /* Fill the entire viewport height */
-        padding: 40px 20px; /* Adjust padding for more space around the content */
-    }
-
-    .logo {
-        margin-bottom: 30px; /* Increase space below the logo */
-        margin-top: 30px; /* Add space above the logo */
-    }
-
-    .credit {
-        margin-top: auto; /* Push the credit to the bottom */
-        padding-top: 30px;
-        padding-bottom: 30px; /* Add space below the credit */
-    }
-}
 
 
 
