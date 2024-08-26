@@ -98,6 +98,7 @@
             vlore: { coordinates: [19.4887, 40.4667], name: "VLORE, ALBANIA", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuyUaE2ZfYwv7vxo5sEtXW1_&si=a4hZrdQ-aoS5h4Pq" },
         // Italy
             rome: { coordinates: [12.4964, 41.9028], name: "ROME, ITALY", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuzUhkH3xIb9KCzQxXDvu84z&si=PD_snF6g2-_hKRrd" },
+            vaticanCity: { coordinates: [12.4534, 41.9029], name: "VATICAN CITY", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwAD4AudQuG2d_DaZG8hS7i&si=4UhbpX1S9RkYWbxB" },
         // Portugal
             lisbon: { coordinates: [-9.1393, 38.7223], name: "LISBON, PORTUGAL", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuybUvJ6kPWKiOBRgwy-Q1Qi&si=IkIhSvkxBXrvxrxo" },
             faro: { coordinates: [-7.9366, 37.0179], name: "FARO, PORTUGAL", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuybUvJ6kPWKiOBRgwy-Q1Qi&si=IkIhSvkxBXrvxrxo" },
@@ -171,7 +172,7 @@
             hushyori: { coordinates: [68.7544, 39.1899], name: "HUSHYORI, TAJIKISTAN" },
             dashnobod: { coordinates: [67.6017, 37.6710], name: "DASHNOBOD, TAJIKISTAN" },
             termez: { coordinates: [67.2715, 37.2274], name: "TERMEZ, UZBEKISTAN" },
-            shoRob: { coordinates: [67.0548, 37.1225], name: "SHO'ROB, UZBEKISTAN" },
+            shoRab: { coordinates: [38.198626, 66.973331], name: "SHO'RAB, UZBEKISTAN" },
             akravat: { coordinates: [66.8833, 37.0250], name: "AKRAVAT, UZBEKISTAN" },
             guzar: { coordinates: [66.5053, 36.8800], name: "GUZAR, UZBEKISTAN" },
             kokdala: { coordinates: [66.4308, 36.7900], name: "KOKDALA, UZBEKISTAN" },
@@ -255,7 +256,6 @@
             lushnja: { coordinates: [19.7053, 40.9417], name: "LUSHNJA, ALBANIA" },
             fier: { coordinates: [19.5544, 40.7239], name: "FIER, ALBANIA" },
             vlore: { coordinates: [19.4887, 40.4667], name: "VLORE, ALBANIA" },
-            
             alcacendoSal: { coordinates: [-8.9717, 38.3736], name: "ALCACENDO SAL, PORTUGAL" },
             albufeira: { coordinates: [-8.2434, 37.0891], name: "ALBUFEIRA, PORTUGAL" },
             odemira: { coordinates: [-8.6424, 37.5985], name: "ODEMIRA, PORTUGAL" },
@@ -371,7 +371,7 @@ const connections = [
     // Tajikistan
     { from: 'panjakent', to: 'shing', transport: 'car' },
     { from: 'shing', to: 'dushanbe', transport: 'car', via: ['sujina', 'iskodar', 'kanapo', 'takfon', 'hushyori'] },
-    { from: 'dushanbe', to: 'samarkand', transport: 'train', via: ['dashnobod', 'termez', "sho'rob", 'akravat', 'guzar', 'kokdala'] },
+    { from: 'dushanbe', to: 'samarkand', transport: 'train', via: ['dashnobod', 'termez', "sho'rab", 'akravat', 'guzar', 'kokdala'] },
     
     // Uzbekistan to Azerbaijan
     { from: 'samarkand', to: 'bukhara', transport: 'train', via: ['ishtykhan', 'aktash', 'navoiy'] },
