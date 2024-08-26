@@ -40,8 +40,9 @@
 
         map.addControl(new mapboxgl.NavigationControl());
 
-        // Step 1: Define Cities
+        // Define Cities
         const cities = {
+            sydney: { coordinates: [151.2093, -33.8688], name: "SYDNEY, AUSTRALIA", link: "" },
             seoul: { coordinates: [126.9780, 37.5665], name: "SEOUL, SOUTH KOREA", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk&si=CxzH7jEE-2hz9azS" },
             incheon: { coordinates: [126.7061, 37.4602], name: "INCHEON, SOUTH KOREA", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuw-hM9UxF_nBv5pyXBN4Yzk&si=CxzH7jEE-2hz9azS" },
             tokyo: { coordinates: [139.6917, 35.6895], name: "TOKYO, JAPAN", link: "https://youtube.com/playlist?list=PLbZGBFUIvyuwbyjMZr7Jaw9Munt9oRqFT&si=4FCXgJ5tzXKvGzoO" },
@@ -84,38 +85,20 @@
             lisbon: { coordinates: [-9.1393, 38.7223], name: "LISBON, PORTUGAL", link: "" },
             faro: { coordinates: [-7.9366, 37.0179], name: "FARO, PORTUGAL", link: "" },
             olhao: { coordinates: [-7.8451, 37.0287], name: "OLHAO, PORTUGAL", link: "" },
-            albufeira: { coordinates: [-8.2434, 37.0891], name: "ALBUFEIRA, PORTUGAL", link: "" },
             lagos: { coordinates: [-8.6719, 37.1025], name: "LAGOS, PORTUGAL", link: "" },
             sagres: { coordinates: [-8.9406, 37.0155], name: "SAGRES, PORTUGAL", link: "" },
             sines: { coordinates: [-8.8700, 37.9562], name: "SINES, PORTUGAL", link: "" },
             entroncamento: { coordinates: [-8.4564, 39.4669], name: "ENTRONCAMENTO, PORTUGAL", link: "" },
-            pombal: { coordinates: [-8.6264, 39.9177], name: "POMBAL, PORTUGAL", link: "" },
-            coimbra: { coordinates: [-8.4196, 40.2056], name: "COIMBRA, PORTUGAL", link: "" },
-            viseu: { coordinates: [-7.9120, 40.6610], name: "VISEU, PORTUGAL", link: "" },
-            casteloDePaiva: { coordinates: [-8.2723, 41.0384], name: "CASTELO DE PAIVA, PORTUGAL", link: "" },
             porto: { coordinates: [-8.6110, 41.1496], name: "PORTO, PORTUGAL", link: "" },
             vianaDoCastelo: { coordinates: [-8.8329, 41.6918], name: "VIANA DO CASTELO, PORTUGAL", link: "" },
-            valenca: { coordinates: [-8.6460, 42.0267], name: "VALENCA, SPAIN", link: "" },
-            vigo: { coordinates: [-8.7251, 42.2406], name: "VIGO, SPAIN", link: "" },
             santiagoDeCompostela: { coordinates: [-8.5456, 42.8782], name: "SANTIAGO DE COMPOSTELA, SPAIN", link: "" },
             viveiro: { coordinates: [-7.5944, 43.6669], name: "VIVEIRO, SPAIN", link: "" },
-            foz: { coordinates: [-7.2577, 43.5664], name: "FOZ, SPAIN", link: "" },
-            tapiaDeCasariego: { coordinates: [-6.9376, 43.5687], name: "TAPIA DE CASARIEGO, SPAIN", link: "" },
-            losCampos: { coordinates: [-5.8498, 43.4715], name: "LOS CAMPOS, SPAIN", link: "" },
-            acebedo: { coordinates: [-5.1306, 43.0933], name: "ACEBEDO, SPAIN", link: "" },
-            santovenia: { coordinates: [-5.5711, 42.7567], name: "SANTOVENIA, SPAIN", link: "" },
-            zamora: { coordinates: [-5.7513, 41.5030], name: "ZAMORA, SPAIN", link: "" },
             venialbo: { coordinates: [-5.4408, 41.3583], name: "VENIALBO, SPAIN", link: "" },
             salamanca: { coordinates: [-5.6635, 40.9701], name: "SALAMANCA, SPAIN", link: "" },
-            bejar: { coordinates: [-5.7677, 40.3868], name: "BEJAR, SPAIN", link: "" },
-            plasencia: { coordinates: [-6.0878, 40.0312], name: "PLASENCIA, SPAIN", link: "" },
             serrejon: { coordinates: [-5.7751, 39.7367], name: "SERREJON, SPAIN", link: "" },
             guadalupe: { coordinates: [-5.3242, 39.4486], name: "GUADALUPE, SPAIN", link: "" },
-            castuera: { coordinates: [-5.5444, 38.7296], name: "CASTUERA, SPAIN", link: "" },
             berlanga: { coordinates: [-5.7184, 38.2551], name: "BERLANGA, SPAIN", link: "" },
-            penarroyaPueblonuevo: { coordinates: [-5.2689, 38.2993], name: "PENARROYA-PUEBLONUEVO, SPAIN", link: "" },
             cordoba: { coordinates: [-4.7794, 37.8882], name: "CORDOBA, SPAIN", link: "" },
-            laPueblaDeCazalla: { coordinates: [-5.2546, 37.2153], name: "LA PUEBLA DE CAZALLA, SPAIN", link: "" },
             seville: { coordinates: [-5.9845, 37.3891], name: "SEVILLE, SPAIN", link: "" },
             jerez: { coordinates: [-6.1370, 36.6850], name: "JEREZ, SPAIN", link: "" },
             marrakesh: { coordinates: [-8.0019, 31.6295], name: "MARRAKESH, MOROCCO", link: "" },
@@ -126,140 +109,146 @@
             chefchaouen: { coordinates: [-5.2684, 35.1710], name: "CHEFCHAOUEN, MOROCCO", link: "" },
             fez: { coordinates: [-4.9998, 34.0331], name: "FEZ, MOROCCO", link: "" },
             plateauDeLaZaouiatOuedIfrane: { coordinates: [-5.1148, 33.2886], name: "PLATEAU DE LA ZAOUIAT OUED IFRANE, MOROCCO", link: "" },
-            meknes: { coordinates: [-5.5473, 33.8942], name: "MEKNES, MOROCCO", link: "" }
+            meknes: { coordinates: [-5.5473, 33.8942], name: "MEKNES, MOROCCO", link: "" },
+            cairo: { coordinates: [31.2357, 30.0444], name: "CAIRO, EGYPT", link: "" },
+            giza: { coordinates: [31.1313, 29.9765], name: "GIZA, EGYPT", link: "" },
+            saqqara: { coordinates: [31.2164, 29.8712], name: "SAQQARA, EGYPT", link: "" },
+            luxor: { coordinates: [32.6396, 25.6872], name: "LUXOR, EGYPT", link: "" },
+            aswan: { coordinates: [32.9002, 24.0889], name: "ASWAN, EGYPT", link: "" },
+            hurghada: { coordinates: [33.8018, 27.2579], name: "HURGHADA, EGYPT", link: "" },
+            tunis: { coordinates: [10.1815, 36.8065], name: "TUNIS, TUNISIA", link: "" },
+            carthage: { coordinates: [10.3300, 36.8611], name: "CARTHAGE, TUNISIA", link: "" },
+            laMarsa: { coordinates: [10.3244, 36.8781], name: "LA MARSA, TUNISIA", link: "" },
+            bizerte: { coordinates: [9.8739, 37.2746], name: "BIZERTE, TUNISIA", link: "" },
+            capeAngela: { coordinates: [9.7388, 37.3444], name: "CAPE ANGELA, TUNISIA", link: "" }
         };
 
-        // Step 2: Define Path Styles
+        // Define Path Styles
         const pathStyles = {
             plane: { color: '#1E90FF', width: 3 },
             bus: { color: '#FF6347', width: 3 },
             train: { color: '#FFD700', width: 3 },
             car: { color: '#228B22', width: 3 },
             ferry: { color: '#8A2BE2', width: 3 },
-            camper: { color: '#FF8C00', width: 3 } // Added camper path style
+            camper: { color: '#FF8C00', width: 3 }
         };
 
-        // Step 3: Define Connections
+        // Define Connections
         const connections = [
-            // South Korea
-            { from: 'seoul', to: 'incheon', transport: 'train' },
+            { from: 'sydney', to: 'incheon', transport: 'plane' },
+            { from: 'incheon', to: 'seoul', transport: 'train', via: ['gimpo'] },
+            { from: 'seoul', to: 'incheon', transport: 'train', via: ['gimpo'] },
             { from: 'incheon', to: 'tokyo', transport: 'plane' },
-            // Japan
             { from: 'tokyo', to: 'osaka', transport: 'plane' },
             { from: 'osaka', to: 'kyoto', transport: 'bus' },
             { from: 'kyoto', to: 'osaka', transport: 'bus' },
             { from: 'osaka', to: 'tokyo', transport: 'plane' },
             { from: 'tokyo', to: 'incheon', transport: 'plane' },
-            // Kazakhstan
             { from: 'incheon', to: 'almaty', transport: 'plane' },
             { from: 'almaty', to: 'astana', transport: 'plane' },
             { from: 'astana', to: 'almaty', transport: 'plane' },
-            // Kyrgyzstan
-            { from: 'almaty', to: 'bishkek', transport: 'plane' },
-            { from: 'bishkek', to: 'cholponata', transport: 'bus' },
-            { from: 'cholponata', to: 'bishkek', transport: 'bus' },
+            { from: 'almaty', to: 'bishkek', transport: 'car', via: ['kenen'] },
+            { from: 'bishkek', to: 'cholponata', transport: 'bus', via: ['jol-bulak', 'balykchy'] },
+            { from: 'cholponata', to: 'bishkek', transport: 'bus', via: ['balykchy', 'jol-bulak'] },
             { from: 'bishkek', to: 'tashkent', transport: 'plane' },
-            // Uzbekistan
-            { from: 'tashkent', to: 'samarkand', transport: 'train' },
+            { from: 'tashkent', to: 'samarkand', transport: 'train', via: ['jizzakh'] },
             { from: 'samarkand', to: 'panjakent', transport: 'car' },
-            { from: 'panjakent', to: 'shing', transport: 'car' },
+            { from: 'panjakent', to: 'shing', transport: 'car', via: ['sujina', 'iskodar', 'kanapo', 'takfon', 'hushyori'] },
             { from: 'shing', to: 'dushanbe', transport: 'car' },
-            { from: 'dushanbe', to: 'samarkand', transport: 'train' },
-            { from: 'samarkand', to: 'bukhara', transport: 'train' },
-            { from: 'bukhara', to: 'samarkand', transport: 'train' },
-            { from: 'samarkand', to: 'tashkent', transport: 'train' },
+            { from: 'dushanbe', to: 'samarkand', transport: 'train', via: ['dashnobod', 'termez', 'sho\'rob', 'akravat', 'guzar', 'kokdala'] },
+            { from: 'samarkand', to: 'bukhara', transport: 'train', via: ['ishtykhan', 'aktash', 'navoiy'] },
+            { from: 'bukhara', to: 'samarkand', transport: 'train', via: ['navoiy', 'aktash', 'ishtykhan'] },
+            { from: 'samarkand', to: 'tashkent', transport: 'train', via: ['jizzakh'] },
             { from: 'tashkent', to: 'baku', transport: 'plane' },
-            // Azerbaijan & Georgia
-            { from: 'baku', to: 'ganja', transport: 'train' },
-            { from: 'ganja', to: 'rustavi', transport: 'car' },
+            { from: 'baku', to: 'ganja', transport: 'train', via: ['sangacnal', 'alat', 'hajibagul', 'kurdamir', 'yevlakh'] },
+            { from: 'ganja', to: 'rustavi', transport: 'car', via: ['shamkir', 'tovuz', 'aghstafa'] },
             { from: 'rustavi', to: 'tblisi', transport: 'bus' },
-            { from: 'tblisi', to: 'sighnaghi', transport: 'bus' },
-            { from: 'sighnaghi', to: 'tblisi', transport: 'bus' },
-            { from: 'tblisi', to: 'batumi', transport: 'train' },
+            { from: 'tblisi', to: 'sighnaghi', transport: 'bus', via: ['sagarejo'] },
+            { from: 'sighnaghi', to: 'tblisi', transport: 'bus', via: ['sagarejo'] },
+            { from: 'tblisi', to: 'batumi', transport: 'train', via: ['kaspi', 'gori', 'agara', 'surami', 'shorpani', 'bashi', 'lanchkhuti', 'ureki', 'kobuleti', 'chakvi'] },
             { from: 'batumi', to: 'sarpi', transport: 'car' },
-            // Turkey & Greece
             { from: 'sarpi', to: 'hopa', transport: 'car' },
-            { from: 'hopa', to: 'erzurum', transport: 'bus' },
-            { from: 'erzurum', to: 'ankara', transport: 'train' },
-            { from: 'ankara', to: 'konya', transport: 'train' },
-            { from: 'konya', to: 'antalya', transport: 'bus' },
-            { from: 'antalya', to: 'fethiye', transport: 'bus' },
+            { from: 'hopa', to: 'erzurum', transport: 'bus', via: ['borcka', 'artvin', 'kinaligam', 'uzundere', 'tortum'] },
+            { from: 'erzurum', to: 'ankara', transport: 'train', via: ['erzincan', 'refahiye', 'reshadiye', 'erbaa', 'amasya', 'osmancik', 'tosya', 'cankiri'] },
+            { from: 'ankara', to: 'konya', transport: 'train', via: ['kulu', 'cihanbeyli'] },
+            { from: 'konya', to: 'antalya', transport: 'bus', via: ['beysehir', 'derebucak', 'serik'] },
+            { from: 'antalya', to: 'fethiye', transport: 'bus', via: ['korkuteli', 'seydikemer'] },
             { from: 'fethiye', to: 'rhodes', transport: 'ferry' },
             { from: 'rhodes', to: 'kos', transport: 'ferry' },
             { from: 'kos', to: 'bodrum', transport: 'ferry' },
-            { from: 'bodrum', to: 'istanbul', transport: 'bus' },
-            // Bulgaria & North Macedonia
-            { from: 'istanbul', to: 'plovdiv', transport: 'train' },
-            { from: 'plovdiv', to: 'sofia', transport: 'train' },
-            { from: 'sofia', to: 'skopje', transport: 'bus' },
-            { from: 'skopje', to: 'ohrid', transport: 'bus' },
-            // Albania & Italy
-            { from: 'ohrid', to: 'tirana', transport: 'bus' },
-            { from: 'tirana', to: 'vlore', transport: 'bus' },
+            { from: 'bodrum', to: 'istanbul', transport: 'bus', via: ['torba', 'milas', 'danisment', 'akyenikoy', 'soke', 'kizilcapinar', 'belevi', 'bornova', 'manisa', 'akhisar', 'balikesir', 'karacabey', 'bursa', 'orhangazi', 'altinova', 'dilovasi', 'gebze', 'pendik'] },
+            { from: 'istanbul', to: 'plovdiv', transport: 'train', via: ['catalca', 'cerkezkoy', 'corlu', 'muratli', 'edirne', 'lyubimets', 'simeonovgrad', 'dimitrovgrad'] },
+            { from: 'plovdiv', to: 'sofia', transport: 'train', via: ['pazardzhik', 'kostenets'] },
+            { from: 'sofia', to: 'skopje', transport: 'bus', via: ['dupnista', 'kyusten', 'kumanovo'] },
+            { from: 'skopje', to: 'ohrid', transport: 'bus', via: ['tetova', 'struga', 'prrenjas', 'librazhs', 'elbasan'] },
+            { from: 'ohrid', to: 'tirana', transport: 'bus', via: ['durres', 'lushnja', 'fier'] },
+            { from: 'tirana', to: 'vlore', transport: 'bus', via: ['fier', 'lushnja', 'durres'] },
             { from: 'vlore', to: 'tirana', transport: 'bus' },
             { from: 'tirana', to: 'rome', transport: 'plane' },
-            // Portugal & Spain
             { from: 'rome', to: 'lisbon', transport: 'plane' },
-            { from: 'lisbon', to: 'faro', transport: 'bus' },
+            { from: 'lisbon', to: 'faro', transport: 'bus', via: ['alcacendo', 'sal', 'albufeira'] },
             { from: 'faro', to: 'olhao', transport: 'camper' },
-            { from: 'olhao', to: 'albufeira', transport: 'camper' },
-            { from: 'albufeira', to: 'lagos', transport: 'camper' },
-            { from: 'lagos', to: 'sagres', transport: 'camper' },
-            { from: 'sagres', to: 'sines', transport: 'camper' },
-            { from: 'sines', to: 'entroncamento', transport: 'camper' },
-            { from: 'entroncamento', to: 'pombal', transport: 'camper' },
-            { from: 'pombal', to: 'coimbra', transport: 'camper' },
-            { from: 'coimbra', to: 'viseu', transport: 'camper' },
-            { from: 'viseu', to: 'casteloDePaiva', transport: 'camper' },
-            { from: 'casteloDePaiva', to: 'porto', transport: 'camper' },
+            { from: 'olhao', to: 'lagos', transport: 'camper', via: ['albufeira'] },
+            { from: 'lagos', to: 'sagres', transport: 'camper', via: ['odemira'] },
+            { from: 'sagres', to: 'sines', transport: 'camper', via: ['grandola', 'benavente'] },
+            { from: 'sines', to: 'entroncamento', transport: 'camper', via: ['pombal', 'coimbra', 'viseu', 'castelo de paiva'] },
+            { from: 'entroncamento', to: 'porto', transport: 'camper' },
             { from: 'porto', to: 'vianaDoCastelo', transport: 'camper' },
-            { from: 'vianaDoCastelo', to: 'valenca', transport: 'camper' },
-            { from: 'valenca', to: 'vigo', transport: 'camper' },
-            { from: 'vigo', to: 'santiagoDeCompostela', transport: 'camper' },
-            { from: 'santiagoDeCompostela', to: 'viveiro', transport: 'camper' },
-            { from: 'viveiro', to: 'foz', transport: 'camper' },
-            { from: 'foz', to: 'tapiaDeCasariego', transport: 'camper' },
-            { from: 'tapiaDeCasariego', to: 'losCampos', transport: 'camper' },
-            { from: 'losCampos', to: 'acebedo', transport: 'camper' },
-            { from: 'acebedo', to: 'santovenia', transport: 'camper' },
-            { from: 'santovenia', to: 'zamora', transport: 'camper' },
-            { from: 'zamora', to: 'venialbo', transport: 'camper' },
-            { from: 'venialbo', to: 'salamanca', transport: 'camper' },
-            { from: 'salamanca', to: 'bejar', transport: 'camper' },
-            { from: 'bejar', to: 'plasencia', transport: 'camper' },
-            { from: 'plasencia', to: 'serrejon', transport: 'camper' },
-            { from: 'serrejon', to: 'guadalupe', transport: 'camper' },
-            { from: 'guadalupe', to: 'castuera', transport: 'camper' },
-            { from: 'castuera', to: 'berlanga', transport: 'camper' },
-            { from: 'berlanga', to: 'penarroyaPueblonuevo', transport: 'camper' },
-            { from: 'penarroyaPueblonuevo', to: 'cordoba', transport: 'camper' },
-            { from: 'cordoba', to: 'laPueblaDeCazalla', transport: 'camper' },
-            { from: 'laPueblaDeCazalla', to: 'seville', transport: 'camper' },
-            { from: 'seville', to: 'jerez', transport: 'camper' },
-            { from: 'jerez', to: 'faro', transport: 'camper' },
-            { from: 'faro', to: 'lisbon', transport: 'bus' },
+            { from: 'vianaDoCastelo', to: 'santiagoDeCompostela', transport: 'camper', via: ['caminha', 'tui', 'vigo'] },
+            { from: 'santiagoDeCompostela', to: 'viveiro', transport: 'camper', via: ['vilalba', 'foz', 'oviedo', 'cangas de onis', 'guardo'] },
+            { from: 'viveiro', to: 'venialbo', transport: 'camper', via: ['sahagun', 'mayorga', 'becila de valeraduey', 'villarrin de campos', 'zamora'] },
+            { from: 'venialbo', to: 'salamanca', transport: 'camper', via: ['la boveda de toro', 'fuentesauco', 'villares de la reina'] },
+            { from: 'salamanca', to: 'serrejon', transport: 'camper', via: ['guijuelo', 'bejar', 'plasencia'] },
+            { from: 'serrejon', to: 'guadalupe', transport: 'camper', via: ['mirabel', 'navalmoral de la mata'] },
+            { from: 'guadalupe', to: 'berlanga', transport: 'camper', via: ['navalvillar de pela', 'castuera', 'azuaga'] },
+            { from: 'berlanga', to: 'cordoba', transport: 'camper', via: ['azuaga', 'penarroya-pueblonuevo'] },
+            { from: 'cordoba', to: 'seville', transport: 'camper', via: ['ecija', 'la puebla de cazalla', 'moron de la fontera'] },
+            { from: 'seville', to: 'jerez', transport: 'camper', via: ['dos hermanas', 'el coronil'] },
+            { from: 'jerez', to: 'faro', transport: 'camper', via: ['el cuervo de sevilla', 'las cabezas de san juan', 'dos hermanas', 'seville', 'almonte', 'huelva', 'ayamonte'] },
+            { from: 'faro', to: 'lisbon', transport: 'bus', via: ['albufeira', 'alcacendo', 'sal'] },
             { from: 'lisbon', to: 'marrakesh', transport: 'plane' },
-            // Morocco
-            { from: 'marrakesh', to: 'casablanca', transport: 'bus' },
+            { from: 'marrakesh', to: 'casablanca', transport: 'bus', via: ['ben guerir', 'skhour rhamna', 'setta', 'berrechid'] },
             { from: 'casablanca', to: 'rabat', transport: 'bus' },
-            { from: 'rabat', to: 'tangier', transport: 'bus' },
+            { from: 'rabat', to: 'tangier', transport: 'bus', via: ['larache'] },
             { from: 'tangier', to: 'tetouan', transport: 'bus' },
-            { from: 'tetouan', to: 'chefchaouen', transport: 'bus' },
-            { from: 'chefchaouen', to: 'fez', transport: 'bus' },
-            { from: 'fez', to: 'plateauDeLaZaouiatOuedIfrane', transport: 'car' },
-            { from: 'plateauDeLaZaouiatOuedIfrane', to: 'fez', transport: 'car' },
-            { from: 'fez', to: 'meknes', transport: 'bus' },
-            { from: 'meknes', to: 'rabat', transport: 'bus' },
-            { from: 'rabat', to: 'casablanca', transport: 'bus' }
+            { from: 'tetouan', to: 'chefchaouen', transport: 'bus', via: ['brikcha', 'ouazzane', 'zaggota'] },
+            { from: 'chefchaouen', to: 'fez', transport: 'car', via: ['ifrane', 'soukel had'] },
+            { from: 'fez', to: 'plateauDeLaZaouiatOuedIfrane', transport: 'car', via: ['soukel had', 'ifrane'] },
+            { from: 'plateauDeLaZaouiatOuedIfrane', to: 'fez', transport: 'bus' },
+            { from: 'fez', to: 'meknes', transport: 'bus', via: ['khemisset', 'tiflet', 'rabat'] },
+            { from: 'meknes', to: 'casablanca', transport: 'plane' },
+            { from: 'carthage', to: 'laMarsa', transport: 'car' },
+            { from: 'laMarsa', to: 'tunis', transport: 'bus' },
+            { from: 'tunis', to: 'bizerte', transport: 'bus' },
+            { from: 'bizerte', to: 'capeAngela', transport: 'bus' },
+            { from: 'capeAngela', to: 'tunis', transport: 'car' },
+            { from: 'tunis', to: 'carthage', transport: 'plane' },
+            { from: 'cairo', to: 'giza', transport: 'car' },
+            { from: 'giza', to: 'saqqara', transport: 'car' },
+            { from: 'saqqara', to: 'cairo', transport: 'bus', via: ['al minya', 'suhaj', 'qena'] },
+            { from: 'cairo', to: 'luxor', transport: 'car', via: ['esna', 'idfu', 'kawm ombo'] },
+            { from: 'luxor', to: 'aswan', transport: 'car', via: ['esna'] },
+            { from: 'aswan', to: 'hurghada', transport: 'bus', via: ['qena', 'safaga'] },
+            { from: 'hurghada', to: 'istanbul', transport: 'plane' }
         ];
 
-        // Step 4: Add Paths to the Map
-        connections.forEach(connection => {
-            const fromCity = cities[connection.from];
-            const toCity = cities[connection.to];
-            const style = pathStyles[connection.transport];
+        // Add Paths to the Map
+        map.on('load', function () {
+            connections.forEach(connection => {
+                const fromCity = cities[connection.from];
+                const toCity = cities[connection.to];
+                const style = pathStyles[connection.transport];
 
-            map.on('load', function () {
+                let coordinates = [fromCity.coordinates];
+
+                if (connection.via) {
+                    connection.via.forEach(via => {
+                        coordinates.push(cities[via].coordinates);
+                    });
+                }
+
+                coordinates.push(toCity.coordinates);
+
                 map.addLayer({
                     'id': `${connection.from}-${connection.to}`,
                     'type': 'line',
@@ -269,7 +258,7 @@
                             'type': 'Feature',
                             'geometry': {
                                 'type': 'LineString',
-                                'coordinates': [fromCity.coordinates, toCity.coordinates]
+                                'coordinates': coordinates
                             }
                         }
                     },
@@ -283,38 +272,36 @@
                     }
                 });
             });
-        });
 
-        // Step 5: Add Markers to the Map
-        Object.keys(cities).forEach(cityKey => {
-            const city = cities[cityKey];
-            const el = document.createElement('div');
-            el.className = 'marker';
-            el.style.backgroundColor = '#FF6347';
-            el.style.width = '10px';
-            el.style.height = '10px';
-            el.style.borderRadius = '50%';
+            // Add Markers to the Map
+            Object.keys(cities).forEach(cityKey => {
+                const city = cities[cityKey];
+                const el = document.createElement('div');
+                el.className = 'marker';
+                el.style.backgroundColor = '#FF6347';
+                el.style.width = '10px';
+                el.style.height = '10px';
+                el.style.borderRadius = '50%';
 
-            const markerInstance = new mapboxgl.Marker(el)
-                .setLngLat(city.coordinates)
-                .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(`<h3>${city.name}</h3>`))
-                .addTo(map);
+                const markerInstance = new mapboxgl.Marker(el)
+                    .setLngLat(city.coordinates)
+                    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(`<h3>${city.name}</h3>`))
+                    .addTo(map);
 
-            // Hover effect: change color and make the line transparent
-            el.addEventListener('mouseenter', () => {
-                markerInstance.getElement().style.backgroundColor = '#FFD700';
-                map.setPaintProperty('travel-routes', 'line-opacity', 0.5);
-                el.style.cursor = 'pointer';
-            });
+                el.addEventListener('mouseenter', () => {
+                    markerInstance.getElement().style.backgroundColor = '#FFD700';
+                    map.setPaintProperty('travel-routes', 'line-opacity', 0.5);
+                    el.style.cursor = 'pointer';
+                });
 
-            el.addEventListener('mouseleave', () => {
-                markerInstance.getElement().style.backgroundColor = '#FF6347';
-                map.setPaintProperty('travel-routes', 'line-opacity', 1);
-            });
+                el.addEventListener('mouseleave', () => {
+                    markerInstance.getElement().style.backgroundColor = '#FF6347';
+                    map.setPaintProperty('travel-routes', 'line-opacity', 1);
+                });
 
-            // Click event: redirect to the link
-            el.addEventListener('click', () => {
-                window.location.href = city.link;
+                el.addEventListener('click', () => {
+                    window.location.href = city.link;
+                });
             });
         });
 
