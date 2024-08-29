@@ -14,30 +14,30 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            height: 100vh; /* Adjusted to use 100vh for full viewport height */
+            height: 100vh;
             margin: 0;
             background: url('https://github.com/thetwostraycats/thetwostraycats.com/blob/main/images/tsc-wallpaper.png?raw=true') no-repeat center center fixed;
             background-size: cover;
             color: #333;
-            overflow: hidden; /* Prevent scrolling */
+            overflow: hidden;
         }
 
         .container-wrapper {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 75vw; /* Occupies 75% of viewport width */
-            height: 75vh; /* Occupies 75% of viewport height */
-            padding: 12.5vh 12.5vw; /* Centered using equal padding for top/bottom and left/right */
+            width: 75vw;
+            height: 75vh;
+            padding: 2.5vh 2.5vw;
             box-sizing: border-box;
         }
 
         .container,
         .stats-container,
         .video-container {
-            width: 25%; /* Each container takes 25% of the wrapper width */
-            height: 100%; /* Containers stretch to fill the height of the wrapper */
-            padding: 20px;
+            width: 25%;
+            height: 100%;
+            padding: 10px;
             text-align: center;
             background-color: rgba(255, 255, 255, 0.9);
             border-radius: 10px;
@@ -49,9 +49,9 @@
         }
 
         .logo {
-            width: 5vw; /* Scales with viewport width */
+            width: 60%;
             height: auto;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .circular-logo {
@@ -59,9 +59,21 @@
             border: 2px solid #ddd;
         }
 
-        h1, h2 {
-            font-size: 1.5vw; /* Scales text size with viewport width */
+        /* Main Headings */
+        h1 {
+            font-size: calc(1vw + 1vh + 1vmin);
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        /* Secondary Headings */
+        h2 {
+            font-size: calc(0.8vw + 0.8vh + 0.8vmin);
+            font-weight: 600;
             margin-bottom: 8px;
+            color: #555;
+            text-align: center;
         }
 
         .links,
@@ -79,11 +91,11 @@
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            padding: 8px;
+            padding: 5%;
             border-radius: 20px;
             background-color: #f0f4f8;
             color: #333;
-            font-size: 1.2vw; /* Scales text size with viewport width */
+            font-size: calc(0.8vw + 0.8vh);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease, transform 0.2s ease;
             position: relative;
@@ -91,10 +103,10 @@
 
         .links a img,
         .support-item img {
-            width: 2vw; /* Scales icon size with viewport width */
+            width: 20%;
             height: auto;
             position: absolute;
-            left: 10px;
+            left: 5%;
         }
 
         .links a span,
@@ -114,11 +126,11 @@
             align-items: center;
             justify-content: space-between;
             text-decoration: none;
-            padding: 8px;
+            padding: 5%;
             border-radius: 20px;
             background-color: #f0f4f8;
             color: #333;
-            font-size: 1.2vw; /* Scales text size with viewport width */
+            font-size: calc(0.8vw + 0.8vh);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
@@ -144,9 +156,9 @@
 
         .credit {
             margin-top: auto;
-            font-size: 1vw; /* Scales text size with viewport width */
+            font-size: calc(0.4vw + 0.4vh);
             color: #999;
-            padding-top: 15px;
+            padding-top: 10px;
         }
 
         .credit a {
@@ -158,6 +170,7 @@
             text-decoration: underline;
         }
 
+        /* Video iframe styling */
         .video-container iframe {
             border: 2px solid #ddd;
             border-radius: 10px;
@@ -165,18 +178,25 @@
             height: auto;
         }
 
+        /* Media query for mobile view */
         @media screen and (max-width: 768px) {
+            body {
+                overflow-y: auto;
+            }
+
             .container-wrapper {
                 flex-direction: column;
-                height: auto; /* Allow content to determine height */
-                padding: 10px;
+                width: 90vw;
+                height: auto;
+                gap: 10px;
+                padding: 20px 0;
             }
 
             .container,
             .stats-container,
             .video-container {
                 width: 90%;
-                margin-bottom: 20px;
+                height: auto;
             }
         }
     </style>
@@ -196,7 +216,7 @@
             </div>
             <!-- Support Section -->
             <div class="support">
-                <h2><p></p>Support us:</h2>
+                <h2>Support us:</h2>
                 <a class="support-item" href="https://www.youtube.com/channel/UCm5Y8sHpz4ljDndK4cNmqPw/join" target="_blank">
                     <img src="https://img.icons8.com/ios-filled/50/000000/membership-card.png" alt="Youtube Membership"><span>Membership</span>
                 </a>
@@ -216,6 +236,7 @@
                 <a href="https://www.youtube.com/@twostraycats" target="_blank">
                     <img src="https://img.icons8.com/ios-filled/50/000000/youtube-play.png" alt="YouTube Icon"><span>YouTube</span>
                 </a>
+                <!-- New Merch Tab -->
                 <a class="support-item">
                     <img src="https://img.icons8.com/ios-filled/50/000000/t-shirt.png" alt="Merch Icon"><span>Merch (Coming Soon)</span>
                 </a>
@@ -254,11 +275,6 @@
 
     <!-- JavaScript to fetch stats and latest video -->
     <script>
-        // Adjust screen zoom to 90% on load
-        window.onload = function() {
-            document.body.style.zoom = "0.9";
-        };
-
         // Fetch YouTube stats from the Netlify function
         fetch('https://thetsc.netlify.app/.netlify/functions/fetch-stats')
             .then(response => response.json())
