@@ -19,17 +19,16 @@
             background: url('https://github.com/thetwostraycats/thetwostraycats.com/blob/main/images/tsc-wallpaper.png?raw=true') no-repeat center center fixed;
             background-size: cover;
             color: #333;
+            overflow: hidden; /* Prevent scrolling */
         }
-
 
         .container-wrapper {
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
             align-items: flex-start;
             width: 100%;
-            max-width: 1400px;
-            gap: 80px;
+            max-width: 1200px; /* Smaller max-width for reduced size */
+            gap: 50px; /* Reduced gap for smaller containers */
             padding: 20px;
             box-sizing: border-box;
         }
@@ -37,11 +36,9 @@
         .container,
         .stats-container,
         .video-container {
-            margin-top: 50px;
             flex: 1;
-            min-width: 320px;
-            max-width: 380px;
-            min-height: 500px;
+            min-width: 250px; /* Reduced min-width for smaller containers */
+            max-width: 320px; /* Reduced max-width for smaller containers */
             padding: 20px;
             text-align: center;
             background-color: rgba(255, 255, 255, 0.9);
@@ -51,12 +48,13 @@
             flex-direction: column;
             align-items: center;
             box-sizing: border-box;
+            margin: 10px; /* Ensure some space around containers */
         }
 
         .logo {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 15px;
+            width: 70px; /* Reduced size for smaller containers */
+            height: 70px; /* Reduced size for smaller containers */
+            margin-bottom: 10px; /* Adjusted margin */
         }
 
         .circular-logo {
@@ -66,17 +64,17 @@
 
         /* Main Headings */
         h1 {
-            font-size: 1.2em;
+            font-size: 1.1em; /* Reduced font size */
             font-weight: 600;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             color: #333;
         }
 
         /* Secondary Headings */
         h2 {
-            font-size: 1em;
+            font-size: 0.9em; /* Reduced font size */
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             color: #555;
             text-align: center;
         }
@@ -86,7 +84,7 @@
         .support {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px; /* Smaller gap for reduced container size */
             width: 100%;
         }
 
@@ -96,11 +94,11 @@
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            padding: 10px;
+            padding: 8px; /* Reduced padding */
             border-radius: 20px;
             background-color: #f0f4f8;
             color: #333;
-            font-size: 1em;
+            font-size: 0.9em; /* Reduced font size */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease, transform 0.2s ease;
             position: relative;
@@ -108,8 +106,8 @@
 
         .links a img,
         .support-item img {
-            width: 20px;
-            height: 20px;
+            width: 18px; /* Smaller icon size */
+            height: 18px; /* Smaller icon size */
             position: absolute;
             left: 10px;
         }
@@ -129,13 +127,13 @@
         .stat-item {
             display: flex;
             align-items: center;
-            justify-content: space-between; /* Ensures text stays aligned properly */
+            justify-content: space-between;
             text-decoration: none;
-            padding: 10px;
+            padding: 8px; /* Reduced padding */
             border-radius: 20px;
             background-color: #f0f4f8;
             color: #333;
-            font-size: 1em;
+            font-size: 0.9em; /* Reduced font size */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
@@ -155,15 +153,15 @@
         }
 
         .socials {
-            margin-top: 15px;
+            margin-top: 10px; /* Adjusted margin */
             width: 100%;
         }
 
         .credit {
             margin-top: auto;
-            font-size: 0.7em;
+            font-size: 0.6em; /* Reduced font size */
             color: #999;
-            padding-top: 20px;
+            padding-top: 15px; /* Adjusted padding */
         }
 
         .credit a {
@@ -175,7 +173,7 @@
             text-decoration: underline;
         }
 
-        /* Style for video iframe to match circular logo border */
+        /* Video iframe styling */
         .video-container iframe {
             border: 2px solid #ddd;
             border-radius: 10px;
@@ -186,58 +184,30 @@
         /* Media query for mobile view */
         @media screen and (max-width: 768px) {
             body {
-                height: 100vh; /* Set body height to 100% of the viewport */
-                padding: 0; /* Remove padding to fit content without scroll */
-                margin: 0; /* Remove default margin to prevent overflow */
-                overflow: hidden; /* Prevent overflow to stop scrolling */
-                background: url('https://github.com/thetwostraycats/thetwostraycats.com/blob/main/images/tsc-wallpaper.png?raw=true') no-repeat center center fixed; /* Correct URL with raw content */
-                background-size: cover; /* Ensure the image covers the entire background */
+                height: 100vh;
+                padding: 0;
+                margin: 0;
+                overflow-y: auto; /* Allow vertical scrolling */
+                background: url('https://github.com/thetwostraycats/thetwostraycats.com/blob/main/images/tsc-wallpaper.png?raw=true') no-repeat center center fixed;
+                background-size: cover;
             }
-        
+
             .container-wrapper {
-                display: flex;
                 flex-direction: column;
                 align-items: center;
-                padding: 0 20px;
-                margin: 0; /* Remove margin to prevent overflow */
+                gap: 20px;
+                width: 100%;
+                padding: 0 10px;
             }
-        
+
             .container,
             .stats-container,
             .video-container {
-                display: none; /* Hide all containers by default */
-            }
-        
-            /* Only display the links container on mobile */
-            .container {
-                display: flex; /* Make the links container visible */
-                flex-direction: column;
-                justify-content: space-between; /* Space out the contents */
-                align-items: center;
-                width: 100%;
-                max-width: none;
-                margin: 0; /* Remove all margin */
-                box-sizing: border-box;
-                height: calc(100vh - 40px); /* Adjust height to prevent overflow, considering padding */
-                padding: 40px 20px; /* Adjust padding for more space around the content */
-            }
-        
-            .logo {
-                margin-bottom: 30px; /* Increase space below the logo */
-                margin-top: 30px; /* Add space above the logo */
-            }
-        
-            .credit {
-                margin-top: auto; /* Push the credit to the bottom */
-                padding-top: 50px;
-                padding-bottom: 10px; /* Add space below the credit */
+                width: 90%;
+                max-width: 100%;
+                margin-bottom: 20px;
             }
         }
-
-
-
-
-
     </style>
 </head>
 
