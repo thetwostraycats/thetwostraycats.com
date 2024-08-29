@@ -14,7 +14,7 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            height: 100vh;
+            height: 100vh; /* Adjusted to use 100vh for full viewport height */
             margin: 0;
             background: url('https://github.com/thetwostraycats/thetwostraycats.com/blob/main/images/tsc-wallpaper.png?raw=true') no-repeat center center fixed;
             background-size: cover;
@@ -26,17 +26,17 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 75%; /* Wrapper takes 75% width of the viewport */
-            height: 75%; /* Wrapper takes 75% height of the viewport */
-            padding: 12.5% 0; /* 12.5% padding for top and bottom */
+            width: 75vw; /* Occupies 75% of viewport width */
+            height: 75vh; /* Occupies 75% of viewport height */
+            padding: 12.5vh 12.5vw; /* Centered using equal padding for top/bottom and left/right */
             box-sizing: border-box;
         }
 
         .container,
         .stats-container,
         .video-container {
-            flex: 0 0 25%; /* Each container takes 25% of the width */
-            height: 100%; /* Full height of the wrapper */
+            width: 25%; /* Each container takes 25% of the wrapper width */
+            height: 100%; /* Containers stretch to fill the height of the wrapper */
             padding: 20px;
             text-align: center;
             background-color: rgba(255, 255, 255, 0.9);
@@ -49,7 +49,7 @@
         }
 
         .logo {
-            width: 15%; /* Scale logos as a percentage of container width */
+            width: 5vw; /* Scales with viewport width */
             height: auto;
             margin-bottom: 15px;
         }
@@ -59,21 +59,9 @@
             border: 2px solid #ddd;
         }
 
-        /* Main Headings */
-        h1 {
-            font-size: 2vw; /* Responsive font size based on viewport width */
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #333;
-        }
-
-        /* Secondary Headings */
-        h2 {
-            font-size: 1.8vw; /* Responsive font size based on viewport width */
-            font-weight: 600;
+        h1, h2 {
+            font-size: 1.5vw; /* Scales text size with viewport width */
             margin-bottom: 8px;
-            color: #555;
-            text-align: center;
         }
 
         .links,
@@ -91,11 +79,11 @@
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            padding: 0.8vw; /* Responsive padding */
+            padding: 8px;
             border-radius: 20px;
             background-color: #f0f4f8;
             color: #333;
-            font-size: 1.5vw; /* Responsive font size */
+            font-size: 1.2vw; /* Scales text size with viewport width */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease, transform 0.2s ease;
             position: relative;
@@ -103,7 +91,7 @@
 
         .links a img,
         .support-item img {
-            width: 1.2vw; /* Responsive icon size */
+            width: 2vw; /* Scales icon size with viewport width */
             height: auto;
             position: absolute;
             left: 10px;
@@ -126,11 +114,11 @@
             align-items: center;
             justify-content: space-between;
             text-decoration: none;
-            padding: 0.8vw; /* Responsive padding */
+            padding: 8px;
             border-radius: 20px;
             background-color: #f0f4f8;
             color: #333;
-            font-size: 1.5vw; /* Responsive font size */
+            font-size: 1.2vw; /* Scales text size with viewport width */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
@@ -156,7 +144,7 @@
 
         .credit {
             margin-top: auto;
-            font-size: 1vw; /* Responsive font size */
+            font-size: 1vw; /* Scales text size with viewport width */
             color: #999;
             padding-top: 15px;
         }
@@ -175,6 +163,21 @@
             border-radius: 10px;
             width: 100%;
             height: auto;
+        }
+
+        @media screen and (max-width: 768px) {
+            .container-wrapper {
+                flex-direction: column;
+                height: auto; /* Allow content to determine height */
+                padding: 10px;
+            }
+
+            .container,
+            .stats-container,
+            .video-container {
+                width: 90%;
+                margin-bottom: 20px;
+            }
         }
     </style>
 </head>
@@ -213,7 +216,6 @@
                 <a href="https://www.youtube.com/@twostraycats" target="_blank">
                     <img src="https://img.icons8.com/ios-filled/50/000000/youtube-play.png" alt="YouTube Icon"><span>YouTube</span>
                 </a>
-                <!-- New Merch Tab -->
                 <a class="support-item">
                     <img src="https://img.icons8.com/ios-filled/50/000000/t-shirt.png" alt="Merch Icon"><span>Merch (Coming Soon)</span>
                 </a>
@@ -252,6 +254,11 @@
 
     <!-- JavaScript to fetch stats and latest video -->
     <script>
+        // Adjust screen zoom to 90% on load
+        window.onload = function() {
+            document.body.style.zoom = "0.9";
+        };
+
         // Fetch YouTube stats from the Netlify function
         fetch('https://thetsc.netlify.app/.netlify/functions/fetch-stats')
             .then(response => response.json())
