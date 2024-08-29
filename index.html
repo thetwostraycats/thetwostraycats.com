@@ -7,248 +7,176 @@
     <title>@twostraycats</title>
     <link rel="icon" href="https://github.com/thetwostraycats/thetwostraycats.com/blob/main/images/tsc-logo.png?raw=true" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
-        <style>
-            body {
-                font-family: 'Courier Prime', monospace;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
-                height: 100vh; /* Full viewport height */
-                margin: 0;
-                background: url('https://github.com/thetwostraycats/thetwostraycats.com/blob/main/images/tsc-wallpaper.png?raw=true') no-repeat center center fixed;
-                background-size: cover;
-                color: #333;
-                overflow: hidden; /* Prevent scrolling */
-            }
-        
-            .container-wrapper {
-                display: flex;
-                justify-content: center;
-                align-items: center; /* Centers containers vertically */
-                flex-wrap: wrap;
-                width: 100%;
-                max-width: 1200px; /* Max width of the container wrapper */
-                gap: 20px;
-                padding: 20px;
-                box-sizing: border-box;
-            }
-        
-            .container,
-            .stats-container,
-            .video-container {
-                flex: 1;
-                min-width: 280px; /* Same min-width for all containers */
-                max-width: 320px; /* Same max-width for all containers */
-                height: 100%; /* Full height */
-                max-height: calc(100vh - 40px); /* Adjust for viewport height */
-                padding: 20px;
-                text-align: center;
-                background-color: rgba(255, 255, 255, 0.9);
-                border-radius: 10px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                box-sizing: border-box;
-                overflow: hidden; /* Prevent content overflow within the container */
-            }
-        
-            .logo {
-                width: 70px;
-                height: 70px;
-                margin-bottom: 15px;
-            }
-        
-            .circular-logo {
-                border-radius: 50%;
-                border: 2px solid #ddd;
-            }
-        
-            /* Main Headings */
-            h1 {
-                font-size: 1.1em; /* Reduced font size */
-                font-weight: 600;
-                margin-bottom: 10px;
-                color: #333;
-            }
-        
-            /* Secondary Headings */
-            h2 {
-                font-size: 0.9em; /* Reduced font size */
-                font-weight: 600;
-                margin-bottom: 8px;
-                color: #555;
-                text-align: center;
-            }
-        
-            .links,
-            .stats,
-            .support {
-                display: flex;
-                flex-direction: column;
-                gap: 8px; /* Smaller gap for reduced container size */
-                width: 100%;
-            }
-        
-            .links a,
-            .support-item {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                text-decoration: none;
-                padding: 8px; /* Reduced padding */
-                border-radius: 20px;
-                background-color: #f0f4f8;
-                color: #333;
-                font-size: 0.9em; /* Reduced font size */
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                transition: background-color 0.3s ease, transform 0.2s ease;
-                position: relative;
-            }
-        
-            .links a img,
-            .support-item img {
-                width: 18px; /* Smaller icon size */
-                height: 18px; /* Smaller icon size */
-                position: absolute;
-                left: 10px;
-            }
-        
-            .links a span,
-            .support-item span {
-                flex: 1;
-                text-align: center;
-            }
-        
-            .links a:hover,
-            .support-item:hover {
-                background-color: #d0e4f7;
-                transform: scale(1.03);
-            }
-        
-            .stat-item {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                text-decoration: none;
-                padding: 8px; /* Reduced padding */
-                border-radius: 20px;
-                background-color: #f0f4f8;
-                color: #333;
-                font-size: 0.9em; /* Reduced font size */
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                transition: background-color 0.3s ease, transform 0.2s ease;
-            }
-        
-            .stat-item span:first-child {
-                font-weight: bold;
-                text-align: left;
-            }
-        
-            .stat-item span:last-child {
-                text-align: right;
-            }
-        
-            .stat-item:hover {
-                background-color: #d0e4f7;
-                transform: scale(1.03);
-            }
-        
-            .socials {
-                margin-top: 10px; /* Adjusted margin */
-                width: 100%;
-            }
-        
-            .credit {
-                margin-top: auto;
-                font-size: 0.6em; /* Reduced font size */
-                color: #999;
-                padding-top: 15px; /* Adjusted padding */
-            }
-        
-            .credit a {
-                text-decoration: none;
-                color: #999;
-            }
-        
-            .credit a:hover {
-                text-decoration: underline;
-            }
-        
-            /* Video iframe styling */
-            .video-container iframe {
-                border: 2px solid #ddd;
-                border-radius: 10px;
-                width: 100%;
-                max-width: 100%;
-                height: 100%; /* Adjust height for responsiveness */
-            }
-        
-            /* Media query for responsive scaling */
-            @media screen and (max-width: 768px) {
-                body {
-                    height: 100vh;
-                    padding: 0;
-                    margin: 0;
-                    overflow-y: auto; /* Allow vertical scrolling */
-                    background: url('https://github.com/thetwostraycats/thetwostraycats.com/blob/main/images/tsc-wallpaper.png?raw=true') no-repeat center center fixed;
-                    background-size: cover;
-                }
-        
-                .container-wrapper {
-                    flex-direction: column;
-                    align-items: center;
-                    gap: 20px;
-                    width: 100%;
-                    padding: 0 10px;
-                }
-        
-                .container,
-                .stats-container,
-                .video-container {
-                    width: 90%;
-                    max-width: 100%;
-                    margin-bottom: 20px;
-                }
-        
-                /* Reduce font sizes and container heights for small screens */
-                h1 {
-                    font-size: 1em;
-                }
-        
-                h2 {
-                    font-size: 0.8em;
-                }
-        
-                .links a,
-                .support-item,
-                .stat-item {
-                    font-size: 0.8em;
-                    padding: 6px;
-                }
-        
-                .container,
-                .stats-container,
-                .video-container {
-                    max-height: calc(100vh - 40px); /* Adjust for smaller screens */
-                }
-            }
-        
-            /* Media query for zoomed-in views to prevent overflow */
-            @media screen and (min-width: 769px) and (max-height: 700px) {
-                .container-wrapper {
-                    flex-direction: column;
-                    align-items: center;
-                }
-        
-                .container,
-                .stats-container,
-                .video-container {
-                    max-height: calc(100vh - 20px);
-                }
-            }
-        </style>
+    <style>
+        body {
+            font-family: 'Courier Prime', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            background: url('https://github.com/thetwostraycats/thetwostraycats.com/blob/main/images/tsc-wallpaper.png?raw=true') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+            overflow: hidden; /* Prevent scrolling */
+        }
+
+        .container-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 75%; /* Wrapper takes 75% width of the viewport */
+            height: 75%; /* Wrapper takes 75% height of the viewport */
+            padding: 12.5% 0; /* 12.5% padding for top and bottom */
+            box-sizing: border-box;
+        }
+
+        .container,
+        .stats-container,
+        .video-container {
+            flex: 0 0 25%; /* Each container takes 25% of the width */
+            height: 100%; /* Full height of the wrapper */
+            padding: 20px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            width: 15%; /* Scale logos as a percentage of container width */
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .circular-logo {
+            border-radius: 50%;
+            border: 2px solid #ddd;
+        }
+
+        /* Main Headings */
+        h1 {
+            font-size: 2vw; /* Responsive font size based on viewport width */
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        /* Secondary Headings */
+        h2 {
+            font-size: 1.8vw; /* Responsive font size based on viewport width */
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #555;
+            text-align: center;
+        }
+
+        .links,
+        .stats,
+        .support {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .links a,
+        .support-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            padding: 0.8vw; /* Responsive padding */
+            border-radius: 20px;
+            background-color: #f0f4f8;
+            color: #333;
+            font-size: 1.5vw; /* Responsive font size */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            position: relative;
+        }
+
+        .links a img,
+        .support-item img {
+            width: 1.2vw; /* Responsive icon size */
+            height: auto;
+            position: absolute;
+            left: 10px;
+        }
+
+        .links a span,
+        .support-item span {
+            flex: 1;
+            text-align: center;
+        }
+
+        .links a:hover,
+        .support-item:hover {
+            background-color: #d0e4f7;
+            transform: scale(1.03);
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-decoration: none;
+            padding: 0.8vw; /* Responsive padding */
+            border-radius: 20px;
+            background-color: #f0f4f8;
+            color: #333;
+            font-size: 1.5vw; /* Responsive font size */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .stat-item span:first-child {
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .stat-item span:last-child {
+            text-align: right;
+        }
+
+        .stat-item:hover {
+            background-color: #d0e4f7;
+            transform: scale(1.03);
+        }
+
+        .socials {
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .credit {
+            margin-top: auto;
+            font-size: 1vw; /* Responsive font size */
+            color: #999;
+            padding-top: 15px;
+        }
+
+        .credit a {
+            text-decoration: none;
+            color: #999;
+        }
+
+        .credit a:hover {
+            text-decoration: underline;
+        }
+
+        .video-container iframe {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            width: 100%;
+            height: auto;
+        }
+    </style>
 </head>
 
 <body>
@@ -324,11 +252,6 @@
 
     <!-- JavaScript to fetch stats and latest video -->
     <script>
-        // Adjust screen zoom to 90% on load
-        window.onload = function() {
-            document.body.style.zoom = "0.9";
-        };
-
         // Fetch YouTube stats from the Netlify function
         fetch('https://thetsc.netlify.app/.netlify/functions/fetch-stats')
             .then(response => response.json())
