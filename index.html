@@ -8,6 +8,7 @@
     <link rel="icon" href="https://github.com/thetwostraycats/thetwostraycats.com/blob/main/images/tsc-logo.png?raw=true" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
     <style>
+        /* Ensure body is centered and has no overflow */
         body {
             font-family: 'Courier Prime', monospace;
             display: flex;
@@ -19,28 +20,29 @@
             background: url('https://github.com/thetwostraycats/thetwostraycats.com/blob/main/images/tsc-wallpaper.png?raw=true') no-repeat center center fixed;
             background-size: cover;
             color: #333;
-            padding: 5vh 5vw; /* Adjust padding for equal top and bottom space */
-            box-sizing: border-box;
+            overflow: hidden; /* Prevent scrolling */
+            padding: 5vh 0; /* Consistent padding for all screen sizes */
         }
-
+        
+        /* Wrapper to handle container alignment and spacing */
         .container-wrapper {
             display: flex;
-            justify-content: space-around; /* Ensures equal space between containers */
-            align-items: flex-start; /* Align items at the start of flex container */
-            width: 90%; /* Ensures the containers do not exceed 90% of viewport width */
-            height: auto; /* Let the height be defined by content */
-            max-height: 80vh; /* Ensures total height remains within viewport */
+            justify-content: space-between;
+            align-items: stretch;
+            width: 90vw; /* Containers take 90% of viewport width */
+            max-width: 1200px; /* Maximum width for large screens */
+            height: 80vh; /* Containers take 80% of viewport height */
+            gap: 2%; /* Space between containers */
             box-sizing: border-box;
-            gap: 2vw; /* Space between containers */
-            overflow: hidden; /* Prevent overflow */
         }
-
+        
+        /* Responsive containers for content */
         .container,
         .stats-container,
         .video-container {
             flex: 1;
-            max-width: 30%; /* Limits each container to 30% of the parent container width */
-            min-width: 300px; /* Minimum width to ensure readability */
+            min-width: 300px;
+            max-width: 380px;
             padding: 20px;
             text-align: center;
             background-color: rgba(255, 255, 255, 0.9);
@@ -52,6 +54,7 @@
             box-sizing: border-box;
         }
 
+        /* Logo styles */
         .logo {
             width: 80px;
             height: 80px;
@@ -63,58 +66,60 @@
             border: 2px solid #ddd;
         }
 
+        /* Headings and text styling */
         h1, h2 {
-            margin: 1vh 0; /* Responsive margin for consistent spacing */
-        }
-
-        h1 {
-            font-size: 2vw; /* Dynamic font size based on viewport width */
-            font-weight: 600;
+            font-size: 1.2em;
+            margin-bottom: 1vh;
             color: #333;
         }
 
         h2 {
-            font-size: 1.5vw; /* Dynamic font size */
-            font-weight: 600;
+            font-size: 1em;
             color: #555;
-            text-align: center;
         }
 
-        .links, .stats, .support {
+        /* Links, stats, and support styling */
+        .links,
+        .stats,
+        .support {
             display: flex;
             flex-direction: column;
-            gap: 1vh; /* Vertical gap between items */
+            gap: 10px; /* Space between items */
             width: 100%;
         }
 
-        .links a, .support-item {
+        .links a,
+        .support-item {
             display: flex;
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            padding: 1.5vh 2vw; /* Responsive padding */
+            padding: 1vh; /* Responsive padding */
             border-radius: 20px;
             background-color: #f0f4f8;
             color: #333;
-            font-size: 1.2vw; /* Dynamic font size */
+            font-size: 1em;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease, transform 0.2s ease;
             position: relative;
         }
 
-        .links a img, .support-item img {
-            width: 2vw;
-            height: auto;
+        .links a img,
+        .support-item img {
+            width: 20px;
+            height: 20px;
             position: absolute;
             left: 10px;
         }
 
-        .links a span, .support-item span {
+        .links a span,
+        .support-item span {
             flex: 1;
             text-align: center;
         }
 
-        .links a:hover, .support-item:hover {
+        .links a:hover,
+        .support-item:hover {
             background-color: #d0e4f7;
             transform: scale(1.03);
         }
@@ -122,29 +127,14 @@
         .stat-item {
             display: flex;
             align-items: center;
-            justify-content: space-between; /* Ensures text stays aligned properly */
-            text-decoration: none;
-            padding: 1.5vh 2vw; /* Responsive padding */
+            justify-content: space-between;
+            padding: 1.5vh;
             border-radius: 20px;
             background-color: #f0f4f8;
             color: #333;
-            font-size: 1.2vw; /* Dynamic font size */
+            font-size: 1em;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        .stat-item span:first-child {
-            font-weight: bold;
-            text-align: left;
-        }
-
-        .stat-item span:last-child {
-            text-align: right;
-        }
-
-        .stat-item:hover {
-            background-color: #d0e4f7;
-            transform: scale(1.03);
         }
 
         .socials {
@@ -153,7 +143,7 @@
         }
 
         .credit {
-            margin-top: auto; /* Push the credit to the bottom */
+            margin-top: auto;
             font-size: 0.7em;
             color: #999;
             padding-top: 20px;
@@ -168,7 +158,7 @@
             text-decoration: underline;
         }
 
-        /* Style for video iframe to match circular logo border */
+        /* Video container styling */
         .video-container iframe {
             border: 2px solid #ddd;
             border-radius: 10px;
@@ -176,46 +166,27 @@
             max-width: 100%;
         }
 
-        /* Media query for mobile view */
+        /* Media query for mobile responsiveness */
         @media screen and (max-width: 768px) {
             body {
-                height: auto; /* Set body height to auto for better mobile experience */
-                padding: 0; /* Remove padding */
-                margin: 0; /* Remove default margin */
-                overflow-x: hidden; /* Prevent horizontal scrolling */
-                background: url('https://github.com/thetwostraycats/thetwostraycats.com/blob/main/images/tsc-wallpaper.png?raw=true') no-repeat center center fixed;
-                background-size: cover;
+                overflow-y: auto; /* Allow vertical scrolling on mobile */
             }
 
             .container-wrapper {
-                display: flex;
                 flex-direction: column;
                 align-items: center;
-                padding: 0 5vw;
-                margin: 0;
-                gap: 5vh;
+                gap: 20px;
+                width: 100%;
+                padding: 0 10px;
             }
 
-            .container {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                align-items: center;
+            .container,
+            .stats-container,
+            .video-container {
+                display: block;
                 width: 90%;
-                margin: 5vh 0;
-                box-sizing: border-box;
-                padding: 5vh 2vw;
-            }
-
-            .logo {
-                margin-bottom: 3vh;
-                margin-top: 3vh;
-            }
-
-            .credit {
-                margin-top: auto;
-                padding-top: 2vh;
-                padding-bottom: 2vh;
+                max-width: 100%;
+                margin-bottom: 20px;
             }
         }
     </style>
@@ -239,7 +210,7 @@
             <div class="support">
                 <h2><p></p>Support us:</h2>
                 <a class="support-item" href="https://www.youtube.com/channel/UCm5Y8sHpz4ljDndK4cNmqPw/join" target="_blank">
-                    <img src="https://img.icons8.com/ios-filled/50/000000/membership.png" alt="Youtube Membership"><span>Membership</span>
+                    <img src="https://img.icons8.com/ios-filled/50/000000/membership-card.png" alt="Youtube Membership"><span>Membership</span>
                 </a>
                 <a class="support-item" href="https://buymeacoffee.com/twostraycats" target="_blank">
                     <img src="https://img.icons8.com/ios-filled/50/000000/cafe.png" alt="Buy Us A Coffee Icon"><span>Coffee?</span>
