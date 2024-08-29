@@ -19,7 +19,8 @@
             background: url('https://github.com/thetwostraycats/thetwostraycats.com/blob/main/images/tsc-wallpaper.png?raw=true') no-repeat center center fixed;
             background-size: cover;
             color: #333;
-            padding: 10vh 5vw; /* Ensures 10% vertical and 5% horizontal padding */
+            padding: 5vh 5vw; /* Adjust padding for equal top and bottom space */
+            overflow: hidden; /* Prevent scrolling */
         }
         
         .container-wrapper {
@@ -28,7 +29,7 @@
             align-items: stretch; /* Align items to stretch them equally */
             width: 100%;
             max-width: 90vw; /* Ensures the containers do not exceed 90% of viewport width */
-            height: calc(100vh - 20vh); /* Ensures total height remains 80% of the viewport */
+            height: calc(100vh - 10vh); /* Ensures total height remains 80% of the viewport */
             box-sizing: border-box;
             gap: 5vw; /* Space between containers */
         }
@@ -187,47 +188,50 @@
         /* Media query for mobile view */
         @media screen and (max-width: 768px) {
             body {
-                height: auto;
-                padding: 0;
-                margin: 0;
-                background: url('https://github.com/thetwostraycats/thetwostraycats.com/blob/main/images/tsc-wallpaper.png?raw=true') no-repeat center center fixed;
-                background-size: cover;
+                height: 100vh; /* Set body height to 100% of the viewport */
+                padding: 0; /* Remove padding to fit content without scroll */
+                margin: 0; /* Remove default margin to prevent overflow */
+                overflow: hidden; /* Prevent overflow to stop scrolling */
+                background: url('https://github.com/thetwostraycats/thetwostraycats.com/blob/main/images/tsc-wallpaper.png?raw=true') no-repeat center center fixed; /* Correct URL with raw content */
+                background-size: cover; /* Ensure the image covers the entire background */
             }
             
             .container-wrapper {
+                display: flex;
                 flex-direction: column;
                 align-items: center;
                 padding: 0 20px;
-                gap: 20px; /* Adjust gap for mobile */
+                margin: 0; /* Remove margin to prevent overflow */
             }
-        
+            
             .container,
             .stats-container,
             .video-container {
                 display: none; /* Hide all containers by default */
             }
-        
+            
+            /* Only display the links container on mobile */
             .container {
-                display: flex;
+                display: flex; /* Make the links container visible */
                 flex-direction: column;
-                justify-content: space-between;
+                justify-content: space-between; /* Space out the contents */
                 align-items: center;
                 width: 100%;
                 max-width: none;
-                margin: 0;
+                margin: 0; /* Remove all margin */
                 box-sizing: border-box;
-                padding: 40px 20px;
+                padding: 40px 20px; /* Adjust padding for more space around the content */
             }
             
             .logo {
-                margin-bottom: 30px;
-                margin-top: 30px;
+                margin-bottom: 30px; /* Increase space below the logo */
+                margin-top: 30px; /* Add space above the logo */
             }
-        
+            
             .credit {
-                margin-top: auto;
+                margin-top: auto; /* Push the credit to the bottom */
                 padding-top: 50px;
-                padding-bottom: 10px;
+                padding-bottom: 10px; /* Add space below the credit */
             }
         }
 
