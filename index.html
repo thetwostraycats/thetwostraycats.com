@@ -182,31 +182,51 @@
                 max-width: 100%;
             }
         
-            /* Media query for mobile view */
+           /* Media query for mobile view */
             @media screen and (max-width: 768px) {
                 body {
-                    height: 100vh;
-                    padding: 0;
+                    height: auto; /* Allow content to determine the height */
+                    padding: 10px; /* Add padding around the body */
                     margin: 0;
                     overflow-y: auto; /* Allow vertical scrolling */
                     background: url('https://github.com/thetwostraycats/thetwostraycats.com/blob/main/images/tsc-wallpaper.png?raw=true') no-repeat center center fixed;
                     background-size: cover;
+                    display: flex; /* Make sure the body also uses flexbox */
+                    justify-content: center; /* Center contents horizontally */
+                    align-items: center; /* Center contents vertically */
                 }
-        
+            
                 .container-wrapper {
-                    flex-direction: column;
+                    flex-direction: column; /* Stack containers vertically */
                     align-items: center;
-                    gap: 20px;
                     width: 100%;
+                    max-width: 100%; /* Allow containers to take the full width */
                     padding: 0 10px;
+                    gap: 20px; /* Gap between containers */
                 }
-        
+            
+                /* Ensure the containers are in the desired order: Links, Stats, Video */
+                .container-wrapper > .container {
+                    order: 1; /* Links container first */
+                }
+            
+                .container-wrapper > .stats-container {
+                    order: 2; /* Stats container second */
+                }
+            
+                .container-wrapper > .video-container {
+                    order: 3; /* Latest Video container third */
+                }
+            
                 .container,
                 .stats-container,
                 .video-container {
-                    width: 90%;
+                    width: 100%; /* Make each container take full width on mobile */
                     max-width: 100%;
-                    margin-bottom: 20px;
+                    margin-bottom: 20px; /* Space between containers */
+                    padding: 15px; /* Add padding within each container */
+                    min-height: auto; /* Adjust height to fit content */
+                    box-sizing: border-box;
                 }
             }
     </style>
