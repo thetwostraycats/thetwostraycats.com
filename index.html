@@ -8,7 +8,6 @@
     <link rel="icon" href="https://github.com/thetwostraycats/thetwostraycats.com/blob/main/images/tsc-logo.png?raw=true" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
     <style>
-        /* Ensure body is centered and has no overflow */
         body {
             font-family: 'Courier Prime', monospace;
             display: flex;
@@ -20,29 +19,29 @@
             background: url('https://github.com/thetwostraycats/thetwostraycats.com/blob/main/images/tsc-wallpaper.png?raw=true') no-repeat center center fixed;
             background-size: cover;
             color: #333;
-            overflow: hidden; /* Prevent scrolling */
-            padding: 5vh 0; /* Consistent padding for all screen sizes */
         }
-        
-        /* Wrapper to handle container alignment and spacing */
+
+
         .container-wrapper {
             display: flex;
-            justify-content: space-between;
-            align-items: stretch;
-            width: 90vw; /* Containers take 90% of viewport width */
-            max-width: 1200px; /* Maximum width for large screens */
-            height: 80vh; /* Containers take 80% of viewport height */
-            gap: 2%; /* Space between containers */
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+            max-width: 1400px;
+            gap: 80px;
+            padding: 20px;
             box-sizing: border-box;
         }
-        
-        /* Responsive containers for content */
+
         .container,
         .stats-container,
         .video-container {
+            margin-top: 50px;
             flex: 1;
-            min-width: 300px;
+            min-width: 320px;
             max-width: 380px;
+            min-height: 500px;
             padding: 20px;
             text-align: center;
             background-color: rgba(255, 255, 255, 0.9);
@@ -54,7 +53,6 @@
             box-sizing: border-box;
         }
 
-        /* Logo styles */
         .logo {
             width: 80px;
             height: 80px;
@@ -66,25 +64,29 @@
             border: 2px solid #ddd;
         }
 
-        /* Headings and text styling */
-        h1, h2 {
+        /* Main Headings */
+        h1 {
             font-size: 1.2em;
-            margin-bottom: 1vh;
+            font-weight: 600;
+            margin-bottom: 15px;
             color: #333;
         }
 
+        /* Secondary Headings */
         h2 {
             font-size: 1em;
+            font-weight: 600;
+            margin-bottom: 10px;
             color: #555;
+            text-align: center;
         }
 
-        /* Links, stats, and support styling */
         .links,
         .stats,
         .support {
             display: flex;
             flex-direction: column;
-            gap: 10px; /* Space between items */
+            gap: 10px;
             width: 100%;
         }
 
@@ -94,7 +96,7 @@
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            padding: 1vh; /* Responsive padding */
+            padding: 10px;
             border-radius: 20px;
             background-color: #f0f4f8;
             color: #333;
@@ -127,14 +129,29 @@
         .stat-item {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 1.5vh;
+            justify-content: space-between; /* Ensures text stays aligned properly */
+            text-decoration: none;
+            padding: 10px;
             border-radius: 20px;
             background-color: #f0f4f8;
             color: #333;
             font-size: 1em;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .stat-item span:first-child {
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .stat-item span:last-child {
+            text-align: right;
+        }
+
+        .stat-item:hover {
+            background-color: #d0e4f7;
+            transform: scale(1.03);
         }
 
         .socials {
@@ -158,7 +175,7 @@
             text-decoration: underline;
         }
 
-        /* Video container styling */
+        /* Style for video iframe to match circular logo border */
         .video-container iframe {
             border: 2px solid #ddd;
             border-radius: 10px;
@@ -166,33 +183,63 @@
             max-width: 100%;
         }
 
-        /* Media query for mobile responsiveness */
+        /* Media query for mobile view */
         @media screen and (max-width: 768px) {
             body {
-                overflow-y: auto; /* Allow vertical scrolling on mobile */
+                height: 100vh; /* Set body height to 100% of the viewport */
+                padding: 0; /* Remove padding to fit content without scroll */
+                margin: 0; /* Remove default margin to prevent overflow */
+                overflow: hidden; /* Prevent overflow to stop scrolling */
+                background: url('https://github.com/thetwostraycats/thetwostraycats.com/blob/main/images/tsc-wallpaper.png?raw=true') no-repeat center center fixed; /* Correct URL with raw content */
+                background-size: cover; /* Ensure the image covers the entire background */
             }
-
+        
             .container-wrapper {
+                display: flex;
                 flex-direction: column;
                 align-items: center;
-                gap: 20px;
-                width: 100%;
-                padding: 0 10px;
+                padding: 0 20px;
+                margin: 0; /* Remove margin to prevent overflow */
             }
-
+        
             .container,
             .stats-container,
             .video-container {
-                display: block;
-                width: 90%;
-                max-width: 100%;
-                margin-bottom: 20px;
+                display: none; /* Hide all containers by default */
+            }
+        
+            /* Only display the links container on mobile */
+            .container {
+                display: flex; /* Make the links container visible */
+                flex-direction: column;
+                justify-content: space-between; /* Space out the contents */
+                align-items: center;
+                width: 100%;
+                max-width: none;
+                margin: 0; /* Remove all margin */
+                box-sizing: border-box;
+                height: calc(100vh - 40px); /* Adjust height to prevent overflow, considering padding */
+                padding: 40px 20px; /* Adjust padding for more space around the content */
+            }
+        
+            .logo {
+                margin-bottom: 30px; /* Increase space below the logo */
+                margin-top: 30px; /* Add space above the logo */
+            }
+        
+            .credit {
+                margin-top: auto; /* Push the credit to the bottom */
+                padding-top: 50px;
+                padding-bottom: 10px; /* Add space below the credit */
             }
         }
+
+
+
+
+
     </style>
 </head>
-
-
 
 <body>
     <div class="container-wrapper">
@@ -240,7 +287,7 @@
                         <img src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png" alt="Instagram Icon"><span>Instagram</span>
                     </a>
                     <a href="https://x.com/twostraycats" target="_blank">
-                        <img src="https://img.icons8.com/ios-filled/50/000000/twitter-circled.png" alt="X (Twitter) Icon"><span>𝕏 (Twitter)</span>
+                        <img src="https://img.icons8.com/ios-filled/50/000000/twitter-circled.png" alt="X (Twitter) Icon"><span>𝕏</span>
                     </a>
                     <a href="https://www.facebook.com/thetwostraycats" target="_blank">
                         <img src="https://img.icons8.com/ios-filled/50/000000/facebook-new.png" alt="Facebook Icon"><span>Facebook</span>
